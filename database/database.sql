@@ -1,0 +1,1 @@
+CREATE SCHEMA IF NOT EXISTS `skills_management` DEFAULT CHARACTER SET utf8 ;

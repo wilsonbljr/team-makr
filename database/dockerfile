@@ -1,0 +1,15 @@
+FROM mysql:latest
+
+LABEL name="Skills Management Database" version="1.0"
+
+COPY database.sql /docker-entrypoint-initdb.d/
+
+EXPOSE 3306
+
+ENV MYSQL_ROOT_PASSWORD '1234'
+
+ENV MYSQL_DATABASE 'skills_management'
+
+ENV MYSQL_USER 'wilson'
+
+ENV MYSQL_PASSWORD '123456'

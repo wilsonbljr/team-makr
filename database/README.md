@@ -6,6 +6,6 @@ Type in the terminal:
 
 docker build -t tmdb . 
 
-docker run -p 3309:3306 -d tmdb
+docker run -p 3306:3306 -d tmdb
 
-Where 3309 can be changed to the port you want to use to connect and smdb is the image name.
+Where the first 3306 can be changed to the port you want to use to connect and smdb is the image name.

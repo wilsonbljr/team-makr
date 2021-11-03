@@ -1,5 +1,6 @@
 import internal = require("assert");
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany} from "typeorm";
+import { PersonToTeam } from "./PersonToTeam";
 
 @Entity()
 export class Team {
@@ -7,13 +8,13 @@ export class Team {
     @PrimaryGeneratedColumn({
         unsigned: true
     })
-    id: number;
+    id!: number;
 
     @Column()
-    name: string;
+    name!: string;
 
     @Column("varchar", {length: 1000})
-    description: string;
+    description!: string;
 
     @CreateDateColumn({
         select: false
@@ -28,5 +29,8 @@ export class Team {
     @DeleteDateColumn({
         select: false
     })
-    deleted: Date;
+    deleted?: Date;
+
+    @OneToMany(() => PersonToTeam, personToTeam => personToTeam.team)
+    personToTeam!: PersonToTeam[];
 }

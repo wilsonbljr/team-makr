@@ -7,10 +7,10 @@ export class Log {
     @PrimaryGeneratedColumn({
         unsigned: true
     })
-    id: number;
+    id!: number;
 
     @CreateDateColumn({
         select: false
     })
-    created: Date;
+    created!: Date;
 }

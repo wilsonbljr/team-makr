@@ -1,5 +1,8 @@
 import internal = require("assert");
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany} from "typeorm";
+import { PersonToHardSkill } from "./PersonToHardSkill";
+import { PersonToSoftSkill } from "./PersonToSoftSkill";
+import { PersonToTeam } from "./PersonToTeam";
 export enum AccessLevel {
     admin = "admin",
     manager = "manager",
@@ -12,13 +15,13 @@ export class Person {
     @PrimaryGeneratedColumn({
         unsigned: true
     })
-    id: number;
+    id!: number;
 
     @Column()
-    firstName: string;
+    firstName!: string;
 
     @Column()
-    lastName: string;
+    lastName!: string;
 
     @Column({
         type: "enum",
@@ -26,22 +29,22 @@ export class Person {
         default: AccessLevel.employee,
         select: false
     })
-    access_level: number;
+    access_level!: number;
 
     @Column({
         nullable: true
     })
-    phone_number: string;
+    phone_number?: string;
 
     @Column({
         select: false
     })
-    password_reset_token: string;
+    password_reset_token?: string;
 
     @Column({
         select: false
     })
-    password_reset_expire: Date;
+    password_reset_expire?: Date;
 
     @CreateDateColumn({
         select: false
@@ -56,5 +59,14 @@ export class Person {
     @DeleteDateColumn({
         select: false
     })
-    deleted: Date;
+    deleted?: Date;
+
+    @OneToMany(() => PersonToHardSkill, personToHardSkill => personToHardSkill.person)
+    personToHardSkill?: PersonToHardSkill[];
+
+    @OneToMany(() => PersonToSoftSkill, personToSoftSkill => personToSoftSkill.person)
+    personToSoftSkill?: PersonToSoftSkill[];
+
+    @OneToMany(() => PersonToTeam, personToTeam => personToTeam.person)
+    personToTeam?: PersonToTeam[];
 }

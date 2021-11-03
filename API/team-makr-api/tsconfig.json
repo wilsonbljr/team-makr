@@ -10,6 +10,9 @@
       "outDir": "./build",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
-      "sourceMap": true
+      "sourceMap": true,
+      "removeComments": true,
+      "importHelpers": true,
+      "forceConsistentCasingInFileNames": true
    }
 }

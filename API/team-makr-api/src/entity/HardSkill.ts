@@ -1,5 +1,6 @@
 import internal = require("assert");
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany} from "typeorm";
+import { PersonToHardSkill } from "./PersonToHardSkill";
 
 @Entity()
 export class HardSkill {
@@ -7,10 +8,10 @@ export class HardSkill {
     @PrimaryGeneratedColumn({
         unsigned: true
     })
-    id: number;
+    id!: number;
 
     @Column()
-    name: string;
+    name!: string;
 
     @CreateDateColumn({
         select: false
@@ -25,5 +26,8 @@ export class HardSkill {
     @DeleteDateColumn({
         select: false
     })
-    deleted: Date;
+    deleted?: Date;
+
+    @OneToMany(() => PersonToHardSkill, personToHardSkill => personToHardSkill.hardskill)
+    public personToHardSkill?: PersonToHardSkill[];
 }

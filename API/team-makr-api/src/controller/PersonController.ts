@@ -4,7 +4,8 @@ import { Person } from "../entity/Person"
 export class PersonController {
     
     static async get() {
-        console.log("ola");
+        // const people = await getManager().find();
+        // return people;
     }
     static async save(person: Person) {
         const personSaved = await getManager().save(person);

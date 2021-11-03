@@ -5,8 +5,8 @@ import { PersonToSoftSkill } from "./PersonToSoftSkill";
 import { PersonToTeam } from "./PersonToTeam";
 export enum AccessLevel {
     admin = "admin",
-    manager = "manager",
-    employee = "employee"
+    leader = "leader",
+    member = "member"
 }
 
 @Entity()
@@ -24,9 +24,14 @@ export class Person {
     lastName!: string;
 
     @Column({
+        nullable: true
+    })
+    pronoun?: string;
+
+    @Column({
         type: "enum",
         enum: AccessLevel,
-        default: AccessLevel.employee,
+        default: AccessLevel.member,
         select: false
     })
     access_level!: number;
@@ -37,12 +42,14 @@ export class Person {
     phone_number?: string;
 
     @Column({
-        select: false
+        select: false,
+        nullable: true
     })
     password_reset_token?: string;
 
     @Column({
-        select: false
+        select: false,
+        nullable: true
     })
     password_reset_expire?: Date;
 

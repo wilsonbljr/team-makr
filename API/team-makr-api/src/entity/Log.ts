@@ -9,6 +9,9 @@ export class Log {
     })
     id!: number;
 
+    @Column("varchar", {length: 1000})
+    description!: string;
+
     @CreateDateColumn({
         select: false
     })

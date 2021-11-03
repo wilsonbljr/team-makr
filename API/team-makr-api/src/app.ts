@@ -6,8 +6,8 @@ import { connectDB } from './config/db';
 
 export const app = express();
 
-routes(app);
-
 app.use(logger('dev'));
+
+routes(app);
 
 connectDB();

@@ -5,7 +5,7 @@ export class teamMakr1635946157353 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`
-        SET sql_mode = ''
+            SET sql_mode = ''
         `);
         await queryRunner.query(`
             CREATE TABLE \`soft_skill\` (

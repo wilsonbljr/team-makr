@@ -19,6 +19,7 @@
    },
    "scripts": {
       "generate": "ts-node ./node_modules/typeorm/cli.js migration:generate -n team-makr -p",
+      "migration": "ts-node ./node_modules/typeorm/cli.js migration:run",
       "dev": "nodemon --exec ts-node src/server.ts",
       "start": "ts-node src/server.ts"
    }

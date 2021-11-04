@@ -7,6 +7,10 @@ PersonRouter.get('/person', PersonController.getPeople);
 
 PersonRouter.get('/person/:id', PersonController.getPerson);
 
+PersonRouter.get('/person/:id/hardskill', PersonController.getPersonHardSkill);
+
+PersonRouter.get('/person/:id/softskill', PersonController.getPersonSoftSkill)
+
 PersonRouter.post('/person', PersonController.savePerson);
 
 PersonRouter.put('/person/:id', PersonController.updatePerson);

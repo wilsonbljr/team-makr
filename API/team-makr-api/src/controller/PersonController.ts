@@ -1,6 +1,7 @@
 import { Person } from "../entity/Person"
 import { getConnection, getRepository } from "typeorm";
 import { PersonToHardSkill } from "../entity/PersonToHardSkill";
+import { PersonToSoftSkill } from "../entity/PersonToSoftSkill";
 import { HardSkill } from "../entity/HardSkill";
 
 
@@ -30,15 +31,13 @@ export class PersonController {
     static async getPersonHardSkill(req, res) {
         const { id } = req.params;
         try {
-            const repository = getRepository(Person);
-            const hardSkills = await getRepository(Person)
-            .createQueryBuilder("person")
-            .select("person.id", "id")
-            .addSelect("h.name", "name")
+            const hardSkills = await getRepository(PersonToHardSkill)
+            .createQueryBuilder("ph")
+            .select("h.name", "name")
             .addSelect("ph.level", "level")
-            .leftJoin("person_to_hard_skill", "ph", "person.id = ph.personId")
             .leftJoin("hard_skill", "h", "ph.hardskillId = h.id")
-            .where("person.id = :id", { id: id }).getRawMany();
+            .where("ph.personId = :id", { id: id})
+            .getRawMany();
             return res.status(200).json(hardSkills);
         } catch (error) {
             return res.status(500).json(error.message);
@@ -48,15 +47,13 @@ export class PersonController {
     static async getPersonSoftSkill(req, res) {
         const { id } = req.params;
         try {
-            const repository = getRepository(Person);
-            const softSkills = await getRepository(Person)
-            .createQueryBuilder("person")
-            .select("person.id", "id")
-            .addSelect("s.name", "name")
+            const softSkills = await getRepository(PersonToSoftSkill)
+            .createQueryBuilder("ps")
+            .select("s.name", "name")
             .addSelect("ps.level", "level")
-            .leftJoin("person_to_soft_skill", "ps", "person.id = ps.personId")
             .leftJoin("soft_skill", "s", "ps.softskillId = s.id")
-            .where("person.id = :id", { id: id }).getRawMany();
+            .where("ps.personId = :id", { id: id})
+            .getRawMany();
             return res.status(200).json(softSkills);
         } catch (error) {
             return res.status(500).json(error.message);

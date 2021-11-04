@@ -3,11 +3,6 @@ import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColu
 import { PersonToHardSkill } from "./PersonToHardSkill";
 import { PersonToSoftSkill } from "./PersonToSoftSkill";
 import { PersonToTeam } from "./PersonToTeam";
-export enum AccessLevel {
-    admin = "admin",
-    leader = "leader",
-    member = "member"
-}
 
 @Entity()
 export class Person {
@@ -29,12 +24,10 @@ export class Person {
     pronoun?: string;
 
     @Column({
-        type: "enum",
-        enum: AccessLevel,
-        default: AccessLevel.member,
-        select: false
+        select: false,
+        default: 0
     })
-    access_level!: number;
+    admin!: boolean;
 
     @Column({
         nullable: true

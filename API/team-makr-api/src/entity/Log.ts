@@ -1,5 +1,5 @@
 import internal = require("assert");
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn} from "typeorm";
 
 @Entity()
 export class Log {
@@ -12,8 +12,6 @@ export class Log {
     @Column("varchar", {length: 1000})
     description!: string;
 
-    @CreateDateColumn({
-        select: false
-    })
+    @CreateDateColumn()
     created!: Date;
 }

@@ -14,6 +14,9 @@ export class PersonToTeam {
     @Column()
     user_active!: boolean;
 
+    @Column()
+    leader!: boolean;
+
     @CreateDateColumn({
         select: false
     })

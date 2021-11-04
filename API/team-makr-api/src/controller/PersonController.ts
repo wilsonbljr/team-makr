@@ -3,6 +3,7 @@ import { getRepository } from "typeorm";
 import { PersonToHardSkill } from "../entity/PersonToHardSkill";
 import { PersonToSoftSkill } from "../entity/PersonToSoftSkill";
 import { PersonToTeam } from "../entity/PersonToTeam";
+const bcrypt = require('bcrypt');
 
 
 export class PersonController {
@@ -11,7 +12,7 @@ export class PersonController {
         try {
             const repository = getRepository(Person);
             const people = await repository.find({ 
-                where: { access_level: 'member' }
+                where: { admin: 0 }
             });
             return res.status(200).json(people);
         } catch (error) {
@@ -107,31 +108,48 @@ export class PersonController {
 
     static async savePerson(req, res) {
         const newPerson = req.body;
-        try {
-            const repository = getRepository(Person);
-            const personSaved = await repository.save(newPerson);
-            return res.status(201).json(personSaved);
-        } catch (error) {
-            return res.status(500).json(error.message);
+        if (newPerson.password != undefined) {
+            try {
+                newPerson.password = await bcrypt.hash(newPerson.password, 12);
+                const repository = getRepository(Person);
+                const personSaved = await repository.save(newPerson);
+                return res.status(201).json(personSaved);
+            } catch (error) {
+                return res.status(500).json(error.message);
+            }
+        } else {
+            return res.status(400).json({message: "Null password"})
         }
+
     };
 
     static async updatePerson(req, res) {
         const { id } = req.params;
         const updateFields = req.body;
-        try {
-            const repository = getRepository(Person);
-            await repository.update(id, updateFields);
-            const personUpdated = await repository.findByIds(id);
-            return res.status(201).json(personUpdated);
-        } catch (error) {
-            return res.status(500).json(error.message);
+        if (updateFields.password != undefined) {
+            try {
+                updateFields.password = await bcrypt.hash(updateFields.password, 12);
+                const repository = getRepository(Person);
+                await repository.update(id, updateFields);
+                const personUpdated = await repository.findByIds(id);
+                return res.status(200).json(personUpdated);
+            } catch (error) {
+                return res.status(500).json(error.message);
+            }
+        } else {
+            try {
+                const repository = getRepository(Person);
+                await repository.update(id, updateFields);
+                const personUpdated = await repository.findByIds(id);
+                return res.status(201).json(personUpdated);
+            } catch (error) {
+                return res.status(500).json(error.message);
+            }
         }
     };
 
     static async deletePerson(req, res) {
         const { id } = req.params;
-        const updateFields = req.body;
         try {
             const repository = getRepository(Person);
             await repository.softDelete(id);
@@ -140,4 +158,5 @@ export class PersonController {
             return res.status(500).json(error.message);
         }
     };
+
 }

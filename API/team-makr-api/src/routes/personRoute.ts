@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import { PersonController } from '../controller/PersonController';
+const passport = require('passport');
 
 const PersonRouter = Router();
 
-PersonRouter.get('/person', PersonController.getPeople);
+PersonRouter.get('/person', passport.authenticate('bearer', { session: false }), PersonController.getPeople);
 
 PersonRouter.get('/person/:id', PersonController.getPerson);
 

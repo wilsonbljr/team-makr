@@ -10,10 +10,17 @@
       "typescript": "3.3.3333"
    },
    "dependencies": {
+      "bcrypt": "^5.0.1",
       "cors": "^2.8.5",
+      "dotenv": "^10.0.0",
       "express": "^4.17.1",
+      "jsonwebtoken": "^8.5.1",
       "morgan": "^1.10.0",
       "mysql2": "^2.3.2",
+      "passport": "^0.5.0",
+      "passport-http-bearer": "^1.0.1",
+      "passport-local": "^1.0.0",
+      "redis": "^3.1.2",
       "reflect-metadata": "^0.1.10",
       "typeorm": "0.2.38"
    },

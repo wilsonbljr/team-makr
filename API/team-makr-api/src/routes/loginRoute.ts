@@ -6,6 +6,4 @@ const loginRouter = Router();
 
 loginRouter.post("/person/login", passport.authenticate('local', { session: false }), LoginController.login)
 
-loginRouter.get("/person/logout", passport.authenticate('bearer', { session: false }), LoginController.logout)
-
 module.exports = loginRouter;

@@ -19,12 +19,6 @@ export class LoginController {
         res.status(204).send();
     };
 
-    static logout(req, res) {
-        console.log(req);
-        res.status(201);
-    };
-
-
     static async getByEmail(email) {
         try {
             const repository = getRepository(Person);

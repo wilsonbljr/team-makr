@@ -30,6 +30,16 @@ export class Person {
     admin!: boolean;
 
     @Column({
+        unique: true
+    })
+    email!: string;
+
+    @Column({
+        select: false
+    })
+    password!: string;
+
+    @Column({
         nullable: true
     })
     phone_number?: string;

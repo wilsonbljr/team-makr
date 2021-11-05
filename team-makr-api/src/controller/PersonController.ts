@@ -1,8 +1,5 @@
 import { Person } from "../entity/Person"
 import { getRepository } from "typeorm";
-import { PersonToHardSkill } from "../entity/PersonToHardSkill";
-import { PersonToSoftSkill } from "../entity/PersonToSoftSkill";
-import { PersonToTeam } from "../entity/PersonToTeam";
 const bcrypt = require('bcrypt');
 const logger = require('../config/logger');
 
@@ -36,91 +33,6 @@ export class PersonController {
             return res.status(500).json(error.message);
         }
     };
-
-    static async getPersonHardSkill(req, res) {
-        const { id } = req.params;
-        try {
-            const hardSkills = await getRepository(PersonToHardSkill)
-            .createQueryBuilder("ph")
-            .select("h.name", "name")
-            .addSelect("ph.level", "level")
-            .leftJoin("hard_skill", "h", "ph.hardskillId = h.id")
-            .where("ph.personId = :id", { id: id})
-            .getRawMany();
-            logger.log('info', 'User: ' + req.user.id + ', Method: getPersonHardSkill');
-            return res.status(200).json(hardSkills);
-        } catch (error) {
-            logger.log('error', 'Method: getPersonHardSkill, error: ' + error);
-            return res.status(500).json(error.message);
-        }
-    };
-
-    static async getPersonSoftSkill(req, res) {
-        const { id } = req.params;
-        try {
-            const softSkills = await getRepository(PersonToSoftSkill)
-            .createQueryBuilder("ps")
-            .select("s.name", "name")
-            .addSelect("ps.level", "level")
-            .leftJoin("soft_skill", "s", "ps.softskillId = s.id")
-            .where("ps.personId = :id", { id: id })
-            .getRawMany();
-            logger.log('info', 'User: ' + req.user.id + ', Method: getPersonSoftSkill');
-            return res.status(200).json(softSkills);
-        } catch (error) {
-            logger.log('error', 'Method: getPersonSoftSkill, error: ' + error);
-            return res.status(500).json(error.message);
-        }
-    };
-
-    static async getPersonTeam(req, res) {
-        const { id } = req.params.id;
-        let active = req.query.active;
-
-        if (active == "true") {
-            try {
-                const teams = await getRepository(PersonToTeam).query(`
-                    SELECT t.name AS t_name, t.description AS t_description 
-                    FROM person_to_team pt LEFT JOIN team t ON  pt.teamId = t.id 
-                    AND t.deleted IS NULL WHERE ( pt.personId = 1 AND pt.user_active != 0 ) 
-                    AND ( pt.deleted IS NULL )
-                `);
-                logger.log('info', 'User: ' + req.user.id + ', Method: getPersonTeam, Active = true');
-                return res.status(200).json(teams)
-                } catch (error) {
-                    logger.log('error', 'Method: getPersonTeam, active = true, error: ' + error);
-                    return res.status(500).json(error.message);
-            }
-        } else if (active == "false") {
-            try {
-                const teams = await getRepository(PersonToTeam).query(`
-                    SELECT t.name AS t_name, t.description AS t_description 
-                    FROM person_to_team pt LEFT JOIN team t ON  pt.teamId = t.id 
-                    AND t.deleted IS NULL WHERE ( pt.personId = 1 AND pt.user_active = 0 ) 
-                    AND ( pt.deleted IS NULL )
-                `);
-                logger.log('info', 'User: ' + req.user.id + ', Method: getPersonTeam, Active = false');
-                return res.status(200).json(teams)
-            } catch (error) {
-                logger.log('error', 'Method: getPersonTeam, active = false, error: ' + error);
-                return res.status(500).json(error.message);
-        }
-        } else {
-            try {
-                const teams = await getRepository(PersonToTeam).query(`
-                    SELECT t.name AS t_name, t.description AS t_description 
-                    FROM person_to_team pt LEFT JOIN team t ON  pt.teamId = t.id 
-                    AND t.deleted IS NULL WHERE ( pt.personId = 1 ) 
-                    AND ( pt.deleted IS NULL )
-                `);
-                logger.log('info', 'User: ' + req.user.id + ', Method: getPersonTeam, Active = null');
-                return res.status(200).json(teams)
-            } catch (error) {
-                logger.log('error', 'Method: getPersonTeam, active = null, error: ' + error);
-                return res.status(500).json(error.message);
-            }
-        }
-    }
 
     static async savePerson(req, res) {
         const newPerson = req.body;

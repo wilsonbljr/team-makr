@@ -2,22 +2,16 @@ import { Router } from 'express';
 import { PersonController } from '../controller/PersonController';
 const passport = require('passport');
 
-const PersonRouter = Router();
+const personRouter = Router();
 
-PersonRouter.get('/person', passport.authenticate('bearer', { session: false }), PersonController.getPeople);
+personRouter.get('/person', passport.authenticate('bearer', { session: false }), PersonController.getPeople);
 
-PersonRouter.get('/person/:id', passport.authenticate('bearer', { session: false }), PersonController.getPerson);
+personRouter.get('/person/:id', passport.authenticate('bearer', { session: false }), PersonController.getPerson);
 
-PersonRouter.get('/person/:id/hardskill', passport.authenticate('bearer', { session: false }), PersonController.getPersonHardSkill);
+personRouter.post('/person', PersonController.savePerson);
 
-PersonRouter.get('/person/:id/softskill', passport.authenticate('bearer', { session: false }), PersonController.getPersonSoftSkill)
+personRouter.put('/person/:id', passport.authenticate('bearer', { session: false }), PersonController.updatePerson);
 
-PersonRouter.get('/person/:id/team', passport.authenticate('bearer', { session: false }), PersonController.getPersonTeam)
+personRouter.delete('/person/:id', passport.authenticate('bearer', { session: false }), PersonController.deletePerson);
 
-PersonRouter.post('/person', PersonController.savePerson);
-
-PersonRouter.put('/person/:id', passport.authenticate('bearer', { session: false }), PersonController.updatePerson);
-
-PersonRouter.delete('/person/:id', passport.authenticate('bearer', { session: false }), PersonController.deletePerson);
-
-module.exports = PersonRouter;
+module.exports = personRouter;

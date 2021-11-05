@@ -9,9 +9,16 @@ export class Log {
     })
     id!: number;
 
-    @Column("varchar", {length: 1000})
-    description!: string;
+    @Column("varchar", {length: 16})
+    level!: string;
 
-    @CreateDateColumn()
-    created!: Date;
+    @Column("varchar", {length: 2048})
+    message!: string;
+
+    @Column("varchar", {length: 2048})
+    meta!: string;
+
+    @Column("datetime")
+    timestamp!: Date;
+
 }

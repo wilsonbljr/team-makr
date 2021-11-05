@@ -4,18 +4,22 @@ import { PersonToHardSkill } from "../entity/PersonToHardSkill";
 import { PersonToSoftSkill } from "../entity/PersonToSoftSkill";
 import { PersonToTeam } from "../entity/PersonToTeam";
 const bcrypt = require('bcrypt');
+const logger = require('../config/logger');
 
 
 export class PersonController {
     
     static async getPeople(req, res) {
+        console.log(req.authInfo.token);
         try {
             const repository = getRepository(Person);
             const people = await repository.find({ 
                 where: { admin: 0 }
             });
+            logger.log('info', 'User: ' + req.user.id + ', Method: getPeople');
             return res.status(200).json(people);
         } catch (error) {
+            logger.log('error', 'Method: getPeople, error: ' + error);
             return res.status(500).json(error.message);
         }
     };
@@ -25,8 +29,10 @@ export class PersonController {
         try {
             const repository = getRepository(Person);
             const person = await repository.findByIds(id);
+            logger.log('info', 'User: ' + req.user.id + ', Method: getPerson');
             return res.status(200).json(person);
         } catch (error) {
+            logger.log('error', 'Method: getPerson, error: ' + error);
             return res.status(500).json(error.message);
         }
     };
@@ -41,8 +47,10 @@ export class PersonController {
             .leftJoin("hard_skill", "h", "ph.hardskillId = h.id")
             .where("ph.personId = :id", { id: id})
             .getRawMany();
+            logger.log('info', 'User: ' + req.user.id + ', Method: getPersonHardSkill');
             return res.status(200).json(hardSkills);
         } catch (error) {
+            logger.log('error', 'Method: getPersonHardSkill, error: ' + error);
             return res.status(500).json(error.message);
         }
     };
@@ -57,8 +65,10 @@ export class PersonController {
             .leftJoin("soft_skill", "s", "ps.softskillId = s.id")
             .where("ps.personId = :id", { id: id })
             .getRawMany();
+            logger.log('info', 'User: ' + req.user.id + ', Method: getPersonSoftSkill');
             return res.status(200).json(softSkills);
         } catch (error) {
+            logger.log('error', 'Method: getPersonSoftSkill, error: ' + error);
             return res.status(500).json(error.message);
         }
     };
@@ -75,8 +85,10 @@ export class PersonController {
                     AND t.deleted IS NULL WHERE ( pt.personId = 1 AND pt.user_active != 0 ) 
                     AND ( pt.deleted IS NULL )
                 `);
+                logger.log('info', 'User: ' + req.user.id + ', Method: getPersonTeam, Active = true');
                 return res.status(200).json(teams)
                 } catch (error) {
+                    logger.log('error', 'Method: getPersonTeam, active = true, error: ' + error);
                     return res.status(500).json(error.message);
             }
         } else if (active == "false") {
@@ -87,8 +99,10 @@ export class PersonController {
                     AND t.deleted IS NULL WHERE ( pt.personId = 1 AND pt.user_active = 0 ) 
                     AND ( pt.deleted IS NULL )
                 `);
+                logger.log('info', 'User: ' + req.user.id + ', Method: getPersonTeam, Active = false');
                 return res.status(200).json(teams)
             } catch (error) {
+                logger.log('error', 'Method: getPersonTeam, active = false, error: ' + error);
                 return res.status(500).json(error.message);
         }
         } else {
@@ -99,8 +113,10 @@ export class PersonController {
                     AND t.deleted IS NULL WHERE ( pt.personId = 1 ) 
                     AND ( pt.deleted IS NULL )
                 `);
+                logger.log('info', 'User: ' + req.user.id + ', Method: getPersonTeam, Active = null');
                 return res.status(200).json(teams)
             } catch (error) {
+                logger.log('error', 'Method: getPersonTeam, active = null, error: ' + error);
                 return res.status(500).json(error.message);
             }
         }
@@ -113,11 +129,14 @@ export class PersonController {
                 newPerson.password = await bcrypt.hash(newPerson.password, 12);
                 const repository = getRepository(Person);
                 const personSaved = await repository.save(newPerson);
+                logger.log('info', 'User: ' + req.user.id + ', Method: savePerson');
                 return res.status(201).json(personSaved);
             } catch (error) {
+                logger.log('error', 'Method: savePerson, error: ' + error);
                 return res.status(500).json(error.message);
             }
         } else {
+            logger.log('error', "Method: savePerson, null password");
             return res.status(400).json({message: "Null password"})
         }
 
@@ -132,8 +151,10 @@ export class PersonController {
                 const repository = getRepository(Person);
                 await repository.update(id, updateFields);
                 const personUpdated = await repository.findByIds(id);
+                logger.log('info', 'User: ' + req.user.id + ', Method: updatePerson');
                 return res.status(200).json(personUpdated);
             } catch (error) {
+                logger.log('error', 'Method: updatePerson, error: ' + error);
                 return res.status(500).json(error.message);
             }
         } else {
@@ -141,8 +162,10 @@ export class PersonController {
                 const repository = getRepository(Person);
                 await repository.update(id, updateFields);
                 const personUpdated = await repository.findByIds(id);
+                logger.log('info', 'User: ' + req.user.id + ', Method: updatePerson');
                 return res.status(201).json(personUpdated);
             } catch (error) {
+                logger.log('error', 'Method: updatePerson, error: ' + error);
                 return res.status(500).json(error.message);
             }
         }
@@ -153,8 +176,10 @@ export class PersonController {
         try {
             const repository = getRepository(Person);
             await repository.softDelete(id);
-            return res.status(201).json({ message: `id ${id} deletado`});
+            logger.log('info', 'User: ' + req.user.id + ', Method: deletePerson');
+            return res.status(200).json({ message: `id ${id} deletado`});
         } catch (error) {
+            logger.log('error', 'Method: deletePerson, error: ' + error);
             return res.status(500).json(error.message);
         }
     };

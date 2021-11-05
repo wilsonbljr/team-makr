@@ -8,6 +8,9 @@ export class teamMakr1636051939909 implements MigrationInterface {
             ALTER TABLE \`person\`
             ADD UNIQUE INDEX \`IDX_d2d717efd90709ebd3cb26b936\` (\`email\`)
         `);
+        await queryRunner.query(`
+        DROP TABLE \`log\`
+    `);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

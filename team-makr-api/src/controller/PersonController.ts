@@ -177,7 +177,7 @@ export class PersonController {
             const repository = getRepository(Person);
             await repository.softDelete(id);
             logger.log('info', 'User: ' + req.user.id + ', Method: deletePerson');
-            return res.status(200).json({ message: `id ${id} deletado`});
+            return res.status(200).json({ message: `id ${id} deleted`});
         } catch (error) {
             logger.log('error', 'Method: deletePerson, error: ' + error);
             return res.status(500).json(error.message);

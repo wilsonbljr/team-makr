@@ -1,8 +1,9 @@
 import { Person } from "../entity/Person"
 import { getRepository } from "typeorm";
+import { v4 as uuidv4} from "uuid";
 const jwt = require('jsonwebtoken');
 const logger = require('../config/logger');
-
+const bcrypt = require('bcrypt');
 
 export class LoginController {
 
@@ -19,7 +20,7 @@ export class LoginController {
             return error
         }
 
-    }
+    };
 
     static login(req, res) {
         try {
@@ -51,7 +52,7 @@ export class LoginController {
     static async getById(id) {
         try {
             const repository = getRepository(Person);
-            const person = await repository.findOne({ select: ["id", "email", "password", "admin"],
+            const person = await repository.findOneOrFail({ select: ["id", "email", "password", "admin"],
                 where: { id: id }
             });
             logger.log('info', 'User: ' + id + ' found in database');
@@ -62,4 +63,69 @@ export class LoginController {
         }
     };
 
+    static async resetTokenGenerator(req, res) {
+        const { email } = req.body;
+        const repository = getRepository(Person);
+        try {
+            const person = await repository.findOneOrFail({ where: { email: email } })
+            if ( person ) {
+                try {
+                    const resetToken = await uuidv4();
+                    const tokenExpireDate = new Date();
+                    tokenExpireDate.setMinutes(tokenExpireDate.getMinutes() + 5);
+    
+                    await repository
+                    .createQueryBuilder()
+                    .update(Person)
+                    .set( { password_reset_token: resetToken, password_reset_expire: tokenExpireDate } )
+                    .where ("email = :email", { email: email})
+                    .execute();
+    
+                    logger.log('info', 'Email: ' + email + ' found in database and reset token generated.');
+                    return res.status(200).json({ resetToken: resetToken });
+                } catch (error) {
+                    logger.log('error', 'Email: ' + email + ' found, can\'t update person, error: ' + error);
+                    return res.status(500).json({ message: "Can't update password"});
+                };
+            };
+        } catch (error) {
+            logger.log('error', 'Email: ' + email + ' not found, error: ' + error);
+            return res.status(400).json({ message: "Email not found"});
+        }
+        
+    }
+
+    static async resetPassword(req, res) {
+        const { email, password, password_token } = req.body;
+        const repository = getRepository(Person);
+        try {
+            const person = await repository.createQueryBuilder()
+            .select("password_reset_token")
+            .addSelect("password_reset_expire")
+            .where("email = :email", { email: email})
+            .getRawOne();
+            if (password_token == person.password_reset_token && person.password_reset_expire < new Date()) {
+                const passwordHash = await bcrypt.hash(password, 12);
+                try {
+                    await repository
+                        .createQueryBuilder()
+                        .update(Person)
+                        .set( { password: passwordHash, password_reset_token: null, password_reset_expire: null } )
+                        .where ("email = :email", { email: email})
+                        .execute();
+                        logger.log('info', 'Email: ' + email + ' found in database and token is valid, password changed.');
+                        return res.status(200).json({ message: "Password changed." });
+                } catch (error) {
+                    logger.log('error', 'Can\'t update person, error: ' + error);
+                    return res.status(500).json({ message: "Internal server error"});
+                }
+            } else {
+                logger.log('error', 'Token invalid or expired');
+                return res.status(400).json({ message: "Token invalid or expired"});
+            }
+        } catch (error) {
+            logger.log('error', 'Email: ' + email + ' not found, error: ' + error);
+            return res.status(400).json({ message: "Email not found"});
+        }
+    }
 }

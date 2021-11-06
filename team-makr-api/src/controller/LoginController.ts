@@ -104,7 +104,10 @@ export class LoginController {
             .addSelect("password_reset_expire")
             .where("email = :email", { email: email})
             .getRawOne();
-            if (password_token == person.password_reset_token && person.password_reset_expire < new Date()) {
+            console.log(person)
+            console.log(password_token)
+            console.log(new Date())
+            if (password_token == person.password_reset_token && person.password_reset_expire > new Date()) {
                 const passwordHash = await bcrypt.hash(password, 12);
                 try {
                     await repository

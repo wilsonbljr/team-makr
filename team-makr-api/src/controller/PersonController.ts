@@ -41,7 +41,7 @@ export class PersonController {
                 newPerson.password = await bcrypt.hash(newPerson.password, 12);
                 const repository = getRepository(Person);
                 const personSaved = await repository.save(newPerson);
-                logger.log('info', 'User: ' + req.user.id + ', Method: savePerson');
+                logger.log('info', 'User: ' + personSaved.id + ', Method: savePerson');
                 return res.status(201).json(personSaved);
             } catch (error) {
                 logger.log('error', 'Method: savePerson, error: ' + error);

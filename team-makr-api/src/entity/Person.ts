@@ -1,7 +1,6 @@
 import internal = require("assert");
 import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany} from "typeorm";
-import { PersonToHardSkill } from "./PersonToHardSkill";
-import { PersonToSoftSkill } from "./PersonToSoftSkill";
+import { PersonToSkill } from "./PersonToSkill";
 import { PersonToTeam } from "./PersonToTeam";
 
 @Entity()
@@ -71,11 +70,8 @@ export class Person {
     })
     deleted?: Date;
 
-    @OneToMany(() => PersonToHardSkill, personToHardSkill => personToHardSkill.person)
-    personToHardSkill?: PersonToHardSkill[];
-
-    @OneToMany(() => PersonToSoftSkill, personToSoftSkill => personToSoftSkill.person)
-    personToSoftSkill?: PersonToSoftSkill[];
+    @OneToMany(() => PersonToSkill, personToSkill => personToSkill.person)
+    personToSkill?: PersonToSkill[];
 
     @OneToMany(() => PersonToTeam, personToTeam => personToTeam.person)
     personToTeam?: PersonToTeam[];

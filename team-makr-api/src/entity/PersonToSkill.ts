@@ -1,10 +1,10 @@
 import internal = require("assert");
 import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne} from "typeorm";
 import { Person } from "./Person";
-import { SoftSkill } from "./SoftSkill";
+import { Skill } from "./Skill";
 
 @Entity()
-export class PersonToSoftSkill {
+export class PersonToSkill {
 
     @PrimaryGeneratedColumn({
         unsigned: true
@@ -29,9 +29,9 @@ export class PersonToSoftSkill {
     })
     deleted?: Date;
 
-    @ManyToOne(() => Person, person => person.personToSoftSkill)
+    @ManyToOne(() => Person, person => person.personToSkill)
     person!: Person;
 
-    @ManyToOne(() => SoftSkill, softskill => softskill.personToSoftSkill)
-    softskill!: SoftSkill;
+    @ManyToOne(() => Skill, skill => skill.personToSkill)
+    skill!: Skill;
 }

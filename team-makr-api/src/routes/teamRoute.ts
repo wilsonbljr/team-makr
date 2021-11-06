@@ -1,6 +1,7 @@
+const passport = require('passport');
+
 import { Router } from 'express';
 import { TeamController } from '../controller/TeamController';
-const passport = require('passport');
 
 const teamRouter = Router();
 

@@ -1,6 +1,7 @@
+const passport = require('passport');
+
 import { Router } from 'express';
 import { PersonController } from '../controller/PersonController';
-const passport = require('passport');
 
 const personRouter = Router();
 

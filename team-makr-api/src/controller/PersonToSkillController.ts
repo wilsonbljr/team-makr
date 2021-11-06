@@ -53,7 +53,7 @@ export class PersonToSkillController {
             };
         } catch (error) {
             logger.log('error', "Method: addPersonSkill, error: " + error);
-            return res.status(500).json({message: "Internal server error"});
+            return res.status(500).json(error.message);
         };
     }
 

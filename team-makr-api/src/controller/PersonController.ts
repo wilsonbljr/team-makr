@@ -51,7 +51,6 @@ export class PersonController {
             logger.log('error', "Method: savePerson, null password");
             return res.status(400).json({message: "Null password"})
         }
-
     };
 
     static async updatePerson(req, res) {

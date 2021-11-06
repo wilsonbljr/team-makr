@@ -19,7 +19,7 @@ export class LogController {
                 return res.status(200).json(logs);
             } catch (error) {
                 logger.log('error', 'Method: getLogs, before & after: undefined, error: ' + error);
-                return res.status(500).json(error);
+                return res.status(500).json(error.message);
             };
         } else if (before != undefined) {
             try {
@@ -31,7 +31,7 @@ export class LogController {
                 return res.status(200).json(logs);
             } catch (error) {
                 logger.log('error', 'Method: getLogs, after: undefined, error: ' + error);
-                return res.status(500).json(error);
+                return res.status(500).json(error.message);
             };
         } else if (after != undefined) {
             try {
@@ -43,7 +43,7 @@ export class LogController {
                 return res.status(200).json(logs);
             } catch (error) {
                 logger.log('error', 'Method: getLogs, before: undefined, error: ' + error);
-                return res.status(500).json(error);
+                return res.status(500).json(error.message);
             };
         } else {
             try {
@@ -53,7 +53,7 @@ export class LogController {
                 return res.status(200).json(logs);
             } catch (error) {
                 logger.log('error', 'Method: getLogs, error: ' + error);
-                return res.status(500).json(error);
+                return res.status(500).json(error.message);
             };
         }
     };
@@ -68,7 +68,7 @@ export class LogController {
             return res.status(200).json(log);
         } catch (error) {
             logger.log('error', 'Method: getLog, error: ' + error);
-            return res.status(500).json(error);
+            return res.status(500).json(error.message);
         }
     }
 

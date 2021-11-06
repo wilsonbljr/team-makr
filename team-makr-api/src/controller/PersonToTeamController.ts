@@ -73,7 +73,7 @@ export class PersonToTeamController {
                         return res.status(200).json(updatedPersonTeam);
                     } catch (error) {
                         logger.log('error', "Method: addPersonTeam, can't update table PersonToTeam, error:" + error);
-                        return res.status(500).json({ message: "Internal server error" });
+                        return res.status(500).json(error.message);
                     }
                 } else {
                     logger.log('error', "Method: addPersonTeam, no changes needed.");
@@ -91,12 +91,12 @@ export class PersonToTeamController {
                     return res.status(201).json(newPersonTeam);
                 }  catch (error) {
                     logger.log('error', "Method: addPersonTeam, error: " + error);
-                    return res.status(500).json({message: "Internal server error"});
+                    return res.status(500).json(error.message);
                 }
             }
         } catch (error) {
             logger.log('error', "Method: addPersonTeam, error: " + error);
-            return res.status(500).json({message: "Internal server error"});            
+            return res.status(500).json(error.message);            
         }
     };
 }

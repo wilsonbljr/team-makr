@@ -1,9 +1,10 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
-import { LoginController } from '../controller/LoginController';
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+
+import { LoginController } from '../controller/LoginController';
 
 function personIsNull (person) {
     if (!person) {
@@ -17,7 +18,6 @@ async function passwordCompare (password, hashPW) {
         throw new Error("Invalid email or password");
     }
 }
-
 
 passport.use(
     new LocalStrategy({

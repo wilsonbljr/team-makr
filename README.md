@@ -11,4 +11,4 @@ For now the development of this application will use MySQL (database), NodeJS wi
 
 # Development Status
 
-Currently I have the EER diagram and I'm working in the database and API creation.
+Currently I'm almost done with the API creation.

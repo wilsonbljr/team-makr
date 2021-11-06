@@ -31,7 +31,7 @@ passport.use(
             await passwordCompare(password, person.password);
             done(null, person);
         } catch (error) {
-            done(error);
+            done(null, false, { message: "Invalid email or password." });
         }
     })
 );
@@ -44,7 +44,7 @@ passport.use(
                 const person = await LoginController.getById(payload.id);
                 done(null, person, { token: token });
             } catch (error) {
-                done(error);
+                done(null, false, { message: "Token invalid or expired." });
             }
 
     } )

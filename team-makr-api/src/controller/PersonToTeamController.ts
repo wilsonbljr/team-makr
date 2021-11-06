@@ -5,7 +5,7 @@ const logger = require('../config/logger');
 export class PersonToTeamController {
     
     static async getPersonTeam(req, res) {
-        const { id } = req.params.id;
+        const { id } = req.params;
         let active = req.query.active;
 
         if (active == "true") {
@@ -13,9 +13,8 @@ export class PersonToTeamController {
                 const teams = await getRepository(PersonToTeam).query(`
                     SELECT t.name AS t_name, t.description AS t_description 
                     FROM person_to_team pt LEFT JOIN team t ON  pt.teamId = t.id 
-                    AND t.deleted IS NULL WHERE ( pt.personId = 1 AND pt.user_active != 0 ) 
-                    AND ( pt.deleted IS NULL )
-                `);
+                    AND t.deleted IS NULL WHERE ( pt.personId = ? AND pt.user_active != 0 ) 
+                `, [id]);
                 logger.log('info', 'User: ' + req.user.id + ', Method: getPersonTeam, Active = true');
                 return res.status(200).json(teams)
                 } catch (error) {
@@ -27,9 +26,8 @@ export class PersonToTeamController {
                 const teams = await getRepository(PersonToTeam).query(`
                     SELECT t.name AS t_name, t.description AS t_description 
                     FROM person_to_team pt LEFT JOIN team t ON  pt.teamId = t.id 
-                    AND t.deleted IS NULL WHERE ( pt.personId = 1 AND pt.user_active = 0 ) 
-                    AND ( pt.deleted IS NULL )
-                `);
+                    AND t.deleted IS NULL WHERE ( pt.personId = ? AND pt.user_active = 0 ) 
+                `, [id]);
                 logger.log('info', 'User: ' + req.user.id + ', Method: getPersonTeam, Active = false');
                 return res.status(200).json(teams)
             } catch (error) {
@@ -41,9 +39,9 @@ export class PersonToTeamController {
                 const teams = await getRepository(PersonToTeam).query(`
                     SELECT t.name AS t_name, t.description AS t_description 
                     FROM person_to_team pt LEFT JOIN team t ON  pt.teamId = t.id 
-                    AND t.deleted IS NULL WHERE ( pt.personId = 1 ) 
-                    AND ( pt.deleted IS NULL )
-                `);
+                    AND t.deleted IS NULL WHERE ( pt.personId = ? ) 
+                `, [id]);
+                console.log(id)
                 logger.log('info', 'User: ' + req.user.id + ', Method: getPersonTeam, Active = null');
                 return res.status(200).json(teams)
             } catch (error) {
@@ -93,6 +91,40 @@ export class PersonToTeamController {
                     logger.log('error', "Method: addPersonTeam, error: " + error);
                     return res.status(500).json(error.message);
                 }
+            }
+        } catch (error) {
+            logger.log('error', "Method: addPersonTeam, error: " + error);
+            return res.status(500).json(error.message);            
+        }
+    };
+
+    static async removePersonTeam (req, res) {
+        const { personId, teamId } = req.params;
+        try {
+            const repository = getRepository(PersonToTeam);
+            const personTeam = await repository.findOne({ where: { person: personId, team: teamId }});
+            if ( personTeam ) {
+                if (personTeam.user_active == true) {
+                    try {                    
+                        await repository
+                        .createQueryBuilder()
+                        .update(PersonToTeam)
+                        .set( { user_active: false } )
+                        .where ("id = :id", { id: personTeam.id})
+                        .execute();
+                        logger.log('info', "Method: removePersonTeam, user:" + personId + " deactivated from team");
+                        return res.status(200).json({ message: "User removed from team" });
+                    } catch (error) {
+                        logger.log('error', "Method: removePersonTeam, can't update table PersonToTeam, error:" + error);
+                        return res.status(500).json(error.message);
+                    }
+                } else {
+                    logger.log('error', "Method: removePersonTeam, user already deactivated.");
+                    return res.status(400).json({ message: "User already removed from team" });
+                }
+            } else {
+                    logger.log('error', "Method: removePersonTeam, user not found in team");
+                    return res.status(400).json( {message: "User not found in team" });
             }
         } catch (error) {
             logger.log('error', "Method: addPersonTeam, error: " + error);

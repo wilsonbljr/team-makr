@@ -24,11 +24,6 @@ export class PersonToSkill {
     })
     updated: Date;
 
-    @DeleteDateColumn({
-        select: false
-    })
-    deleted?: Date;
-
     @ManyToOne(() => Person, person => person.personToSkill)
     person!: Person;
 

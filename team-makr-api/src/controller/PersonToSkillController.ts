@@ -57,4 +57,22 @@ export class PersonToSkillController {
         };
     }
 
+    static async removePersonSkill (req, res) {
+        const { personId, skillId } = req.params;
+        try {
+            const repository = getRepository(PersonToSkill);
+            const personSkill = await repository.findOne({ where: { person: personId, skill: skillId} });
+            if ( personSkill ) {
+                await repository.delete(personSkill.id);
+                logger.log('info', "Method: removePersonSkill, skill:" + skillId + " deleted from User:" + personId);
+                return res.status(200).json({ message: "Skill deleted successfully" });
+            } else {
+                logger.log('info', "Method: removePersonSkill, skill: " + skillId + " not found in user:" + personId);
+                return res.status(400).json({ message: "Skill not found in this user" });
+            };
+        } catch (error) {
+            logger.log('error', "Method: removePersonSkill, error: " + error);
+            return res.status(500).json(error.message);
+        };
+    }
 }

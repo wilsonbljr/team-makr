@@ -27,11 +27,6 @@ export class PersonToTeam {
     })
     updated: Date;
 
-    @DeleteDateColumn({
-        select: false
-    })
-    deleted?: Date;
-
     @ManyToOne(() => Person, person => person.personToTeam)
     person!: Person;
 

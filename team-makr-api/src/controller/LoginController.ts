@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const logger = require('../config/logger');
 const bcrypt = require('bcrypt');
 const blacklist = require('../../redis/manage-blacklist')
+const emailMiddleWare = require('../config/email')
 
 export class LoginController {
 
@@ -47,11 +48,13 @@ export class LoginController {
                     .createQueryBuilder()
                     .update(Person)
                     .set( { password_reset_token: resetToken, password_reset_expire: tokenExpireDate } )
-                    .where ("email = :email", { email: email})
+                    .where ("email = :email", { email: email })
                     .execute();
+
+                    emailMiddleWare(email, resetToken);
     
                     logger.log('info', 'Email: ' + email + ' found in database and reset token generated.');
-                    return res.status(200).json({ resetToken: resetToken });
+                    return res.status(200).json({ message: "Email sent with reset token" });
                 } catch (error) {
                     logger.log('error', 'Email: ' + email + ' found, can\'t update person, error: ' + error);
                     return res.status(500).json({ message: "Can't update password"});

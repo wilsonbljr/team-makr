@@ -1,4 +1,5 @@
 require('dotenv').config()
+require('../redis/blacklist');
 
 import { app } from './app'
 

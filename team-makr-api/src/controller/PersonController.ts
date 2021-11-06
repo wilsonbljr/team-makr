@@ -7,7 +7,6 @@ const logger = require('../config/logger');
 export class PersonController {
     
     static async getPeople(req, res) {
-        console.log(req.authInfo.token);
         try {
             const repository = getRepository(Person);
             const people = await repository.find({ 

@@ -4,6 +4,7 @@ import { v4 as uuidv4} from "uuid";
 const jwt = require('jsonwebtoken');
 const logger = require('../config/logger');
 const bcrypt = require('bcrypt');
+const blacklist = require('../../redis/manage-blacklist')
 
 export class LoginController {
 
@@ -17,7 +18,18 @@ export class LoginController {
             logger.log('error', 'User: ' + req.user.id + ' failed to login, error: ' + error);
             res.status(500).json(error.message);
         }
+    };
 
+    static async logout(req, res) {
+        try {
+            const token = req.authInfo.token;
+            await blacklist.add(token);
+            logger.log('info', 'User: ' + req.user.id + ' logged out.');
+            res.status(204).send()
+        } catch (error) {
+            logger.log('error', 'User: ' + req.user.id + ' failed to logout, error: ' + error);
+            res.status(500).json(error.message);
+        }
     };
 
     static async resetTokenGenerator(req, res) {

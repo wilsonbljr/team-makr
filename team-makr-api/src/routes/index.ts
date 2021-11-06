@@ -11,9 +11,9 @@ import * as express from 'express';
 module.exports = app => {
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
+    app.use(login);
     app.use(person);
     app.use(log);
-    app.use(login);
     app.use(skill);
     app.use(team);
     app.use(personToSkill);

@@ -9,6 +9,10 @@ export class LogController {
         let before = req.query.before;
         let after = req.query.after;
 
+        if (req.user.admin == false) {
+            return res.status(401).json({ message: "Unauthorized" })
+        }
+        
         if (before != undefined && after != undefined) {
             try {
                 const repository = getRepository(Log);
@@ -60,6 +64,10 @@ export class LogController {
 
     static async getLog(req, res) {
         const { id } = req.params;
+
+        if (req.user.admin == false) {
+            return res.status(401).json({ message: "Unauthorized" })
+        }
 
         try {
             const repository = getRepository(Log);

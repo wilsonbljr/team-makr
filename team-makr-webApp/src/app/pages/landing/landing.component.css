@@ -9,13 +9,12 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .logo {
     width: 40%;
     height: 35px;
-    justify-self: flex-start;
 }
 
 .img__mobile {
@@ -29,20 +28,16 @@
 .landing__bottom {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
     text-align: center;
 }
 
 .landing__title {
     font-weight: 700;
     font-size: 2em;
-    margin-bottom: 1rem;
 }
 
 .landing__text {
     font-weight: 400;
-    margin-bottom: 2rem;
 }
 
 .landing__button{

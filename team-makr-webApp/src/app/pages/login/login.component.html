@@ -1,0 +1,22 @@
+<section class="login">
+    <div class="login__content">
+        <div class="login__welcome">
+            <h1 class="login__title mb-5">Welcome Back!</h1>
+        </div>
+        <div class="login__input mt-5 mb-5">
+            <form action="" class="login__form">
+                <input type="email" class="form-control form__input mb-4" title="email" placeholder="Email address">
+                <input type="password" class="form-control form__input" name="password" title="password"
+                    placeholder="Password">
+                <div class="mt-4">
+                    <button class="login__button mb-2" type="submit" routerLink="/login"
+                        routerLinkActive="active">Login</button>
+                    <a routerLink="/forgot-password" routerLinkActive="active" class="login__link">Forgot password?</a>
+                </div>
+            </form>
+        </div>
+        <div class="login__text mt-4">
+            <a routerLink="/register" routerLinkActive="active" class="login__link">New User? Create Account</a>
+        </div>
+    </div>
+</section>

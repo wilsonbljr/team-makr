@@ -7,8 +7,8 @@ With this information project leaders will be able to sort users by skills so th
 
 # Development
 
-For now the development of this application will use MySQL (database), NodeJS with Express and TypeORM (api).
+The development of this application will use MySQL (database), NodeJS with Express and TypeORM (api), Angular (Web App) and React Native (Mobile App).
 
 # Development Status
 
-Currently I'm almost done with the API creation.
+I'm done with the API for now, and started the Web App development with Angular

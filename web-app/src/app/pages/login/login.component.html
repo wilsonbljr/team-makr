@@ -9,8 +9,7 @@
                 <input type="password" class="form-control form__input" name="password" title="password"
                     placeholder="Password">
                 <div class="mt-4">
-                    <button class="login__button mb-2" type="submit" routerLink="/login"
-                        routerLinkActive="active">Login</button>
+                    <button class="login__button mb-2" type="submit" (click)="loginRequest()">Login</button>
                     <a routerLink="/forgot-password" routerLinkActive="active" class="login__link">Forgot password?</a>
                 </div>
             </form>

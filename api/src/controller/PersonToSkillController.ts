@@ -11,6 +11,8 @@ export class PersonToSkillController {
             const skills = await repository.createQueryBuilder("ph")
             .select("h.name", "name")
             .addSelect("ph.level", "level")
+            .addSelect("h.soft_skill", "softSkill")
+            .addSelect("h.id", "id")
             .leftJoin("skill", "h", "ph.skillId = h.id")
             .where("ph.personId = :id", { id: id})
             .getRawMany();

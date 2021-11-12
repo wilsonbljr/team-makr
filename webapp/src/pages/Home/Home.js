@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import login from '../../services/auth';
+import { getUser } from '../../services/user';
 
 const Home = () => {
-    const [token, setToken] = useState('')
+
+    const [user, setUser] = useState({});
 
     useEffect(() => {
-        const token = login("sana@gmail.com", "minatozaki")
-        return token
-    });
+        getUser(sessionStorage.getItem('user'), setUser);
+    }, {})
 
     return (
         <section>
-            <p>Home</p>
-            <button onClick={() => setToken(login("sana@gmail.com","minatozaki"))} >aaaa</button>
+            <p>{user.firstName}</p>
+            <p>{user.lastName}</p>
+            <p>{user.pronoun}</p>
+            <p>{user.email}</p>
+            <p>{user.phone_number}</p>    
         </section>
     )
 }

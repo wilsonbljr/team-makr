@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Button, TextField } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import Container from '../../components/Container'
+import { login } from '../../services/auth';
 
 const StyledForm = styled.form`
     display: flex;
@@ -31,16 +32,22 @@ const PasswordContainer = styled.div`
     flex-direction: column;
 `
 
+function handleSubmit(event, email, password, navigate) {
+    event.preventDefault();
+    login(email, password).then(() => {
+        navigate('/home');
+    });
+}
+
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     return (
         <Container>
             <Title>Welcome Back!</Title>
-            <StyledForm onSubmit={(event) => {
-                event.preventDefault();
-            }}>
+            <StyledForm onSubmit={event => {handleSubmit(event, email, password, navigate)}}>
                 <TextField onChange={(event) => {
                     setEmail(event.target.value);
                 }} id='email' label='E-mail' variant='outlined' type="email" />

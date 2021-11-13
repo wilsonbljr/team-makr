@@ -7,11 +7,11 @@ export const login = async (email, password) => {
     const decoded = await jwt_decode(res.headers.authorization)
     sessionStorage.setItem('token', res.headers.authorization)
     sessionStorage.setItem('user', decoded.id)
-
 };
 
 export const logout = async () => {
     await api.get('/person/logout', { headers: authHeader() });
+    sessionStorage.removeItem('user');
 }
 
 export const registerUser = async (name, pronoun, phone_number, email, password) => {

@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import {
-    SwipeableDrawer, Divider, List, ListItem,
-    ListItemText, Typography, AppBar, Box, Toolbar, IconButton
-} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { SwipeableDrawer, Divider, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton, ListItemButton, ListItemIcon } from '@mui/material';
+import { AppRegistration, Code, Home, Login, People, Menu, Logout } from '@mui/icons-material';
 
 import logo from '../assets/images/logo.svg';
-import { darkSecondaryColour } from './UI/Variables'
+import { darkSecondaryColour } from './UI/Variables';
 
 const Logo = styled.img`
     width: 50%;
@@ -34,24 +32,34 @@ const checkLoggedIn = (user, navigate, setOpen) => {
     if (user) {
         return (
             <List>
-                <ListItem button sx={{ height: '60px' }} onClick={() => {
+                <ListItemButton divider sx={{ height: '60px' }} onClick={() => {
                     navigate('/home')
                     setOpen(false)
                 }}>
+                    <ListItemIcon><Home sx={{ filter: 'invert(100)' }} /></ListItemIcon>
                     <ListItemText primary={<ListText variant="p" style={{ color: '#fff', fontWeight: 700 }}>Home</ListText>} />
-                </ListItem>
-                <ListItem button sx={{ height: '60px' }} onClick={() => {
+                </ListItemButton>
+                <ListItemButton divider sx={{ height: '60px' }} onClick={() => {
                     navigate('/team')
                     setOpen(false)
                 }}>
+                    <ListItemIcon><People sx={{ filter: 'invert(100)' }} /></ListItemIcon>
                     <ListItemText primary={<ListText variant="p" style={{ color: '#fff', fontWeight: 700 }}>Teams</ListText>} />
-                </ListItem>
-                <ListItem button sx={{ height: '60px' }} onClick={() => {
+                </ListItemButton>
+                <ListItemButton divider sx={{ height: '60px' }} onClick={() => {
                     navigate('/skill')
                     setOpen(false)
                 }}>
+                    <ListItemIcon><Code sx={{ filter: 'invert(100)' }} /></ListItemIcon>
                     <ListItemText primary={<ListText variant="p" style={{ color: '#fff', fontWeight: 700 }}>Skills</ListText>} />
-                </ListItem>
+                </ListItemButton>
+                <ListItemButton divider sx={{ height: '60px' }} onClick={() => {
+                    navigate('/skill')
+                    setOpen(false)
+                }}>
+                    <ListItemIcon><Logout sx={{ filter: 'invert(100)' }} /></ListItemIcon>
+                    <ListItemText primary={<ListText variant="p" style={{ color: '#fff', fontWeight: 700 }}>Logout</ListText>} />
+                </ListItemButton>
             </List>
         )
     } else {
@@ -61,12 +69,14 @@ const checkLoggedIn = (user, navigate, setOpen) => {
                     navigate('/login')
                     setOpen(false)
                 }}>
+                    <ListItemIcon><Login sx={{ filter: 'invert(100)' }} /></ListItemIcon>
                     <ListItemText primary={<ListText variant="p" style={{ color: '#fff', fontWeight: 700 }}>Login</ListText>} />
                 </ListItem>
                 <ListItem button sx={{ height: '60px' }} onClick={() => {
                     navigate('/register')
                     setOpen(false)
                 }}>
+                    <ListItemIcon><AppRegistration sx={{ filter: 'invert(100)' }} /></ListItemIcon>
                     <ListItemText primary={<ListText variant="p" style={{ color: '#fff', fontWeight: 700 }}>Register</ListText>} />
                 </ListItem>
             </List>
@@ -95,7 +105,7 @@ const Header = () => {
                         sx={{ mr: 2, filter: 'invert(100)' }}
                         onClick={() => setOpen(true)}
                     >
-                        <MenuIcon />
+                        <Menu />
                     </IconButton>
                     <Logo src={logo} alt="Team Makr" />
                     <SwipeableDrawer

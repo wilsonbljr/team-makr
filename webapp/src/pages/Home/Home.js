@@ -44,6 +44,22 @@ const ContainerTeams = styled.section`
     gap: 1vh;
 `
 
+function skillsMap(skills, soft) {
+    return skills.map((skill) => {
+    if (skill.softSkill !== soft && skill.id !== null) {
+        return (
+            <Card sx={{ width: "280px" }} key={skill.id}>
+                <CardContent>{skill.name}</CardContent>
+                <CardContent>Level: {skill.level}</CardContent>
+            </Card>
+        )
+    } else {
+        return (
+            <></>
+        )
+    }
+})}
+
 const Home = () => {
 
     const [user, setUser] = useState([]);
@@ -83,39 +99,13 @@ const Home = () => {
             <ContainerInfo>
                 <Title>Soft Skills</Title>
                 <ContainerTeams>
-                    {skills.map((skill) => {
-                        if (skill.softSkill !== 0 && skill.id !== null) {
-                            return (
-                                <Card sx={{ width: "280px" }} key={skill.id}>
-                                    <CardContent>{skill.name}</CardContent>
-                                    <CardContent>Level: {skill.level}</CardContent>
-                                </Card>
-                            )
-                        } else {
-                            return (
-                                <></>
-                            )
-                        }
-                    })}
+                    {skillsMap(skills, 0)}
                 </ContainerTeams>
             </ContainerInfo>
             <ContainerInfo>
                 <Title>Hard Skills</Title>
                 <ContainerTeams>
-                    {skills.map((skill) => {
-                        if (skill.softSkill !== 1 && skill.id !== null) {
-                            return (
-                                <Card sx={{ width: "280px" }} key={skill.id}>
-                                    <CardContent>{skill.name}</CardContent>
-                                    <CardContent>Level: {skill.level}</CardContent>
-                                </Card>
-                            )
-                        } else {
-                            return (
-                                <></>
-                            )
-                        }
-                    })}
+                    {skillsMap(skills, 1)}
                 </ContainerTeams>
             </ContainerInfo>
         </Container>

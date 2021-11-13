@@ -15,10 +15,17 @@ export const logout = async () => {
 }
 
 export const registerUser = async (name, pronoun, phone_number, email, password) => {
-    let firstName = '';
-    let lastName = '';
-    [firstName, lastName] = name.split(" ", 1);
-
-    await api.post('/person', { firstName, lastName, pronoun, phone_number, email, password });
+    try {
+        let firstName = '';
+        let lastName = '';
+        [firstName, lastName] = name.split(" ", 2);
+        if (!lastName) {
+            lastName = ' ';
+        }
+        const res = await api.post('/person', { firstName, lastName, pronoun, phone_number, email, password });
+        return res;
+    } catch (error) {
+        return error.name;
+    }
 };
 

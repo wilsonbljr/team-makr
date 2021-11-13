@@ -14,7 +14,7 @@ export class PersonToSkillController {
             .addSelect("h.soft_skill", "softSkill")
             .addSelect("h.id", "id")
             .leftJoin("skill", "h", "ph.skillId = h.id")
-            .where("ph.personId = :id", { id: id})
+            .where("ph.personId = :id", { id: id })
             .getRawMany();
             logger.log('info', 'User: ' + req.user.id + ', Method: getPersonSkill');
             return res.status(200).json(skills);

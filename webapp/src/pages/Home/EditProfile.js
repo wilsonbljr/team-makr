@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, TextField, Alert } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import Container from '../../components/Container'
 import { registerUser } from '../../services/auth';
+import { getUser } from '../../services/user';
 
 const StyledForm = styled.form`
     display: flex;
@@ -37,7 +38,8 @@ function handleSubmit(event, name, pronouns, phone, email, password, navigate, s
     })
 };
 
-const Register = () => {
+const EditProfile = () => {
+    const [user, setUser] = useState([]);
     const [name, setName] = useState('');
     const [pronouns, setPronouns] = useState('');
     const [phone, setPhone] = useState('');
@@ -46,13 +48,17 @@ const Register = () => {
     const [alert, setAlert] = useState(false);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        getUser(sessionStorage.getItem('user'), setUser);
+    }, [])
+
     return (
         <Container>
-            <Title>Register Account</Title>
+            <Title>Edit your profile</Title>
             <StyledForm onSubmit={event => { handleSubmit(event, name, pronouns, phone, email, password, navigate, setAlert) }}>
                 <TextField onChange={(event) => {
                     setName(event.target.value);
-                }} id='name' label='Name' variant='outlined' type="text" />
+                }} id='name' label='Name' value={user.firstName + ' ' + user.lastName} disabled variant='outlined' type="text" />
                 <TextField onChange={(event) => {
                     setPronouns(event.target.value);
                 }} id='pronoun' label='Pronouns' variant='outlined' type="text" />
@@ -61,14 +67,14 @@ const Register = () => {
                 }} id='phone' label='Phone Number' variant='outlined' type="tel" />
                 <TextField onChange={(event) => {
                     setEmail(event.target.value);
-                }} id='email' label='E-mail' variant='outlined' type="email" />
+                }} id='email' label='E-mail' InputLabelProps={{ shrink: true }} disabled value={user.email} variant='outlined' type="email" />
                 <TextField onChange={(event) => {
                     setPassword(event.target.value);
                 }} id='password' label='Password' variant='outlined' type="password" />
 
                 <ButtonContainer>
                     <Button type="submit" variant="contained" >Register</Button>
-                    <Button component={Link} to="/login" variant="contained" >Back to Login</Button>
+                    <Button component={Link} to="/home" variant="contained" >Back to Home</Button>
                 </ButtonContainer>
             </StyledForm>
             {alert ? <Alert severity="error">Server error, try again</Alert> : <> </>}
@@ -77,6 +83,4 @@ const Register = () => {
 }
 
 
-export default Register
-
-
+export default EditProfile

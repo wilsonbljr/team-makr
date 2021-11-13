@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, CardContent, CardActions } from '@mui/material';
+import { Button, Card, CardContent } from '@mui/material';
 import { Edit } from '@mui/icons-material';
 import styled from 'styled-components';
 import Container from '../../components/Container'
 import { getUser, getUserSkills, getUserTeams } from '../../services/user';
+import { Link } from 'react-router-dom';
 
 const Welcome = styled.h1`
     text-align: center;
@@ -65,7 +66,8 @@ const Home = () => {
                     <p> Email: {user.email} </p>
                     <p> Phone: {user.phone_number}</p>
                 </Information>
-                <EditProfile endIcon={<Edit />} variant='outlined' sx={{ fontWeight: 700 }}>Edit Profile</EditProfile>
+                <EditProfile endIcon={<Edit />} variant='outlined' sx={{ fontWeight: 700 }}
+                    component={Link} to='/editprofile'>Edit Profile</EditProfile>
             </ContainerInfo>
             <ContainerInfo>
                 <Title>Teams</Title>
@@ -82,12 +84,16 @@ const Home = () => {
                 <Title>Soft Skills</Title>
                 <ContainerTeams>
                     {skills.map((skill) => {
-                        if (skill.softSkill !== 0) {
+                        if (skill.softSkill !== 0 && skill.id !== null) {
                             return (
                                 <Card sx={{ width: "280px" }} key={skill.id}>
                                     <CardContent>{skill.name}</CardContent>
                                     <CardContent>Level: {skill.level}</CardContent>
                                 </Card>
+                            )
+                        } else {
+                            return (
+                                <></>
                             )
                         }
                     })}
@@ -97,12 +103,16 @@ const Home = () => {
                 <Title>Hard Skills</Title>
                 <ContainerTeams>
                     {skills.map((skill) => {
-                        if (skill.softSkill !== 1) {
+                        if (skill.softSkill !== 1 && skill.id !== null) {
                             return (
                                 <Card sx={{ width: "280px" }} key={skill.id}>
                                     <CardContent>{skill.name}</CardContent>
                                     <CardContent>Level: {skill.level}</CardContent>
                                 </Card>
+                            )
+                        } else {
+                            return (
+                                <></>
                             )
                         }
                     })}

@@ -2,16 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import desktop from '../../assets/images/desktop.svg'
 import mobile from '../../assets/images/mobile.svg'
-import logo from '../../assets/images/logo.svg'
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Container from '../../components/Container'
 
-
-const Logo = styled.img`
-    width: 40%;
-    height: 35px;
-`
 
 const MobileImg = styled.img`
     max-width: 100%;
@@ -36,7 +30,6 @@ const Text = styled.p`
 const Landing = () => {
     return (
         <Container>
-            <Logo src={logo} alt="Team Makr" />
             <MobileImg src={mobile} alt="Desenvolvedor" />
             <DesktopImg src={desktop} alt="Time" />
             <Title>Find the perfect team</Title>

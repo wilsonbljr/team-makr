@@ -1,10 +1,15 @@
 import { createTheme } from '@mui/material';
-import { primaryColour, secondaryColour, backgroundColour, darkSecondaryColour } from './components/UI/Variables'
+import { darkSecondaryColour } from './components/UI/Variables'
 
 const mainTheme = createTheme({
     palette: {
         primary: {
-            main: darkSecondaryColour
+            main: darkSecondaryColour,
+            contrastText: '#FFF'
+        },
+        secondary: {
+            main: darkSecondaryColour,
+            contrastText: '#FFF'
         }
     }
 })

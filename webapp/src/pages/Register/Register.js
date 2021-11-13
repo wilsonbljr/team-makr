@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, TextField, Alert } from '@mui/material';
+import { Button, TextField, Snackbar, Alert } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import Container from '../../components/Container'
@@ -22,18 +22,14 @@ const ButtonContainer = styled.div`
     gap: 2vh;
 `
 
-function handleSubmit(event, name, pronouns, phone, email, password, navigate, setAlert) {
+function handleSubmit(event, name, pronouns, phone, email, password, navigate, snack) {
     event.preventDefault();
     registerUser(name, pronouns, phone, email, password).then((res) => {
         if (res.status === 201) {
             navigate('/register/success');
+        } else {
+            snack(true)
         }
-        
-    }).catch(error => {
-        setAlert(true)
-        setTimeout(() => {
-            setAlert(false)
-        }, 3000);
     })
 };
 
@@ -43,39 +39,49 @@ const Register = () => {
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [alert, setAlert] = useState(false);
+    const [openSnack, setOpenSnack] = useState(false)
     const navigate = useNavigate();
 
-    return (
-        <Container>
-            <Title>Register Account</Title>
-            <StyledForm onSubmit={event => { handleSubmit(event, name, pronouns, phone, email, password, navigate, setAlert) }}>
-                <TextField onChange={(event) => {
-                    setName(event.target.value);
-                }} id='name' label='Name' variant='outlined' type="text" />
-                <TextField onChange={(event) => {
-                    setPronouns(event.target.value);
-                }} id='pronoun' label='Pronouns' variant='outlined' type="text" />
-                <TextField onChange={(event) => {
-                    setPhone(event.target.value);
-                }} id='phone' label='Phone Number' variant='outlined' type="tel" />
-                <TextField onChange={(event) => {
-                    setEmail(event.target.value);
-                }} id='email' label='E-mail' variant='outlined' type="email" />
-                <TextField onChange={(event) => {
-                    setPassword(event.target.value);
-                }} id='password' label='Password' variant='outlined' type="password" />
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return
+        }
+        setOpenSnack(false)
+    }
 
-                <ButtonContainer>
-                    <Button type="submit" variant="contained" >Register</Button>
-                    <Button component={Link} to="/login" variant="contained" >Back to Login</Button>
-                </ButtonContainer>
-            </StyledForm>
-            {alert ? <Alert severity="error">Server error, try again</Alert> : <> </>}
-        </Container>
-    )
-}
+        return (
+            <Container>
+                <Title>Register Account</Title>
+                <StyledForm onSubmit={event => { handleSubmit(event, name, pronouns, phone, email, password, navigate, setOpenSnack) }}>
+                    <TextField onChange={(event) => {
+                        setName(event.target.value);
+                    }} id='name' label='Name' variant='outlined' type="text" required/>
+                    <TextField onChange={(event) => {
+                        setPronouns(event.target.value);
+                    }} id='pronoun' label='Pronouns' variant='outlined' type="text" />
+                    <TextField onChange={(event) => {
+                        setPhone(event.target.value);
+                    }} id='phone' label='Phone Number' variant='outlined' type="tel" />
+                    <TextField onChange={(event) => {
+                        setEmail(event.target.value);
+                    }} id='email' label='E-mail' variant='outlined' type="email" required/>
+                    <TextField onChange={(event) => {
+                        setPassword(event.target.value);
+                    }} id='password' label='Password' variant='outlined' type="password" required/>
 
+                    <ButtonContainer>
+                        <Button type="submit" variant="contained" >Register</Button>
+                        <Button component={Link} to="/login" variant="contained" >Back to Login</Button>
+                    </ButtonContainer>
+                </StyledForm>
+                <Snackbar open={openSnack} autoHideDuration={5000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+                    <Alert severity="error">
+                        Email already exists
+                    </Alert>
+                </Snackbar>
+            </Container>
+        )
+    }
 
 export default Register
 

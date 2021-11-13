@@ -1,4 +1,4 @@
-import './App.css'
+import './App.css' 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { GlobalStyle } from './components/UI/GlobalStyle'
 import { ThemeProvider } from '@mui/material'
@@ -7,9 +7,9 @@ import Header from './components/Header'
 
 import Landing from './pages/Landing/Landing'
 import Login from './pages/Login/Login'
-import ForgotPassword from './pages/Register/ForgotPassword'
+import RecoverPassword from './pages/RecoverPassword/RecoverPassword'
 import SuccessfulLogin from './pages/Login/SuccessfulLogin'
-import SuccessfulPassword from './pages/Register/SuccessfulPassword'
+import SuccessfulPassword from './pages/RecoverPassword/SuccessfulPassword'
 import SuccessfulLogout from './pages/Login/SuccessfulLogout'
 
 import Register from './pages/Register/Register'
@@ -33,7 +33,7 @@ function App() {
 
           <Route path='/login' element={<Login />} />
           <Route path='/login/success' element={<SuccessfulLogin />} />
-          <Route path='/forgot-password' element={<ForgotPassword />} />
+          <Route path='/forgot-password' element={<RecoverPassword />} />
           <Route path='/logout-success' element={<SuccessfulLogout />} />
           <Route path='/forgot-password/success' element={<SuccessfulPassword />} />
 

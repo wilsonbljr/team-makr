@@ -8,6 +8,7 @@ import { AppRegistration, Code, Home, Login, People, Menu, Logout } from '@mui/i
 
 import logo from '../assets/images/logo.svg';
 import { darkSecondaryColour } from './UI/Variables';
+import { logout as logoutAuth } from '../services/auth';
 
 const Logo = styled.img`
     width: 50%;
@@ -27,6 +28,15 @@ const ListText = styled(Typography)`
     font-weight: 700;
     font-size: 1.1em;
 `
+
+const logout = async (navigate) => {
+    const res = await logoutAuth()
+    if (res.status === 204) {
+        navigate('logout-success');
+    } else {
+        navigate('logout-fail');
+    }
+}
 
 const checkLoggedIn = (user, navigate, setOpen) => {
     if (user) {
@@ -53,9 +63,8 @@ const checkLoggedIn = (user, navigate, setOpen) => {
                     <ListItemIcon><Code sx={{ filter: 'invert(100)' }} /></ListItemIcon>
                     <ListItemText primary={<ListText variant="p" style={{ color: '#fff', fontWeight: 700 }}>Skills</ListText>} />
                 </ListItemButton>
-                <ListItemButton divider sx={{ height: '60px' }} onClick={() => {
-                    navigate('/skill')
-                    setOpen(false)
+                <ListItemButton divider sx={{ height: '60px' }} onClick={async () => {
+                    await logout(navigate)
                 }}>
                     <ListItemIcon><Logout sx={{ filter: 'invert(100)' }} /></ListItemIcon>
                     <ListItemText primary={<ListText variant="p" style={{ color: '#fff', fontWeight: 700 }}>Logout</ListText>} />
@@ -91,7 +100,7 @@ const Header = () => {
 
     useEffect(() => {
         setUserHeader(sessionStorage.getItem('user'))
-    }, [])
+    })
 
     return (
         <Box sx={{ flexGrow: 1 }}>

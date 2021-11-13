@@ -10,8 +10,14 @@ export const login = async (email, password) => {
 };
 
 export const logout = async () => {
-    await api.get('/person/logout', { headers: authHeader() });
-    sessionStorage.removeItem('user');
+    try {
+        const res = await api.get('/person/logout', { headers: authHeader() });
+        sessionStorage.removeItem('user');
+        return res
+    } catch (error) {
+        return error.name
+    }
+
 }
 
 export const registerUser = async (name, pronoun, phone_number, email, password) => {

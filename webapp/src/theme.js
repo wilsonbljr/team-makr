@@ -11,6 +11,12 @@ const mainTheme = createTheme({
             main: darkSecondaryColour,
             contrastText: '#FFF'
         }
+    },
+    typography: {
+        fontFamily: [
+            'Roboto', 
+            'sans-serif'
+        ]
     }
 })
 

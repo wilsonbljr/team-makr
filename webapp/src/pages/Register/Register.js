@@ -26,7 +26,7 @@ function handleSubmit(event, name, pronouns, phone, email, password, navigate, s
     event.preventDefault();
     registerUser(name, pronouns, phone, email, password).then((res) => {
         if (res.status === 201) {
-            navigate('/login');
+            navigate('/register/success');
         }
         
     }).catch(error => {

@@ -2,16 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import desktop from '../../assets/images/desktop.svg'
 import mobile from '../../assets/images/mobile.svg'
+import Image from 'mui-image'
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Container from '../../components/Container'
 
 
-const MobileImg = styled.img`
+const MobileImg = styled(Image)`
     max-width: 100%;
 `
 
-const DesktopImg = styled.img`
+const DesktopImg = styled(Image)`
     display: none;
 `
 

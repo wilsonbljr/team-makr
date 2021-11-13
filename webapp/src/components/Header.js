@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
-import { SwipeableDrawer, Divider, List, ListItem, ListItemText, Typography } from '@mui/material';
-import { AppBar, Box, Toolbar, IconButton, ListItemButton, ListItemIcon } from '@mui/material';
-import { AppRegistration, Code, Home, Login, People, Menu, Logout } from '@mui/icons-material';
+import { SwipeableDrawer, Divider, List, ListItem, ListItemText, Typography } from '@mui/material'
+import { AppBar, Box, Toolbar, IconButton, ListItemButton, ListItemIcon } from '@mui/material'
+import { AppRegistration, Code, Home, Login, People, Menu, Logout } from '@mui/icons-material'
 
-import logo from '../assets/images/logo.svg';
-import { darkSecondaryColour } from './UI/Variables';
-import { logout as logoutAuth } from '../services/auth';
+import logo from '../assets/images/logo.svg'
+import { darkSecondaryColour } from './UI/Variables'
+import { logout as logoutAuth } from '../services/auth'
 
 const Logo = styled.img`
     width: 50%;
@@ -34,7 +34,7 @@ const logout = async (navigate) => {
     if (res.status === 204) {
         navigate('logout-success');
     } else {
-        navigate('logout-fail');
+        navigate('/internal');
     }
 }
 

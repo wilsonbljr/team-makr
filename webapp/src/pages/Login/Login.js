@@ -35,7 +35,7 @@ const PasswordContainer = styled.div`
 function handleSubmit(event, email, password, navigate) {
     event.preventDefault();
     login(email, password).then(() => {
-        navigate('/home');
+        navigate('/login/success');
     });
 }
 

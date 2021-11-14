@@ -7,7 +7,7 @@ export const login = async (email, password) => {
     const decoded = await jwt_decode(res.headers.authorization)
     sessionStorage.setItem('token', res.headers.authorization)
     sessionStorage.setItem('user', decoded.id)
-};
+}
 
 export const logout = async () => {
     try {
@@ -17,7 +17,6 @@ export const logout = async () => {
     } catch (error) {
         return error.name
     }
-
 }
 
 export const registerUser = async (name, pronoun, phone_number, email, password) => {
@@ -31,13 +30,22 @@ export const registerUser = async (name, pronoun, phone_number, email, password)
         const res = await api.post('/person', { firstName, lastName, pronoun, phone_number, email, password })
         return res
     } catch (error) {
-        return error.name;
+        return error.name
     }
-};
+}
 
 export const forgotPasswordEmail = async (email) => {
     try {
         const res = await api.post('/person/password-reset/token', { email })
+        return res
+    } catch (error) {
+        return error.name
+    }
+}
+
+export const resetPassword = async (email, password, password_token) => {
+    try {
+        const res = await api.post('/person/password-reset', { email, password, password_token })
         return res
     } catch (error) {
         return error.name

@@ -1,8 +1,6 @@
 import './App.css' 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { GlobalStyle } from './components/UI/GlobalStyle'
-import { ThemeProvider } from '@mui/material'
-import mainTheme from './theme'
+import { CssBaseline } from '@mui/material'
 import Header from './components/Header'
 
 import Landing from './pages/Landing/Landing'
@@ -24,17 +22,15 @@ import Unauthorized from './pages/Error/Unauthorized'
 
 function App() {
   return (
-    <ThemeProvider theme={mainTheme}>
       <Router>
-        <GlobalStyle />
+        <CssBaseline />
         <Header />
         <Routes>
           <Route path='/' element={<Landing />} />
-
           <Route path='/login' element={<Login />} />
           <Route path='/login/success' element={<SuccessfulLogin />} />
-          <Route path='/forgot-password' element={<RecoverPassword />} />
           <Route path='/logout-success' element={<SuccessfulLogout />} />
+          <Route path='/forgot-password' element={<RecoverPassword />} />
           <Route path='/forgot-password/success' element={<SuccessfulPassword />} />
 
           <Route path='/register' element={<Register />} />
@@ -48,7 +44,6 @@ function App() {
           <Route path='/*' element={<NotFound />} />
         </Routes>
       </Router>
-    </ThemeProvider >
   );
 }
 

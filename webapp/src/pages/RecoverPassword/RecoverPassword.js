@@ -82,7 +82,7 @@ const RecoverPassword = () => {
                 </ButtonContainer>
             </StyledForm>
             <Snackbar open={snackSent} autoHideDuration={5000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-                <Alert severity="error">
+                <Alert severity="success">
                     Email sent
                 </Alert>
             </Snackbar>
@@ -97,7 +97,3 @@ const RecoverPassword = () => {
 
 
 export default RecoverPassword
-
-
-
-

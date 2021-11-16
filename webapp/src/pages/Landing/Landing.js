@@ -35,7 +35,7 @@ const Landing = () => {
             <DesktopImg src={desktop} alt="Time" />
             <Title>Find the perfect team</Title>
             <Text>Building your project is way easier with the right people</Text>
-            <Button component={Link} to="/login" variant="contained">Get Started</Button>
+            <Button component={Link} to="/login" >Get Started</Button>
         </Container>
     )
 }

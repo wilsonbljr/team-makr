@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Button, TextField, Alert } from '@mui/material';
+import { Button, TextField, Alert, Snackbar } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import Container from '../../components/Container'
-import { registerUser } from '../../services/auth';
+import { registerUser, updateUser } from '../../services/auth';
 import { getUser } from '../../services/user';
 
 const StyledForm = styled.form`
@@ -23,13 +23,15 @@ const ButtonContainer = styled.div`
     gap: 2vh;
 `
 
-function handleSubmit(event, name, pronouns, phone, email, password, navigate, setAlert) {
+function handleSubmit(event, userid, pronouns, phone, password, navigate, setAlert, setSnack) {
     event.preventDefault();
-    registerUser(name, pronouns, phone, email, password).then((res) => {
-        if (res.status === 201) {
-            navigate('/login');
+    updateUser(userid, pronouns, phone, password).then((res) => {
+        if (res.status === 200) {
+            setSnack(true)
+            setTimeout(() => {
+                navigate('/home')
+            }, 3000)
         }
-        
     }).catch(error => {
         setAlert(true)
         setTimeout(() => {
@@ -39,8 +41,9 @@ function handleSubmit(event, name, pronouns, phone, email, password, navigate, s
 };
 
 const EditProfile = () => {
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState({ firstName: '', lastName: '', email: '' });
     const [name, setName] = useState('');
+    const [snack, setSnack] = useState(false);
     const [pronouns, setPronouns] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
@@ -52,22 +55,26 @@ const EditProfile = () => {
         getUser(sessionStorage.getItem('user'), setUser);
     }, [])
 
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return
+        }
+        setSnack(false)
+    }
+
     return (
         <Container>
             <Title>Edit your profile</Title>
-            <StyledForm onSubmit={event => { handleSubmit(event, name, pronouns, phone, email, password, navigate, setAlert) }}>
-                <TextField onChange={(event) => {
-                    setName(event.target.value);
-                }} id='name' label='Name' value={user.firstName + ' ' + user.lastName} disabled variant='outlined' type="text" />
+            {alert ? <Alert severity="error">Server error, try again</Alert> : <> </>}
+            <StyledForm onSubmit={event => { handleSubmit(event, user.id, pronouns, phone, password, navigate, setAlert, setSnack) }}>
+                <TextField id='name' label='Name' value={user.firstName + ' ' + user.lastName} disabled variant='outlined' type="text" />
                 <TextField onChange={(event) => {
                     setPronouns(event.target.value);
                 }} id='pronoun' label='Pronouns' variant='outlined' type="text" />
                 <TextField onChange={(event) => {
                     setPhone(event.target.value);
                 }} id='phone' label='Phone Number' variant='outlined' type="tel" />
-                <TextField onChange={(event) => {
-                    setEmail(event.target.value);
-                }} id='email' label='E-mail' InputLabelProps={{ shrink: true }} disabled value={user.email} variant='outlined' type="email" />
+                <TextField id='email' label='E-mail' InputLabelProps={{ shrink: true }} disabled value={user.email} variant='outlined' type="email" />
                 <TextField onChange={(event) => {
                     setPassword(event.target.value);
                 }} id='password' label='Password' variant='outlined' type="password" />
@@ -77,7 +84,12 @@ const EditProfile = () => {
                     <Button component={Link} to="/home" variant="contained" >Back to Home</Button>
                 </ButtonContainer>
             </StyledForm>
-            {alert ? <Alert severity="error">Server error, try again</Alert> : <> </>}
+            <Snackbar open={snack} autoHideDuration={5000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+                <Alert severity="success">
+                    Profile Updated!
+                </Alert>
+            </Snackbar>
+
         </Container>
     )
 }

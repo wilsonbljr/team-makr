@@ -34,6 +34,21 @@ export const registerUser = async (name, pronoun, phone_number, email, password)
     }
 }
 
+export const updateUser = async (userid, pronoun, phone_number, password) => {
+    try {
+        const receivedObject = {
+            ...(pronoun && { pronoun }),
+            ...(phone_number && { phone_number }),
+            ...(password && { password })
+        }
+        console.log(receivedObject)
+        const res = await api.put('/person/' + userid, receivedObject, { headers: authHeader() })
+        return res
+    } catch (error) {
+        return error.name
+    }
+}
+
 export const forgotPasswordEmail = async (email) => {
     try {
         const res = await api.post('/person/password-reset/token', { email })

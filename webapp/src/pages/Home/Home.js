@@ -6,6 +6,7 @@ import Container from '../../components/Container'
 import { getUser, getUserSkills, getUserTeams } from '../../services/user';
 import { Link } from 'react-router-dom';
 import { primaryColour } from '../../components/UI/Variables';
+import { skillLabel } from '../../assets/Lists';
 
 const Welcome = styled(Typography)`
     text-align: center;
@@ -32,30 +33,6 @@ const CategoryText = styled(Typography)`
     letter-spacing: 0.3px;
 `
 
-
-const ContainerInfo = styled.section`
-    display: flex;
-    flex-direction: column;
-    gap: 2vh;
-    align-items: center;
-`
-
-const ContainerTeams = styled.section`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1vh;
-`
-
-const skillLabel = {
-    1: 'Being Developed',
-    2: 'Basic',
-    3: 'Intermediate',
-    4: 'Advanced',
-    5: 'Expert'
-}
-
 function skillsMap(skills, soft) {
     return skills.map((skill) => {
         if (skill.softSkill !== soft && skill.id !== null) {
@@ -64,11 +41,11 @@ function skillsMap(skills, soft) {
                     <CardHeader sx={{ background: primaryColour, padding: '5px' }}></CardHeader>
                     <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
                         <Grid container>
-                            <Grid item xs={5} sx={{ textAlign: 'right', pr: 1 }} zeroMinWidth>
+                            <Grid item xs={5} sx={{ textAlign: 'right', pr: 1 }} >
                                 <CategoryText sx={{ mt: 1 }}>Skill Name: </CategoryText>
                             </Grid>
-                            <Grid item xs={7} zeroMinWidth>
-                                <Text sx={{ mt: 1 }} zeroMinWidth>{skill.name}</Text>
+                            <Grid item xs={7} >
+                                <Text sx={{ mt: 1 }} >{skill.name}</Text>
                             </Grid>
                             <Grid item xs={6}>
                                 <Rating sx={{ mt: 1, mb: 1 }} name='skill-level' value={skill.level} readOnly />
@@ -131,18 +108,18 @@ const Home = () => {
                             <CardHeader sx={{ background: primaryColour, padding: '5px' }}></CardHeader>
                             <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
                                 <Grid container alignItems='stretch'>
-                                    <Grid item xs={5} sx={{ textAlign: 'right', pr: 1 }} zeroMinWidth>
+                                    <Grid item xs={5} sx={{ textAlign: 'right', pr: 1 }} >
                                         <CategoryText sx={{ mt: 2 }}>Team Name: </CategoryText>
                                     </Grid>
-                                    <Grid item xs={7} zeroMinWidth>
-                                        <Text sx={{ mt: 2 }} zeroMinWidth>{team.t_name}</Text>
+                                    <Grid item xs={7} >
+                                        <Text sx={{ mt: 2 }} >{team.t_name}</Text>
                                     </Grid>
-                                    <Grid item xs={5} sx={{ textAlign: 'right', pr: 1 }} zeroMinWidth>
+                                    <Grid item xs={5} sx={{ textAlign: 'right', pr: 1 }} >
                                         <CategoryText sx={{ mt: 1, mb: 2 }}>Description: </CategoryText>
 
                                     </Grid>
-                                    <Grid item xs={7} zeroMinWidth>
-                                        <Text sx={{ mt: 1, mb: 2 }} zeroMinWidth>{team.t_description}</Text>
+                                    <Grid item xs={7} >
+                                        <Text sx={{ mt: 1, mb: 2 }} >{team.t_description}</Text>
                                     </Grid>
                                 </Grid>
                             </CardContent>

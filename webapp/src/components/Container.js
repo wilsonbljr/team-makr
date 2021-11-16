@@ -1,9 +1,10 @@
+import { Container as Cont} from '@mui/material'
 import styled from 'styled-components'
 
-const Container = styled.section`
+const Container = styled(Cont)`
     min-height: calc(100vh - 56px);
     overflow: auto;
-    padding: 10%;
+    padding: 25px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

@@ -1,6 +1,6 @@
-import { createTheme } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
 
-const mainTheme = createTheme({
+const theme = createTheme({
     palette: {
         primary: {
             main: '#344955'
@@ -10,7 +10,7 @@ const mainTheme = createTheme({
         },
         warning: {
             main: '#ffea19'
-        },
+        }
     },
     typography: {
         fontWeightLight: 300,
@@ -26,7 +26,7 @@ const mainTheme = createTheme({
         MuiButton: {
             styleOverrides: {
                 root: {
-                    background: 'linear-gradient(90deg, #4A6572 40%, #364654 95%)',
+                    background: 'linear-gradient(360deg, #4A6572 40%, #364654 95%)',
                     border: 0,
                     borderRadius: 9,
                     boxShadow: '0 3px 5px 2px rgba(0, 0, 0, 0)',
@@ -35,8 +35,24 @@ const mainTheme = createTheme({
                     padding: '0 30px'
                 }
             }
+        },
+        MuiCard: {
+            styleOverrides: {
+                root: {
+                    border: '1px solid #344955'
+                }
+            }
+        },
+        MuiCardContent: {
+            styleOverrides: {
+                root: {
+                    "&:last-child": {
+                        paddingBottom: 0
+                    }
+                }
+            }
         }
     }
 })
 
-export default mainTheme;
+export default theme;

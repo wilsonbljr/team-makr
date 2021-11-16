@@ -7,7 +7,7 @@ import { AppBar, Box, Toolbar, IconButton, ListItemButton, ListItemIcon } from '
 import { AppRegistration, Code, Home, Login, People, Menu, Logout } from '@mui/icons-material'
 
 import logo from '../assets/images/logo.svg'
-import { darkSecondaryColour } from './UI/Variables'
+import { primaryColour } from './UI/Variables'
 import { logout as logoutAuth } from '../services/auth'
 
 const Logo = styled.img`
@@ -19,7 +19,7 @@ const Logo = styled.img`
 
 const MenuContainer = styled.div`
     width: 225px;
-    background-color: ${darkSecondaryColour};
+    background-color: ${primaryColour};
     height: 100%;
 `
 
@@ -42,52 +42,52 @@ const checkLoggedIn = (user, navigate, setOpen) => {
     if (user) {
         return (
             <List>
-                <ListItemButton divider sx={{ height: '60px' }} onClick={() => {
+                <ListItemButton divider sx={{ height: '60px', color: 'white' }} onClick={() => {
                     navigate('/home')
                     setOpen(false)
                 }}>
-                    <ListItemIcon><Home sx={{ filter: 'invert(100)' }} /></ListItemIcon>
-                    <ListItemText primary={<ListText variant="p" style={{ color: '#fff', fontWeight: 700 }}>Home</ListText>} />
+                    <ListItemIcon><Home sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary={<ListText variant="p">Home</ListText>} />
                 </ListItemButton>
-                <ListItemButton divider sx={{ height: '60px' }} onClick={() => {
+                <ListItemButton divider sx={{ height: '60px', color: 'white' }} onClick={() => {
                     navigate('/team')
                     setOpen(false)
                 }}>
-                    <ListItemIcon><People sx={{ filter: 'invert(100)' }} /></ListItemIcon>
-                    <ListItemText primary={<ListText variant="p" style={{ color: '#fff', fontWeight: 700 }}>Teams</ListText>} />
+                    <ListItemIcon><People sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary={<ListText variant="p">Teams</ListText>} />
                 </ListItemButton>
-                <ListItemButton divider sx={{ height: '60px' }} onClick={() => {
+                <ListItemButton divider sx={{ height: '60px', color: 'white' }} onClick={() => {
                     navigate('/skill')
                     setOpen(false)
                 }}>
-                    <ListItemIcon><Code sx={{ filter: 'invert(100)' }} /></ListItemIcon>
-                    <ListItemText primary={<ListText variant="p" style={{ color: '#fff', fontWeight: 700 }}>Skills</ListText>} />
+                    <ListItemIcon><Code sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary={<ListText variant="p">Skills</ListText>} />
                 </ListItemButton>
-                <ListItemButton divider sx={{ height: '60px' }} onClick={async () => {
+                <ListItemButton divider sx={{ height: '60px', color: 'white' }} onClick={async () => {
                     await logout(navigate)
                 }}>
-                    <ListItemIcon><Logout sx={{ filter: 'invert(100)' }} /></ListItemIcon>
-                    <ListItemText primary={<ListText variant="p" style={{ color: '#fff', fontWeight: 700 }}>Logout</ListText>} />
+                    <ListItemIcon><Logout sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary={<ListText variant="p">Logout</ListText>} />
                 </ListItemButton>
             </List>
         )
     } else {
         return (
             <List>
-                <ListItem button sx={{ height: '60px' }} onClick={() => {
+                <ListItemButton divider sx={{ height: '60px', color: 'white' }} onClick={() => {
                     navigate('/login')
                     setOpen(false)
                 }}>
-                    <ListItemIcon><Login sx={{ filter: 'invert(100)' }} /></ListItemIcon>
-                    <ListItemText primary={<ListText variant="p" style={{ color: '#fff', fontWeight: 700 }}>Login</ListText>} />
-                </ListItem>
-                <ListItem button sx={{ height: '60px' }} onClick={() => {
+                    <ListItemIcon><Login sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary={<ListText variant="p">Login</ListText>} />
+                </ListItemButton>
+                <ListItemButton divider sx={{ height: '60px', color: 'white' }} onClick={() => {
                     navigate('/register')
                     setOpen(false)
                 }}>
-                    <ListItemIcon><AppRegistration sx={{ filter: 'invert(100)' }} /></ListItemIcon>
-                    <ListItemText primary={<ListText variant="p" style={{ color: '#fff', fontWeight: 700 }}>Register</ListText>} />
-                </ListItem>
+                    <ListItemIcon><AppRegistration sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary={<ListText variant="p">Register</ListText>} />
+                </ListItemButton>
             </List>
         )
     }
@@ -111,10 +111,10 @@ const Header = () => {
                         edge="start"
                         color="inherit"
                         aria-label="menu"
-                        sx={{ mr: 2, filter: 'invert(100)' }}
+                        sx={{ mr: 2}}
                         onClick={() => setOpen(true)}
                     >
-                        <Menu />
+                        <Menu sx={{ color: 'white' }} />
                     </IconButton>
                     <Logo src={logo} alt="Team Makr" />
                     <SwipeableDrawer

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, CardContent } from '@mui/material';
+import { Button, Card, CardActions, CardContent, CardHeader, Grid, Rating, Typography } from '@mui/material';
 import { Edit } from '@mui/icons-material';
 import styled from 'styled-components';
 import Container from '../../components/Container'
 import { getUser, getUserSkills, getUserTeams } from '../../services/user';
 import { Link } from 'react-router-dom';
+import { primaryColour } from '../../components/UI/Variables';
 
-const Welcome = styled.h1`
+const Welcome = styled(Typography)`
     text-align: center;
-    font-weight: 500;
-    font-size: 1.2em;
-    margin-bottom: 2vh;
+    font-weight: 900;
+    font-size: 1.4em;
 `
 
 const Title = styled(Welcome)`
@@ -19,16 +19,19 @@ const Title = styled(Welcome)`
     margin-top: 3vh;
 `
 
-const Information = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1.5vh;
-    text-align: center;
+const Text = styled(Typography)`
+    font-weight: 400;
+    text-align: left;
+    letter-spacing: 0.3px;
+    word-wrap: break-word;
 `
 
-const EditProfile = styled(Button)`
-    width: 60%;
+const CategoryText = styled(Typography)`
+    font-weight: 700;
+    text-align: right;
+    letter-spacing: 0.3px;
 `
+
 
 const ContainerInfo = styled.section`
     display: flex;
@@ -39,26 +42,47 @@ const ContainerInfo = styled.section`
 
 const ContainerTeams = styled.section`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     gap: 1vh;
 `
 
+const skillLabel = {
+    1: 'Being Developed',
+    2: 'Basic',
+    3: 'Intermediate',
+    4: 'Advanced',
+    5: 'Expert'
+}
+
 function skillsMap(skills, soft) {
     return skills.map((skill) => {
-    if (skill.softSkill !== soft && skill.id !== null) {
-        return (
-            <Card sx={{ width: "280px" }} key={skill.id}>
-                <CardContent>{skill.name}</CardContent>
-                <CardContent>Level: {skill.level}</CardContent>
-            </Card>
-        )
-    } else {
-        return (
-            <></>
-        )
-    }
-})}
+        if (skill.softSkill !== soft && skill.id !== null) {
+            return (
+                <Card sx={{ width: "280px" }} key={skill.id}>
+                    <CardHeader sx={{ background: primaryColour, padding: '5px' }}></CardHeader>
+                    <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
+                        <Grid container>
+                            <Grid item xs={5} sx={{ textAlign: 'right', pr: 1 }} zeroMinWidth>
+                                <CategoryText sx={{ mt: 1 }}>Skill Name: </CategoryText>
+                            </Grid>
+                            <Grid item xs={7} zeroMinWidth>
+                                <Text sx={{ mt: 1 }} zeroMinWidth>{skill.name}</Text>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Rating sx={{ mt: 1, mb: 1 }} name='skill-level' value={skill.level} readOnly />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Typography sx={{ mt: 1, mb: 1, fontWeight: 900 }} variant='body1'>{skillLabel[skill.level]}</Typography>
+                            </Grid>
+                        </Grid>
+                    </CardContent>
+                </Card>
+            )
+        }
+    })
+}
 
 const Home = () => {
 
@@ -75,39 +99,69 @@ const Home = () => {
 
     return (
         <Container>
-            <ContainerInfo>
-                <Welcome>Welcome {user.firstName} {user.lastName}</Welcome>
-                <Information>
-                    <p> Pronouns: {user.pronoun}</p>
-                    <p> Email: {user.email} </p>
-                    <p> Phone: {user.phone_number}</p>
-                </Information>
-                <EditProfile endIcon={<Edit />} variant='outlined' sx={{ fontWeight: 700 }}
-                    component={Link} to='/editprofile'>Edit Profile</EditProfile>
-            </ContainerInfo>
-            <ContainerInfo>
+            <Grid container flexDirection='column' alignItems='center'>
+                <Welcome sx={{ mt: 2, mb: 2 }}>Welcome {user.firstName} {user.lastName}</Welcome>
+                <Card sx={{ width: '290px' }}>
+                    <CardHeader sx={{ background: primaryColour, padding: '8px' }}></CardHeader>
+                    <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
+                        <Grid container>
+                            <Grid item xs={4} sx={{ textAlign: 'right', pr: 1 }}>
+                                <CategoryText sx={{ mt: 2, mb: 2 }}>Pronouns: </CategoryText>
+                                <CategoryText sx={{ mt: 2, mb: 2 }}>Email: </CategoryText>
+                                <CategoryText sx={{ mt: 2, mb: 2 }}>Phone: </CategoryText>
+                            </Grid>
+                            <Grid item xs={8}>
+                                <Text sx={{ mt: 2, mb: 2 }}>{user.pronoun}</Text>
+                                <Text sx={{ mt: 2, mb: 2 }}>{user.email}</Text>
+                                <Text sx={{ mt: 2, mb: 2 }}>{user.phone_number}</Text>
+                            </Grid>
+                        </Grid>
+                    </CardContent>
+                    <CardActions>
+                        <Button endIcon={<Edit />} variant='outlined' sx={{ width: '100%' }}
+                            component={Link} to='/editprofile'>Edit Profile</Button>
+                    </CardActions>
+                </Card>
+            </Grid>
+            <Grid container flexDirection='column' alignItems='center'>
                 <Title>Teams</Title>
-                <ContainerTeams>
+                <Grid container alignItems='center' justifyContent='space-around' gap='10px'>
                     {teams.map((team, index) => (
-                        <Card sx={{ width: "280px" }} key={index}>
-                            <CardContent>{team.t_name}</CardContent>
-                            <CardContent>{team.t_description}</CardContent>
+                        <Card sx={{ width: "290px" }} key={index}>
+                            <CardHeader sx={{ background: primaryColour, padding: '5px' }}></CardHeader>
+                            <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
+                                <Grid container alignItems='stretch'>
+                                    <Grid item xs={5} sx={{ textAlign: 'right', pr: 1 }} zeroMinWidth>
+                                        <CategoryText sx={{ mt: 2 }}>Team Name: </CategoryText>
+                                    </Grid>
+                                    <Grid item xs={7} zeroMinWidth>
+                                        <Text sx={{ mt: 2 }} zeroMinWidth>{team.t_name}</Text>
+                                    </Grid>
+                                    <Grid item xs={5} sx={{ textAlign: 'right', pr: 1 }} zeroMinWidth>
+                                        <CategoryText sx={{ mt: 1, mb: 2 }}>Description: </CategoryText>
+
+                                    </Grid>
+                                    <Grid item xs={7} zeroMinWidth>
+                                        <Text sx={{ mt: 1, mb: 2 }} zeroMinWidth>{team.t_description}</Text>
+                                    </Grid>
+                                </Grid>
+                            </CardContent>
                         </Card>
                     ))}
-                </ContainerTeams>
-            </ContainerInfo>
-            <ContainerInfo>
-                <Title>Soft Skills</Title>
-                <ContainerTeams>
-                    {skillsMap(skills, 0)}
-                </ContainerTeams>
-            </ContainerInfo>
-            <ContainerInfo>
+                </Grid>
+            </Grid>
+            <Grid container flexDirection='column' alignItems='center'>
                 <Title>Hard Skills</Title>
-                <ContainerTeams>
+                <Grid container alignItems='center' justifyContent='space-around' gap='10px'>
                     {skillsMap(skills, 1)}
-                </ContainerTeams>
-            </ContainerInfo>
+                </Grid>
+            </Grid>
+            <Grid container flexDirection='column' alignItems='center'>
+                <Title>Soft Skills</Title>
+                <Grid container alignItems='center' justifyContent='space-around' gap='10px'>
+                    {skillsMap(skills, 0)}
+                </Grid>
+            </Grid>
         </Container>
     )
 }

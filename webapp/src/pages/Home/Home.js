@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, CardActions, CardContent, CardHeader, Grid, Rating, Typography } from '@mui/material';
+import { Button, Card, CardActions, CardContent, CardHeader, Grid, Rating, Tooltip, Typography } from '@mui/material';
 import { Edit } from '@mui/icons-material';
 import styled from 'styled-components';
 import Container from '../../components/Container'
 import { getUser, getUserSkills, getUserTeams } from '../../services/user';
 import { Link } from 'react-router-dom';
 import { primaryColour } from '../../components/UI/Variables';
-import { skillLabel } from '../../assets/Lists';
+import { skillLabel, skillTooltip } from '../../assets/Lists';
 
 const Welcome = styled(Typography)`
     text-align: center;
@@ -51,7 +51,9 @@ function skillsMap(skills, soft) {
                                 <Rating sx={{ mt: 1, mb: 1 }} name='skill-level' value={skill.level} readOnly />
                             </Grid>
                             <Grid item xs={6}>
-                                <Typography sx={{ mt: 1, mb: 1, fontWeight: 900 }} variant='body1'>{skillLabel[skill.level]}</Typography>
+                                <Tooltip disableFocusListener title={<Typography sx={{ textAlign: 'justify' }} variant='body2'>{skillTooltip[skill.level]}</Typography>}>
+                                    <Typography sx={{ mt: 1, mb: 1, fontWeight: 900 }} variant='body1'>{skillLabel[skill.level]}</Typography>
+                                </Tooltip>
                             </Grid>
                         </Grid>
                     </CardContent>

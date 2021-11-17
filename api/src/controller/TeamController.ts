@@ -11,9 +11,7 @@ export class TeamController {
             const repository = getRepository(Team);
             const team = await repository.findByIds(id);
             const users = await PersonToTeamController.getTeamPeople(id);
-            console.log(team)
             team[0]['users'] = users;
-            console.log(team)
             logger.log('info', 'User: ' + req.user.id + ', Method: getTeam');
             return res.status(200).json(team);
         } catch (error) {

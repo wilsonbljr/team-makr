@@ -16,6 +16,9 @@ import SuccessfulRegister from './pages/Register/SuccessfulRegister'
 import Home from './pages/Home/Home'
 import EditProfile from './pages/Home/EditProfile'
 
+import TeamsUser from './pages/Team/TeamsUser'
+import Teams from './pages/Team/Teams'
+
 import InternalServer from './pages/Error/InternalServer'
 import NotFound from './pages/Error/NotFound'
 import Unauthorized from './pages/Error/Unauthorized'
@@ -38,6 +41,9 @@ function App() {
 
           <Route path='/home' element={<Home />} />
           <Route path='/editprofile' element={<EditProfile />} />
+
+          <Route path='/team' element={<TeamsUser />} />
+          <Route path='/team/:id' element={<Teams />} />
           
           <Route path='/unauthorized' element={<Unauthorized />} />
           <Route path='/internal' element={<InternalServer />} />

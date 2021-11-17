@@ -38,25 +38,19 @@ function skillsMap(skills, soft) {
         if (skill.softSkill !== soft && skill.id !== null) {
             return (
                 <Card sx={{ width: "280px" }} key={skill.id}>
-                    <CardHeader sx={{ background: primaryColour, padding: '5px' }}></CardHeader>
-                    <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
-                        <Grid container>
-                            <Grid item xs={5} sx={{ textAlign: 'right', pr: 1 }} >
-                                <CategoryText sx={{ mt: 1 }}>Skill Name: </CategoryText>
+                    <CardHeader sx={{ background: primaryColour, padding: '10px' }} title={<Typography variant='h6' sx={{ color: 'white', fontSize: '1.2em', textAlign: 'center' }}>{skill.name}</Typography>} />
+                    <Tooltip disableFocusListener placement='top' title={<Typography sx={{ textAlign: 'justify' }} variant='body2'>{skillTooltip[skill.level]}</Typography>}>
+                        <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
+                            <Grid container>
+                                <Grid item xs={6}>
+                                    <Rating sx={{ mt: 1, mb: 1, pt: 1 }} name='skill-level' value={skill.level} readOnly />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography sx={{ mt: 1, mb: 1, fontWeight: 900, pb: 1, pt: 1 }} variant='body1'>{skillLabel[skill.level]}</Typography>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={7} >
-                                <Text sx={{ mt: 1 }} >{skill.name}</Text>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <Rating sx={{ mt: 1, mb: 1 }} name='skill-level' value={skill.level} readOnly />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <Tooltip disableFocusListener title={<Typography sx={{ textAlign: 'justify' }} variant='body2'>{skillTooltip[skill.level]}</Typography>}>
-                                    <Typography sx={{ mt: 1, mb: 1, fontWeight: 900 }} variant='body1'>{skillLabel[skill.level]}</Typography>
-                                </Tooltip>
-                            </Grid>
-                        </Grid>
-                    </CardContent>
+                        </CardContent>
+                    </Tooltip>
                 </Card>
             )
         }
@@ -106,21 +100,21 @@ const Home = () => {
                 <Title>Teams</Title>
                 <Grid container alignItems='center' justifyContent='space-around' gap='10px'>
                     {teams.map((team, index) => (
-                        <Card sx={{ width: "290px" }} key={index}>
-                            <CardHeader sx={{ background: primaryColour, padding: '5px' }}></CardHeader>
+                        <Card sx={{ width: "400px" }} key={index}>
+                            <CardHeader
+                                sx={{ background: primaryColour, pt: 1, pb: 1 }}
+                                title={<Typography
+                                    variant='h6'
+                                    sx={{ color: 'white', fontSize: '1.2em', textAlign: 'center' }}>
+                                    {team.t_name}
+                                </Typography>}
+                            />
                             <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
                                 <Grid container alignItems='stretch'>
-                                    <Grid item xs={5} sx={{ textAlign: 'right', pr: 1 }} >
-                                        <CategoryText sx={{ mt: 2 }}>Team Name: </CategoryText>
-                                    </Grid>
-                                    <Grid item xs={7} >
-                                        <Text sx={{ mt: 2 }} >{team.t_name}</Text>
-                                    </Grid>
-                                    <Grid item xs={5} sx={{ textAlign: 'right', pr: 1 }} >
+                                    <Grid item xs={4} sx={{ textAlign: 'right', pr: 1 }} >
                                         <CategoryText sx={{ mt: 1, mb: 2 }}>Description: </CategoryText>
-
                                     </Grid>
-                                    <Grid item xs={7} >
+                                    <Grid item xs={8} >
                                         <Text sx={{ mt: 1, mb: 2 }} >{team.t_description}</Text>
                                     </Grid>
                                 </Grid>

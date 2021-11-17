@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Alert, Avatar, Button, Card, CardContent, CardHeader, Grid, IconButton, Link, Modal, Snackbar, TextField, Typography } from '@mui/material';
-import { OpenInNew, SettingsBackupRestore } from '@mui/icons-material';
+import { Alert, Avatar, Button, Card, CardContent, CardHeader, Grid, IconButton, Modal, Snackbar, TextField, Typography } from '@mui/material';
+import { OpenInNew } from '@mui/icons-material';
 import Container from '../../components/Container'
 import { getUserTeams } from '../../services/user';
 import { lightPrimaryColour, primaryColour } from '../../components/UI/Variables';
@@ -74,7 +74,7 @@ const TeamsUser = () => {
     const closeSnack = () => setSnack(false);
     const openSnack = () => setSnack(true);
     const navigate = useNavigate();
-    
+
 
     useEffect(() => {
         getUserTeams(sessionStorage.getItem('user'), setTeams);
@@ -95,12 +95,12 @@ const TeamsUser = () => {
                                 title={<Typography
                                     variant='h6'
                                     sx={{ color: 'white', fontSize: '1.2em', textAlign: 'center' }}>
-                                    {team.t_name}
+                                    {team.name}
                                 </Typography>}
                                 action={<IconButton>
                                     <OpenInNew sx={{ filter: 'invert(100)' }} />
                                 </IconButton>}
-                                avatar={<Avatar sx={{ bgcolor: lightPrimaryColour }}>{team.t_name.charAt(0)}</Avatar>}
+                                avatar={<Avatar sx={{ bgcolor: lightPrimaryColour }}>{team.name.charAt(0)}</Avatar>}
                             />
                             <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
                                 <Grid container alignItems='stretch'>
@@ -108,7 +108,7 @@ const TeamsUser = () => {
                                         <CategoryText sx={{ mt: 1, mb: 2 }}>Description: </CategoryText>
                                     </Grid>
                                     <Grid item xs={8} >
-                                        <Text sx={{ mt: 1, mb: 2 }} >{team.t_description}</Text>
+                                        <Text sx={{ mt: 1, mb: 2 }} >{team.description}</Text>
                                     </Grid>
                                 </Grid>
                             </CardContent>

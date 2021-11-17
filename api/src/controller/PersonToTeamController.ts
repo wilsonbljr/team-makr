@@ -11,7 +11,7 @@ export class PersonToTeamController {
         if (active == "true") {
             try {
                 const teams = await getRepository(PersonToTeam).query(`
-                    SELECT t.name AS t_name, t.description AS t_description 
+                    SELECT t.id as id, t.name AS name, t.description AS description
                     FROM person_to_team pt LEFT JOIN team t ON  pt.teamId = t.id 
                     AND t.deleted IS NULL WHERE ( pt.personId = ? AND pt.user_active != 0 ) 
                 `, [id]);
@@ -24,7 +24,7 @@ export class PersonToTeamController {
         } else if (active == "false") {
             try {
                 const teams = await getRepository(PersonToTeam).query(`
-                    SELECT t.name AS t_name, t.description AS t_description 
+                SELECT t.id as id, t.name AS name, t.description AS description 
                     FROM person_to_team pt LEFT JOIN team t ON  pt.teamId = t.id 
                     AND t.deleted IS NULL WHERE ( pt.personId = ? AND pt.user_active = 0 ) 
                 `, [id]);
@@ -37,7 +37,7 @@ export class PersonToTeamController {
         } else {
             try {
                 const teams = await getRepository(PersonToTeam).query(`
-                    SELECT t.name AS t_name, t.description AS t_description 
+                SELECT t.id as id, t.name AS name, t.description AS description 
                     FROM person_to_team pt LEFT JOIN team t ON  pt.teamId = t.id 
                     AND t.deleted IS NULL WHERE ( pt.personId = ? ) 
                 `, [id]);
@@ -142,7 +142,7 @@ export class PersonToTeamController {
                 .addSelect('pt.leader', 'leader')
                 .addSelect('pt.user_active', 'user_active')
                 .leftJoin('person', 'p', 'pt.personId = p.id')
-                .where('pt.teamId = :id', { id: teamId})
+                .where('pt.teamId = :id', { id: teamId })
                 .getRawMany();
             return teamPeople;
         } catch (error) {

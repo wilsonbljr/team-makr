@@ -11,7 +11,12 @@ export class TeamController {
             const repository = getRepository(Team);
             const team = await repository.findByIds(id);
             const users = await PersonToTeamController.getTeamPeople(id);
-            team[0]['users'] = users;
+            if (users) {
+                team[0]['users'] = users;
+            } else {
+                team[0]['users'] = [];
+            }
+
             logger.log('info', 'User: ' + req.user.id + ', Method: getTeam');
             return res.status(200).json(team);
         } catch (error) {

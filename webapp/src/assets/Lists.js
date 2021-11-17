@@ -13,3 +13,8 @@ export const skillTooltip = {
     4: 'In depth proficiency level: is able to assist, consult or lead others in the application of a competency',
     5: 'Broad, in-depth proficiency: is recognized as an authority or master performer in exercising the competency'
 }
+
+export const teamRoles = {
+    1: 'Leader',
+    0: 'Member'
+}

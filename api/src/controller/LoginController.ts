@@ -124,7 +124,6 @@ export class LoginController {
             const person = await repository.findOneOrFail({ select: ["id", "email", "password", "admin"],
                 where: { id: id }
             });
-            logger.log('info', 'User: ' + id + ' found in database');
             return person;
         } catch (error) {
             logger.log('error', 'User: ' + id + ' not found, error: ' + error);

@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import Container from '../../components/Container'
 import { login } from '../../../auth/auth'
 import desktop from '../../../assets/desktop.svg'
+import { useAuth } from '../../../auth/AuthContext';
 
 const StyledForm = styled.form`
     display: flex;
@@ -36,21 +37,22 @@ const PasswordContainer = styled.div`
     flex-direction: column;
 `
 
-function handleSubmit(event, email, password, navigate, snack) {
-    event.preventDefault();
-    login(email, password).then(() => {
-        navigate('/login/success');
-    }).catch((error) => {
-        snack(true)
-    });
-}
 
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [openSnack, setOpenSnack] = useState(false)
+    const [openSnack, setOpenSnack] = useState(false);
+    const { setCurrentUser } = useAuth();
     const navigate = useNavigate();
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        setCurrentUser(email, password)
+            .then(() => {
+                navigate('/login/success');
+            }).catch(err => setOpenSnack(true))
+    };
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -70,7 +72,7 @@ const Login = () => {
             <Grid item xs={12} md={4}>
                 <Container maxWidth='sm'>
                     <Title>Welcome Back!</Title>
-                    <StyledForm onSubmit={event => { handleSubmit(event, email, password, navigate, setOpenSnack) }}>
+                    <StyledForm onSubmit={event => { handleSubmit(event) }}>
                         <TextField onChange={(event) => {
                             setEmail(event.target.value);
                         }} id='email' label='E-mail' variant='outlined' type="email" required />

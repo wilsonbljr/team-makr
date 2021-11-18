@@ -5,6 +5,7 @@ import { getTeam } from '../../../core/services/team.service';
 import { useParams } from 'react-router';
 import { primaryColour } from '../../../core/utils/Variables';
 import { teamRoles } from '../../../core/utils/Lists';
+import { useAuth } from '../../../auth/AuthContext';
 
 const Title = styled(Typography)`
     text-align: left;
@@ -13,11 +14,12 @@ const Title = styled(Typography)`
 `
 
 const Teams = () => {
-    const [team, setTeam] = useState({})
-    const { id } = useParams()
+    const [team, setTeam] = useState({ id: null, name: '', description: '', users: []})
+    const { token } = useAuth();
+    const { id } = useParams();
 
-    useEffect((id) => {
-        getTeam(id, setTeam);
+    useEffect(() => {
+        getTeam(id, setTeam, token);
     }, [])
 
     return (
@@ -28,17 +30,16 @@ const Teams = () => {
             </Grid>
             <Grid>
                 <Typography sx={{ fontSize: '1.3em', fontWeight: 900 }}>Members</Typography>
-                {/* {team.users.map((user, index) => {
-                    console.log(user)
+                {team.users.map((user, index) => {
                     return (
                         <Card sx={{ width: "280px" }} key={index}>
                             <CardHeader
-                                sx={{ background: primaryColour, pt: 1, pb: 1 }}
-                                title={<Typography sx={{ textAlign: 'justify' }} variant='body2'>{teamRoles[user.leader]}</Typography>}
+                                sx={{ background: primaryColour, p: 1 }}
+                                title={<Typography sx={{ textAlign: 'center', color: 'white' }} variant='body2'>{teamRoles[user.leader]}</Typography>}
                             />
-                            <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
+                            <CardContent sx={{ paddingTop: '0px' }}>
                                 <Grid container alignItems='stretch'>
-                                    <Grid item xs={12} sx={{ textAlign: 'right', pr: 1 }} >
+                                    <Grid item xs={12} sx={{ textAlign: 'right', p: 1 }} >
                                         <Typography
                                             variant='h6'
                                             sx={{ fontSize: '1.2em', textAlign: 'center' }}>
@@ -49,7 +50,7 @@ const Teams = () => {
                             </CardContent>
                         </Card>
                     )
-                })} */}
+                })}
             </Grid>
         </Grid>
     )

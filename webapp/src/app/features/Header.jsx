@@ -8,7 +8,7 @@ import { AppRegistration, Code, Home, Login, People, Menu, Logout } from '@mui/i
 
 import logo from '../../assets/logo.svg'
 import { primaryColour } from '../../core/utils/Variables'
-import { logout as logoutAuth } from '../../auth/auth'
+import { useAuth } from '../../auth/AuthContext'
 
 const Logo = styled.img`
     width: 50%;
@@ -29,16 +29,7 @@ const ListText = styled(Typography)`
     font-size: 1.1em;
 `
 
-const logout = async (navigate) => {
-    const res = await logoutAuth()
-    if (res.status === 204) {
-        navigate('logout-success');
-    } else {
-        navigate('/internal');
-    }
-}
-
-const checkLoggedIn = (user, navigate, setOpen) => {
+const checkLoggedIn = (user, navigate, setOpen, logout) => {
     if (user) {
         return (
             <List>
@@ -64,7 +55,7 @@ const checkLoggedIn = (user, navigate, setOpen) => {
                     <ListItemText primary={<ListText variant="p">Skills</ListText>} />
                 </ListItemButton>
                 <ListItemButton divider sx={{ height: '60px', color: 'white' }} onClick={async () => {
-                    await logout(navigate)
+                    await logout()
                 }}>
                     <ListItemIcon><Logout sx={{ color: 'white' }} /></ListItemIcon>
                     <ListItemText primary={<ListText variant="p">Logout</ListText>} />
@@ -96,11 +87,24 @@ const checkLoggedIn = (user, navigate, setOpen) => {
 const Header = () => {
     const [userHeader, setUserHeader] = useState({});
     const [open, setOpen] = useState(false);
+    const { user, unsetCurrentUser } = useAuth();
     const navigateHeader = useNavigate();
 
     useEffect(() => {
-        setUserHeader(sessionStorage.getItem('user'))
-    })
+        setUserHeader(user)
+    }, [user])
+
+    const logout = async () => {
+        await unsetCurrentUser()
+            .then((res) => {
+                if (res.status === 204) {
+                    navigateHeader('logout-success');
+                } else {
+                    throw Error('Internal server error')
+                }
+            })
+            .catch(err => navigateHeader('/internal'));
+    }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -111,7 +115,7 @@ const Header = () => {
                         edge="start"
                         color="inherit"
                         aria-label="menu"
-                        sx={{ mr: 2}}
+                        sx={{ mr: 2 }}
                         onClick={() => setOpen(true)}
                     >
                         <Menu sx={{ color: 'white' }} />
@@ -127,7 +131,7 @@ const Header = () => {
                                 Menu
                             </Box>
                             <Divider />
-                            {checkLoggedIn(userHeader, navigateHeader, setOpen)}
+                            {checkLoggedIn(userHeader, navigateHeader, setOpen, logout)}
                         </MenuContainer>
                     </SwipeableDrawer>
                 </Toolbar>

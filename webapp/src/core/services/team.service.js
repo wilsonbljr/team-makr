@@ -1,9 +1,8 @@
 import api from './api.service';
-import authHeader from '../../auth/auth.header';
 
 // Get teams from a certain user
-export const getUserTeams = async (id, setData) => {
-    const status = await api.get('/person/' + id + '/team', { headers: authHeader() })
+export const getUserTeams = async (id, setData, token) => {
+    const status = await api.get('/person/' + id + '/team', { headers: { Authorization: 'Bearer ' + token } })
         .then(res => {
             setData(res.data);
             return res.status;
@@ -13,8 +12,8 @@ export const getUserTeams = async (id, setData) => {
 }
 
 // Get method for team information
-export const getTeam = async (teamId, setData) => {
-    const status = await api.get('/team/' + teamId, { headers: authHeader() })
+export const getTeam = async (teamId, setData, token) => {
+    const status = await api.get('/team/' + teamId, { headers: { Authorization: 'Bearer ' + token } })
         .then(res => {
             // Set state inside component with the team info
             setData(res.data[0]);
@@ -24,13 +23,13 @@ export const getTeam = async (teamId, setData) => {
 }
 
 // Post method to create team
-export const createTeam = async (name, description, userId) => {
-    const status = await api.post('/team', { name, description }, { headers: authHeader() })
+export const createTeam = async (name, description, userId, token) => {
+    const status = await api.post('/team', { name, description }, { headers: { Authorization: 'Bearer ' + token } })
         .then(async (res) => {
             // Makes the user that created the team its Leader
             await api.put('/person/' + userId + '/team/' + res.data.id,
                 { user_active: true, leader: true },
-                { headers: authHeader() });
+                { headers: { Authorization: 'Bearer ' + token } });
             return res.status;
         }).catch(err => err.message);
     return status;

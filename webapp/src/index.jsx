@@ -6,11 +6,14 @@ import App from './app/App';
 
 import { ThemeProvider } from '@mui/material'
 import mainTheme from './theme'
+import { AuthContextProvider } from './auth/AuthContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={mainTheme}>
-      <App />
+      <AuthContextProvider>
+        <App />
+      </AuthContextProvider>
     </ThemeProvider >
   </React.StrictMode>,
   document.getElementById('root')

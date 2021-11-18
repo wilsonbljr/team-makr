@@ -1,9 +1,8 @@
 import api from './api.service';
-import authHeader from '../../auth/auth.header';
 
 // Get user info
-export const getUser = async (id, setData) => {
-    const status = await api.get('/person/' + id, { headers: authHeader() })
+export const getUser = async (id, setData, token) => {
+    const status = await api.get('/person/' + id, { headers: { Authorization: 'Bearer ' + token } })
         .then(res => {
             setData(res.data[0]);
             return res.status;
@@ -24,14 +23,14 @@ export const registerUser = async (name, pronoun, phone_number, email, password)
 }
 
 // Update user
-export const updateUser = async (userid, pronoun, phone_number, password) => {
+export const updateUser = async (userid, pronoun, phone_number, password, token) => {
     // Makes the object with only the received info
     const receivedObject = {
         ...(pronoun && { pronoun }),
         ...(phone_number && { phone_number }),
         ...(password && { password })
     };
-    const res = await api.put('/person/' + userid, receivedObject, { headers: authHeader() })
+    const res = await api.put('/person/' + userid, receivedObject, { headers: { Authorization: 'Bearer ' + token } })
         .then(res => res)
         .catch(err => err.message);
     return res;

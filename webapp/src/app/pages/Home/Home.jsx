@@ -10,6 +10,7 @@ import { getUser } from '../../../core/services/user.service';
 import { getUserSkills } from '../../../core/services/skill.service'
 import { getUserTeams } from '../../../core/services/team.service'
 import { skillLabel, skillTooltip } from '../../../core/utils/Lists';
+import { useAuth } from '../../../auth/AuthContext';
 
 const Welcome = styled(Typography)`
     text-align: center;
@@ -62,21 +63,22 @@ function skillsMap(skills, soft) {
 
 const Home = () => {
 
-    const [user, setUser] = useState([]);
+    const [userInfo, setUserInfo] = useState([]);
     const [teams, setTeams] = useState([]);
     const [skills, setSkills] = useState([]);
+    const { user, token } = useAuth();
 
     useEffect(() => {
-        getUser(sessionStorage.getItem('user'), setUser);
-        getUserTeams(sessionStorage.getItem('user'), setTeams);
-        getUserSkills(sessionStorage.getItem('user'), setSkills);
+        getUser(user, setUserInfo, token);
+        getUserTeams(user, setTeams, token);
+        getUserSkills(user, setSkills, token);
     }, [])
 
 
     return (
         <Container>
             <Grid container flexDirection='column' alignItems='center'>
-                <Welcome sx={{ mt: 2, mb: 2 }}>Welcome {user.firstName} {user.lastName}</Welcome>
+                <Welcome sx={{ mt: 2, mb: 2 }}>Welcome {userInfo.firstName} {userInfo.lastName}</Welcome>
                 <Card sx={{ width: '290px' }}>
                     <CardHeader sx={{ background: primaryColour, padding: '8px' }}></CardHeader>
                     <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
@@ -87,9 +89,9 @@ const Home = () => {
                                 <CategoryText sx={{ mt: 2, mb: 2 }}>Phone: </CategoryText>
                             </Grid>
                             <Grid item xs={8}>
-                                <Text sx={{ mt: 2, mb: 2 }}>{user.pronoun}</Text>
-                                <Text sx={{ mt: 2, mb: 2 }}>{user.email}</Text>
-                                <Text sx={{ mt: 2, mb: 2 }}>{user.phone_number}</Text>
+                                <Text sx={{ mt: 2, mb: 2 }}>{userInfo.pronoun}</Text>
+                                <Text sx={{ mt: 2, mb: 2 }}>{userInfo.email}</Text>
+                                <Text sx={{ mt: 2, mb: 2 }}>{userInfo.phone_number}</Text>
                             </Grid>
                         </Grid>
                     </CardContent>
@@ -109,7 +111,7 @@ const Home = () => {
                                 title={<Typography
                                     variant='h6'
                                     sx={{ color: 'white', fontSize: '1.2em', textAlign: 'center' }}>
-                                    {team.t_name}
+                                    {team.name}
                                 </Typography>}
                             />
                             <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
@@ -118,7 +120,7 @@ const Home = () => {
                                         <CategoryText sx={{ mt: 1, mb: 2 }}>Description: </CategoryText>
                                     </Grid>
                                     <Grid item xs={8} >
-                                        <Text sx={{ mt: 1, mb: 2 }} >{team.t_description}</Text>
+                                        <Text sx={{ mt: 1, mb: 2 }} >{team.description}</Text>
                                     </Grid>
                                 </Grid>
                             </CardContent>

@@ -13,7 +13,7 @@ export class PersonToTeamController {
                 const teams = await getRepository(PersonToTeam).query(`
                     SELECT t.id as id, t.name AS name, t.description AS description
                     FROM person_to_team pt LEFT JOIN team t ON  pt.teamId = t.id 
-                    AND t.deleted IS NULL WHERE ( pt.personId = ? AND pt.user_active != 0 ) 
+                    WHERE ( pt.personId = ? AND pt.user_active != 0 AND t.deleted IS NULL ) 
                 `, [id]);
                 logger.log('info', 'User: ' + req.user.id + ', Method: getPersonTeam, Active = true');
                 return res.status(200).json(teams)
@@ -26,7 +26,7 @@ export class PersonToTeamController {
                 const teams = await getRepository(PersonToTeam).query(`
                 SELECT t.id as id, t.name AS name, t.description AS description 
                     FROM person_to_team pt LEFT JOIN team t ON  pt.teamId = t.id 
-                    AND t.deleted IS NULL WHERE ( pt.personId = ? AND pt.user_active = 0 ) 
+                    WHERE ( pt.personId = ? AND pt.user_active = 0 AND t.deleted IS NULL ) 
                 `, [id]);
                 logger.log('info', 'User: ' + req.user.id + ', Method: getPersonTeam, Active = false');
                 return res.status(200).json(teams)
@@ -39,7 +39,7 @@ export class PersonToTeamController {
                 const teams = await getRepository(PersonToTeam).query(`
                 SELECT t.id as id, t.name AS name, t.description AS description 
                     FROM person_to_team pt LEFT JOIN team t ON  pt.teamId = t.id 
-                    AND t.deleted IS NULL WHERE ( pt.personId = ? ) 
+                    WHERE ( pt.personId = ? AND t.deleted IS NULL ) 
                 `, [id]);
                 console.log(id)
                 logger.log('info', 'User: ' + req.user.id + ', Method: getPersonTeam, Active = null');

@@ -3,19 +3,16 @@ import { getRepository } from "typeorm";
 const logger = require('../config/logger');
 
 export class PersonToSkillController {
-    
+
     static async getPersonSkill(req, res) {
         const { id } = req.params;
         try {
             const repository = getRepository(PersonToSkill)
-            const skills = await repository.createQueryBuilder("ph")
-            .select("h.name", "name")
-            .addSelect("ph.level", "level")
-            .addSelect("h.soft_skill", "softSkill")
-            .addSelect("h.id", "id")
-            .leftJoin("skill", "h", "ph.skillId = h.id")
-            .where("ph.personId = :id", { id: id })
-            .getRawMany();
+            const skills = await repository.query(`
+                SELECT s.name as name, ps.level AS level, s.soft_skill AS softSkill, s.id AS id
+                FROM person_to_skill ps LEFT JOIN skill s ON  ps.skillId = s.id 
+                WHERE ( ps.personId = ?  AND s.deleted IS NULL )            
+            `, [id])
             logger.log('info', 'User: ' + req.user.id + ', Method: getPersonSkill');
             return res.status(200).json(skills);
         } catch (error) {
@@ -24,29 +21,29 @@ export class PersonToSkillController {
         }
     };
 
-    static async addPersonSkill (req, res) {
+    static async addPersonSkill(req, res) {
         const { personId, skillId } = req.params;
         const { level } = req.body;
         try {
             const repository = getRepository(PersonToSkill);
-            const personSkill = await repository.findOne({ where: { person: personId, skill: skillId}});
-            if ( personSkill ) {
+            const personSkill = await repository.findOne({ where: { person: personId, skill: skillId } });
+            if (personSkill) {
                 if (level == personSkill.level) {
                     return res.status(400).json({ message: "Skill already linked to your user" });
                 } else {
                     await repository
-                    .createQueryBuilder()
-                    .update(PersonToSkill)
-                    .set( { level: level } )
-                    .where ("id = :id", { id: personSkill.id})
-                    .execute();
+                        .createQueryBuilder()
+                        .update(PersonToSkill)
+                        .set({ level: level })
+                        .where("id = :id", { id: personSkill.id })
+                        .execute();
                     const updatedPersonSkill = await repository.findOne({ where: { id: personSkill.id } });
                     logger.log('info', "Method: addPersonSkill, skill level updated for User:" + personId);
                     return res.status(200).json(updatedPersonSkill);
                 }
             } else {
-                const newPersonSkill = await repository.save({ 
-                    level: level, 
+                const newPersonSkill = await repository.save({
+                    level: level,
                     person: personId,
                     skill: skillId
                 });
@@ -59,12 +56,12 @@ export class PersonToSkillController {
         };
     }
 
-    static async removePersonSkill (req, res) {
+    static async removePersonSkill(req, res) {
         const { personId, skillId } = req.params;
         try {
             const repository = getRepository(PersonToSkill);
-            const personSkill = await repository.findOne({ where: { person: personId, skill: skillId} });
-            if ( personSkill ) {
+            const personSkill = await repository.findOne({ where: { person: personId, skill: skillId } });
+            if (personSkill) {
                 await repository.delete(personSkill.id);
                 logger.log('info', "Method: removePersonSkill, skill:" + skillId + " deleted from User:" + personId);
                 return res.status(200).json({ message: "Skill deleted successfully" });

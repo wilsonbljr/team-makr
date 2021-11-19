@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, CardActions, CardContent, CardHeader, Grid, Rating, Tooltip, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Button, Card, CardActions, CardContent, CardHeader, Grid, Typography } from '@mui/material';
 import { Edit } from '@mui/icons-material';
 import styled from 'styled-components';
 
 import Container from '../../components/Container'
-import { primaryColour } from '../../../core/utils/Variables';
 import { getUser } from '../../../core/services/user.service';
 import { getUserSkills } from '../../../core/services/skill.service'
 import { getUserTeams } from '../../../core/services/team.service'
-import { skillLabel, skillTooltip } from '../../../core/utils/Lists';
 import { useAuth } from '../../../auth/AuthContext';
+import HomeSkillCard from '../../components/HomeSkillCard';
+import TeamCard from '../../components/TeamCard';
+import HomeProfileCard from '../../components/HomeProfileCard';
 
 const Welcome = styled(Typography)`
     text-align: center;
@@ -24,41 +24,21 @@ const Title = styled(Welcome)`
     margin-top: 3vh;
 `
 
-const Text = styled(Typography)`
-    font-weight: 400;
-    text-align: left;
-    letter-spacing: 0.3px;
-    word-wrap: break-word;
-`
-
-const CategoryText = styled(Typography)`
-    font-weight: 700;
-    text-align: right;
-    letter-spacing: 0.3px;
-`
-
 function skillsMap(skills, soft) {
-    return skills.map((skill) => {
-        if (skill.softSkill !== soft && skill.id !== null) {
-            return (
-                <Card sx={{ width: "280px" }} key={skill.id}>
-                    <CardHeader sx={{ background: primaryColour, padding: '10px' }} title={<Typography variant='h6' sx={{ color: 'white', fontSize: '1.2em', textAlign: 'center' }}>{skill.name}</Typography>} />
-                    <Tooltip disableFocusListener placement='top' title={<Typography sx={{ textAlign: 'justify' }} variant='body2'>{skillTooltip[skill.level]}</Typography>}>
-                        <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
-                            <Grid container>
-                                <Grid item xs={6}>
-                                    <Rating sx={{ mt: 1, mb: 1, pt: 1 }} name='skill-level' value={skill.level} readOnly />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <Typography sx={{ mt: 1, mb: 1, fontWeight: 900, pb: 1, pt: 1 }} variant='body1'>{skillLabel[skill.level]}</Typography>
-                                </Grid>
-                            </Grid>
-                        </CardContent>
-                    </Tooltip>
-                </Card>
-            )
-        }
-    })
+    // Checks if there is a skill
+    const array = skills.find(skill => skill.softSkill !== soft);
+    if (array === 0 || array === undefined) {
+        // If there isn't returns a message instead of the card
+        return <Typography variant='body1'>You haven't added any skills yet</Typography>
+    } else {
+        return skills.map((skill) => {
+            if (skill.softSkill !== soft && skill.id !== null) {
+                return (
+                    <HomeSkillCard id={skill.id} level={skill.level} name={skill.name} />
+                )
+            }
+        })
+    }
 }
 
 const Home = () => {
@@ -79,53 +59,15 @@ const Home = () => {
         <Container>
             <Grid container flexDirection='column' alignItems='center'>
                 <Welcome sx={{ mt: 2, mb: 2 }}>Welcome {userInfo.firstName} {userInfo.lastName}</Welcome>
-                <Card sx={{ width: '290px' }}>
-                    <CardHeader sx={{ background: primaryColour, padding: '8px' }}></CardHeader>
-                    <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
-                        <Grid container>
-                            <Grid item xs={4} sx={{ textAlign: 'right', pr: 1 }}>
-                                <CategoryText sx={{ mt: 2, mb: 2 }}>Pronouns: </CategoryText>
-                                <CategoryText sx={{ mt: 2, mb: 2 }}>Email: </CategoryText>
-                                <CategoryText sx={{ mt: 2, mb: 2 }}>Phone: </CategoryText>
-                            </Grid>
-                            <Grid item xs={8}>
-                                <Text sx={{ mt: 2, mb: 2 }}>{userInfo.pronoun}</Text>
-                                <Text sx={{ mt: 2, mb: 2 }}>{userInfo.email}</Text>
-                                <Text sx={{ mt: 2, mb: 2 }}>{userInfo.phone_number}</Text>
-                            </Grid>
-                        </Grid>
-                    </CardContent>
-                    <CardActions>
-                        <Button endIcon={<Edit />} variant='outlined' sx={{ width: '100%' }}
-                            component={Link} to='/editprofile'>Edit Profile</Button>
-                    </CardActions>
-                </Card>
+                <HomeProfileCard email={userInfo.email} pronoun={userInfo.pronoun} phone_number={userInfo.phone_number} />
             </Grid>
             <Grid container flexDirection='column' alignItems='center'>
                 <Title>Teams</Title>
                 <Grid container alignItems='center' justifyContent='space-around' gap='10px'>
-                    {teams.map((team, index) => (
-                        <Card sx={{ width: "400px" }} key={index}>
-                            <CardHeader
-                                sx={{ background: primaryColour, pt: 1, pb: 1 }}
-                                title={<Typography
-                                    variant='h6'
-                                    sx={{ color: 'white', fontSize: '1.2em', textAlign: 'center' }}>
-                                    {team.name}
-                                </Typography>}
-                            />
-                            <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
-                                <Grid container alignItems='stretch'>
-                                    <Grid item xs={4} sx={{ textAlign: 'right', pr: 1 }} >
-                                        <CategoryText sx={{ mt: 1, mb: 2 }}>Description: </CategoryText>
-                                    </Grid>
-                                    <Grid item xs={8} >
-                                        <Text sx={{ mt: 1, mb: 2 }} >{team.description}</Text>
-                                    </Grid>
-                                </Grid>
-                            </CardContent>
-                        </Card>
-                    ))}
+                    {teams.length !== 0 ? teams.map((team) => (
+                        <TeamCard name={team.name} id={team.id} description={team.description} />
+                    ))
+                    : <Typography variant='body1'>You haven't joined any teams yet</Typography>}
                 </Grid>
             </Grid>
             <Grid container flexDirection='column' alignItems='center'>

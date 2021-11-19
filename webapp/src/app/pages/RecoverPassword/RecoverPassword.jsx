@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Alert, Button, Snackbar, TextField } from '@mui/material';
+import { Alert, Button, Snackbar } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import Container from '../../components/Container'
 import { forgotPasswordEmail } from '../../../core/services/password.service';
+import GeneralInput from '../../components/GeneralInput';
 
 const StyledForm = styled.form`
     display: flex;
@@ -63,17 +64,17 @@ const RecoverPassword = () => {
             <Title>Recover password</Title>
 
             <StyledForm onSubmit={event => { handleEmail(event, email, setSnackSent, setSnackError) }}>
-                <TextField onChange={(event) => {
+                <GeneralInput onChange={(event) => {
                     setEmail(event.target.value);
                 }} id='email' label='E-mail' variant='outlined' type="email" required />
                 <Button type="submit" variant="contained" >Send Token</Button>
             </StyledForm>
 
             <StyledForm onSubmit={event => { handleReset(event, email, setSnackSent) }}>
-            <TextField onChange={(event) => {
+            <GeneralInput onChange={(event) => {
                     setPassword(event.target.value);
                 }} id='token' label='Token' variant='outlined' type="text" required />
-                <TextField onChange={(event) => {
+                <GeneralInput onChange={(event) => {
                     setPassword(event.target.value);
                 }} id='password' label='New Password' variant='outlined' type="password" required />
                 <ButtonContainer>

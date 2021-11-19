@@ -35,7 +35,7 @@ const TeamForm = (props) => {
             <TextField onChange={(event) => {
                 setTeamDesc(event.target.value);
             }} id='description' multiline label='Description' variant='outlined' type="text" required />
-            <Button type="submit">Create</Button>
+            <Button type="submit" variant='outlined'>Create</Button>
         </StyledForm>
     )
 }

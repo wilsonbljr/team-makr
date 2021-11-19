@@ -35,11 +35,11 @@ const TeamsUser = () => {
             <TeamsContainer>
                 <Grid container sx={{ maxWidth: '400px' }} justifyContent='space-between'>
                     <Title>Teams</Title>
-                    <Button sx={{ maxWidth: '165px', padding: 2 }} onClick={openModal}>Create new Team</Button>
+                    <Button sx={{ maxWidth: '190px', pt: 1, pb: 1, pr: 2, pl: 2 }} variant='outlined' onClick={openModal}>Create Team</Button>
                 </Grid>
                 <Grid container alignItems='center' justifyContent='space-around' gap='10px' sx={{ mt: 3 }}>
                     {teams.map((team, index) => (
-                        <TeamCard id={team.id} name={team.name} description={team.description} navigate = { navigate } />
+                        <TeamCard id={team.id} name={team.name} description={team.description} navigate={navigate} />
                     ))}
                 </Grid>
             </TeamsContainer>

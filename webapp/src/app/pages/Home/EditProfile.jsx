@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, TextField, Alert, Snackbar } from '@mui/material';
+import { Button, Alert, Snackbar } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 
@@ -7,6 +7,7 @@ import Container from '../../components/Container'
 import { updateUser } from '../../../core/services/user.service'
 import { getUser } from '../../../core/services/user.service';
 import { useAuth } from '../../../auth/AuthContext';
+import GeneralInput from '../../components/GeneralInput';
 
 const StyledForm = styled.form`
     display: flex;
@@ -68,20 +69,20 @@ const EditProfile = () => {
             <Title>Edit your profile</Title>
             {alert ? <Alert severity="error">Server error, try again</Alert> : <> </>}
             <StyledForm onSubmit={event => { handleSubmit(event) }}>
-                <TextField id='name' label='Name' value={userInfo.firstName + ' ' + userInfo.lastName} disabled variant='outlined' type="text" />
-                <TextField onChange={(event) => {
+                <GeneralInput id='name' label='Name' value={userInfo.firstName + ' ' + userInfo.lastName} disabled variant='outlined' type="text" />
+                <GeneralInput onChange={(event) => {
                     setPronouns(event.target.value);
                 }} id='pronoun' label='Pronouns' variant='outlined' type="text" />
-                <TextField onChange={(event) => {
+                <GeneralInput onChange={(event) => {
                     setPhone(event.target.value);
                 }} id='phone' label='Phone Number' variant='outlined' type="tel" />
-                <TextField id='email' label='E-mail' InputLabelProps={{ shrink: true }} disabled value={userInfo.email} variant='outlined' type="email" />
-                <TextField onChange={(event) => {
+                <GeneralInput id='email' label='E-mail' InputLabelProps={{ shrink: true }} disabled value={userInfo.email} variant='outlined' type="email" />
+                <GeneralInput onChange={(event) => {
                     setPassword(event.target.value);
                 }} id='password' label='Password' variant='outlined' type="password" />
                 <ButtonContainer>
                     <Button type="submit" variant="contained" >Register</Button>
-                    <Button component={Link} to="/home" variant="contained" >Back to Home</Button>
+                    <Button component={Link} to="/home" variant="outlined" >Back to Home</Button>
                 </ButtonContainer>
             </StyledForm>
             <Snackbar open={snack} autoHideDuration={5000} onClose={closeSnack} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>

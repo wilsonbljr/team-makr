@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Button, TextField, Snackbar, Alert } from '@mui/material';
+import { Button, Snackbar, Alert } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import Container from '../../components/Container'
 import { registerUser } from '../../../core/services/user.service';
+import GeneralInput from '../../components/GeneralInput';
 
 const StyledForm = styled.form`
     display: flex;
@@ -53,19 +54,19 @@ const Register = () => {
             <Container>
                 <Title>Register Account</Title>
                 <StyledForm onSubmit={event => { handleSubmit(event, name, pronouns, phone, email, password, navigate, setOpenSnack) }}>
-                    <TextField onChange={(event) => {
+                    <GeneralInput onChange={(event) => {
                         setName(event.target.value);
                     }} id='name' label='Name' variant='outlined' type="text" required/>
-                    <TextField onChange={(event) => {
+                    <GeneralInput onChange={(event) => {
                         setPronouns(event.target.value);
                     }} id='pronoun' label='Pronouns' variant='outlined' type="text" />
-                    <TextField onChange={(event) => {
+                    <GeneralInput onChange={(event) => {
                         setPhone(event.target.value);
                     }} id='phone' label='Phone Number' variant='outlined' type="tel" />
-                    <TextField onChange={(event) => {
+                    <GeneralInput onChange={(event) => {
                         setEmail(event.target.value);
                     }} id='email' label='E-mail' variant='outlined' type="email" required/>
-                    <TextField onChange={(event) => {
+                    <GeneralInput onChange={(event) => {
                         setPassword(event.target.value);
                     }} id='password' label='Password' variant='outlined' type="password" required/>
 

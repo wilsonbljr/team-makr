@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Alert, Button, Grid, Snackbar, TextField, Typography } from '@mui/material';
+import { Alert, Button, Grid, Snackbar, Typography } from '@mui/material';
 import Image from 'mui-image'
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import Container from '../../components/Container'
-import { login } from '../../../auth/auth'
+import GeneralInput from '../../components/GeneralInput'
 import desktop from '../../../assets/desktop.svg'
 import { useAuth } from '../../../auth/AuthContext';
 
@@ -27,7 +27,7 @@ const ButtonContainer = styled.div`
 
 const ForgotPassword = styled(Link)`
     text-decoration: none;
-    color: black;
+    color: white;
     text-align: right;
     margin-top: 1vh;
 `
@@ -36,8 +36,6 @@ const PasswordContainer = styled.div`
     display: flex;
     flex-direction: column;
 `
-
-
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -49,7 +47,10 @@ const Login = () => {
     function handleSubmit(event) {
         event.preventDefault();
         setCurrentUser(email, password)
-            .then(() => {
+            .then((status) => {
+                if (status !== undefined) {
+                    throw Error('Invalid email or password')
+                }
                 navigate('/login/success');
             }).catch(err => setOpenSnack(true))
     };
@@ -73,18 +74,18 @@ const Login = () => {
                 <Container maxWidth='sm'>
                     <Title>Welcome Back!</Title>
                     <StyledForm onSubmit={event => { handleSubmit(event) }}>
-                        <TextField onChange={(event) => {
+                        <GeneralInput onChange={(event) => {
                             setEmail(event.target.value);
                         }} id='email' label='E-mail' variant='outlined' type="email" required />
                         <PasswordContainer>
-                            <TextField onChange={(event) => {
+                            <GeneralInput onChange={(event) => {
                                 setPassword(event.target.value);
                             }} id='password' label='Password' variant='outlined' type="password" required />
                             <ForgotPassword to='/forgot-password'>Recover password</ForgotPassword>
                         </PasswordContainer>
                         <ButtonContainer>
                             <Button type="submit" variant="contained" >Login</Button>
-                            <Button component={Link} to="/register" variant="contained" >Register</Button>
+                            <Button component={Link} to="/register" variant="outlined" >Register</Button>
                         </ButtonContainer>
                     </StyledForm>
                     <Snackbar open={openSnack} autoHideDuration={5000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>

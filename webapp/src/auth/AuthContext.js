@@ -13,11 +13,15 @@ export const AuthContextProvider = ({ children }) => {
     const [token, setToken] = useState();
 
     const setCurrentUser = async (email, password) => {
-        await login(email, password)
-            .then(({ token, userId }) => {
+        const status = await login(email, password)
+            .then(({ token, userId, status}) => {
+                if (token === undefined) {
+                    return status;
+                }
                 setToken(token);
                 setUser(userId);
-            }).catch(err => console.log(err.message));
+            }).catch(err => err.message);
+        return status;
     }
 
     const unsetCurrentUser = async () => {

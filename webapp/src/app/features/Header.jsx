@@ -56,6 +56,7 @@ const checkLoggedIn = (user, navigate, setOpen, logout) => {
                 </ListItemButton>
                 <ListItemButton divider sx={{ height: '60px', color: 'white' }} onClick={async () => {
                     await logout()
+                    setOpen(false)
                 }}>
                     <ListItemIcon><Logout sx={{ color: 'white' }} /></ListItemIcon>
                     <ListItemText primary={<ListText variant="p">Logout</ListText>} />
@@ -108,7 +109,7 @@ const Header = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar sx={{backgroundColor: primaryColour}} position="static">
                 <Toolbar sx={{ justifyContent: 'space-between' }}>
                     <IconButton
                         size="large"

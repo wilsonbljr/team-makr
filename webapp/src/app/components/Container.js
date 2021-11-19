@@ -1,7 +1,6 @@
-import { Container as Cont } from '@mui/material'
 import styled from 'styled-components'
 
-const Container = styled(Cont)`
+const Container = styled.section`
     min-height: calc(100vh - 56px);
     width: 100%;
     overflow: auto;
@@ -13,6 +12,7 @@ const Container = styled(Cont)`
     @media(min-width: 600px) {
     min-height: calc(100vh - 64px);
     width: 100%;
+    flex-direction: row;
     }
 `
 

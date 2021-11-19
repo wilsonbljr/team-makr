@@ -2,47 +2,52 @@ import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
     palette: {
+        type: 'light',
+        background: {
+            default: '#031424'
+        },
         primary: {
-            main: '#344955'
+            main: '#cf6766',
         },
         secondary: {
-            main: '#f9aa33'
+            main: '#30415d',
+            light: '#8eaebd',
+            dark: '#031424',
         },
         warning: {
-            main: '#ffea19'
+            main: '#ffea19',
+        },
+        divider: '#cf6667',
+        text: {
+            primary: '#FFF',
+            disabled: '#a0a1a3'
         }
     },
     typography: {
         fontWeightLight: 300,
         fontWeightRegular: 400,
-        fontWeightMedium: 700,
-        fontWeightBold: 900,
-        fontFamily: 'Lato'
+        fontWeightMedium: 500,
+        fontWeightBold: 700,
+        fontFamily: 'Montserrat',
+        fontSize: 14,
+        button: {
+            fontSize: '1rem',
+            fontWeight: 700,
+            lineHeight: 2,
+        },
     },
     shape: {
-        borderRadius: 9
+        borderRadius: 6,
+    },
+    props: {
+        MuiTooltip: {
+            arrow: true,
+        },
+        MuiAppBar: {
+            color: 'secondary',
+        },
     },
     components: {
-        MuiButton: {
-            styleOverrides: {
-                root: {
-                    background: 'linear-gradient(360deg, #4A6572 40%, #364654 95%)',
-                    border: 0,
-                    borderRadius: 9,
-                    boxShadow: '0 3px 5px 2px rgba(0, 0, 0, 0)',
-                    color: 'white',
-                    height: 42,
-                    padding: '0 30px'
-                }
-            }
-        },
-        MuiCard: {
-            styleOverrides: {
-                root: {
-                    border: '1px solid #344955'
-                }
-            }
-        },
         MuiCardContent: {
             styleOverrides: {
                 root: {
@@ -55,8 +60,7 @@ const theme = createTheme({
         MuiTooltip: {
             styleOverrides: {
                 tooltip: {
-                    color: "white",
-                    backgroundColor: "black"
+                    color: "white"
                 }
             }
         }

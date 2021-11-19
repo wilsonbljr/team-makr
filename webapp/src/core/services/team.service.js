@@ -34,3 +34,23 @@ export const createTeam = async (name, description, userId, token) => {
         }).catch(err => err.message);
     return status;
 }
+
+// Delete method that removes the person from team and then deletes it
+export const leaveTeam = async (teamId, userId, users, token) => {
+    const requestUser = users.find(user => {
+        return user.id === userId
+    });
+    if (requestUser.leader === 1) {
+        const res = await api.delete('/person/' + userId + '/team/' + teamId, { headers: { Authorization: 'Bearer ' + token } })
+            .then(async res => {
+                const response = await api.delete('/team/' + teamId, { headers: { Authorization: 'Bearer ' + token } });
+                return response;
+            })
+            .catch(err => err.message);
+        return res
+    } else {
+        const res = await api.delete('/person/' + userId + '/team/' + teamId, { headers: { Authorization: 'Bearer ' + token } })
+            .catch(err => err.message);
+        return res;
+    }
+}

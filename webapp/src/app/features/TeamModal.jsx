@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Box } from '@mui/system';
 import { Alert, Modal, Snackbar, Typography, IconButton } from '@mui/material';
 import TeamForm from '../components/TeamForm';
-import { lightPrimaryColour, primaryColour } from '../../core/utils/Variables';
+import { primaryColour } from '../../core/utils/Variables';
 import { Close } from '@mui/icons-material';
 
 const ModalContent = styled(Box)`

@@ -38,8 +38,8 @@ const TeamsUser = () => {
                     <Button sx={{ maxWidth: '190px', pt: 1, pb: 1, pr: 2, pl: 2 }} variant='outlined' onClick={openModal}>Create Team</Button>
                 </Grid>
                 <Grid container alignItems='center' justifyContent='space-around' gap='10px' sx={{ mt: 3 }}>
-                    {teams.map((team, index) => (
-                        <TeamCard id={team.id} name={team.name} description={team.description} navigate={navigate} />
+                    {teams.map((team) => (
+                        <TeamCard key={team.id} id={team.id} name={team.name} description={team.description} navigate={navigate} />
                     ))}
                 </Grid>
             </TeamsContainer>

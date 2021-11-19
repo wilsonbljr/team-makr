@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, CardActions, CardContent, CardHeader, Grid, Typography } from '@mui/material';
-import { Edit } from '@mui/icons-material';
+import { Grid, Typography } from '@mui/material';
 import styled from 'styled-components';
 
 import Container from '../../components/Container'

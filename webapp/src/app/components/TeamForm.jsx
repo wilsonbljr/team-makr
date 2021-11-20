@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import { createTeam, getUserTeams } from '../../core/services/team.service';
 import { useAuth } from '../../auth/AuthContext';
+import ModalInput from './ModalInput';
 
 const StyledForm = styled.form`
     display: flex;
@@ -29,10 +30,10 @@ const TeamForm = (props) => {
 
     return (
         <StyledForm onSubmit={event => { teamForm(event) }}>
-            <TextField onChange={(event) => {
+            <ModalInput onChange={(event) => {
                 setTeamName(event.target.value);
             }} id='name' label='Team name' variant='outlined' type="text" required />
-            <TextField onChange={(event) => {
+            <ModalInput onChange={(event) => {
                 setTeamDesc(event.target.value);
             }} id='description' multiline label='Description' variant='outlined' type="text" required />
             <Button type="submit" variant='outlined'>Create</Button>

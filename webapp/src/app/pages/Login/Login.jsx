@@ -7,6 +7,7 @@ import Container from '../../components/Container'
 import GeneralInput from '../../components/GeneralInput'
 import desktop from '../../../assets/desktop.svg'
 import { useAuth } from '../../../auth/AuthContext';
+import { secondaryColour } from '../../../core/utils/Variables'
 
 const StyledForm = styled.form`
     display: flex;
@@ -27,7 +28,7 @@ const ButtonContainer = styled.div`
 
 const ForgotPassword = styled(Link)`
     text-decoration: none;
-    color: white;
+    color: ${secondaryColour};
     text-align: right;
     margin-top: 1vh;
 `

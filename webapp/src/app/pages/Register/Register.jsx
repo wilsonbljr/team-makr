@@ -72,7 +72,7 @@ const Register = () => {
 
                     <ButtonContainer>
                         <Button type="submit" variant="contained" >Register</Button>
-                        <Button component={Link} to="/login" variant="contained" >Back to Login</Button>
+                        <Button component={Link} to="/login" variant="outlined" >Back to Login</Button>
                     </ButtonContainer>
                 </StyledForm>
                 <Snackbar open={openSnack} autoHideDuration={5000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>

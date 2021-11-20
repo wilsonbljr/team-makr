@@ -30,28 +30,30 @@ function App() {
     <Router>
       <CssBaseline />
       <Header />
-      <Routes>
-        <Route path='/' element={<Landing />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/login/success' element={<SuccessfulLogin />} />
-        <Route path='/logout-success' element={<SuccessfulLogout />} />
-        <Route path='/forgot-password' element={<RecoverPassword />} />
-        <Route path='/forgot-password/success' element={<SuccessfulPassword />} />
+        <Routes>
+          <Route path='/' element={<Landing />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/login/success' element={<SuccessfulLogin />} />
+          <Route path='/logout-success' element={<SuccessfulLogout />} />
+          <Route path='/forgot-password' element={<RecoverPassword />} />
+          <Route path='/forgot-password/success' element={<SuccessfulPassword />} />
 
-        <Route path='/register' element={<Register />} />
-        <Route path='/register/success' element={<SuccessfulRegister />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/register/success' element={<SuccessfulRegister />} />
 
-        <Route element={<RequireAuth />}>
-          <Route path='/home' element={<Home />} />
-          <Route path='/editprofile' element={<EditProfile />} />
-          <Route path='/team' element={<TeamsUser />} />
-          <Route path='/team/:id' element={<Teams />} />
-        </Route>
+          <Route element={<RequireAuth />}>
 
-        <Route path='/unauthorized' element={<Unauthorized />} />
-        <Route path='/internal' element={<InternalServer />} />
-        <Route path='/*' element={<NotFound />} />
-      </Routes>
+            <Route path='/home' element={<Home />} />
+            <Route path='/editprofile' element={<EditProfile />} />
+            <Route path='/team' element={<TeamsUser />} />
+            <Route path='/team/:id' element={<Teams />} />
+
+          </Route>
+          
+          <Route path='/unauthorized' element={<Unauthorized />} />
+          <Route path='/internal' element={<InternalServer />} />
+          <Route path='/*' element={<NotFound />} />
+        </Routes>
     </Router>
   );
 }

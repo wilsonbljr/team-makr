@@ -1,11 +1,10 @@
 import api from './api.service';
 
 // Get user info
-export const getUser = async (id, setData, token) => {
+export const getUser = async (id, token) => {
     const status = await api.get('/person/' + id, { headers: { Authorization: 'Bearer ' + token } })
         .then(res => {
-            setData(res.data[0]);
-            return res.status;
+            return res.data[0];
         })
         .catch(err => err.message);
     return status;

@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Grid, Typography } from '@mui/material';
+import React from 'react';
+import { useTeams } from '../../../core/hooks/useTeams';
+import { useSkills } from '../../../core/hooks/useSkills';
 import styled from 'styled-components';
 
+import { Grid, Typography } from '@mui/material';
 import Container from '../../components/Container'
-import { getUser } from '../../../core/services/user.service';
-import { getUserSkills } from '../../../core/services/skill.service'
-import { getUserTeams } from '../../../core/services/team.service'
-import { useAuth } from '../../../auth/AuthContext';
-import HomeSkillCard from '../../components/HomeSkillCard';
-import TeamCard from '../../components/TeamCard';
 import HomeProfileCard from '../../components/HomeProfileCard';
+import HomeTeamCard from '../../features/HomeTeamCard';
+import HomeSkillsCard from '../../features/HomeSkillsCard';
 
 const Welcome = styled(Typography)`
     text-align: center;
@@ -23,62 +21,35 @@ const Title = styled(Welcome)`
     margin-top: 3vh;
 `
 
-function skillsMap(skills, soft) {
-    // Checks if there is a skill
-    const array = skills.find(skill => skill.softSkill !== soft);
-    if (array === 0 || array === undefined) {
-        // If there isn't returns a message instead of the card
-        return <Typography variant='body1'>You haven't added any skills yet</Typography>
-    } else {
-        return skills.map((skill) => {
-            if (skill.softSkill !== soft && skill.id !== null) {
-                return (
-                    <HomeSkillCard id={skill.id} level={skill.level} name={skill.name} />
-                )
-            }
-        })
-    }
-}
-
 const Home = () => {
-
-    const [userInfo, setUserInfo] = useState([]);
-    const [teams, setTeams] = useState([]);
-    const [skills, setSkills] = useState([]);
-    const { user, token } = useAuth();
-
-    useEffect(() => {
-        getUser(user, setUserInfo, token);
-        getUserTeams(user, setTeams, token);
-        getUserSkills(user, setSkills, token);
-    }, [])
-
+    const { teams } = useTeams();
+    const { skills } = useSkills();
 
     return (
         <Container>
-            <Grid container flexDirection='column' alignItems='center'>
-                <Welcome sx={{ mt: 2, mb: 2 }}>Welcome {userInfo.firstName} {userInfo.lastName}</Welcome>
-                <HomeProfileCard email={userInfo.email} pronoun={userInfo.pronoun} phone_number={userInfo.phone_number} />
-            </Grid>
-            <Grid container flexDirection='column' alignItems='center'>
-                <Title>Teams</Title>
-                <Grid container alignItems='center' justifyContent='space-around' gap='10px'>
-                    {teams.length !== 0 ? teams.map((team) => (
-                        <TeamCard name={team.name} id={team.id} description={team.description} />
-                    ))
-                    : <Typography variant='body1'>You haven't joined any teams yet</Typography>}
+            <Grid container spacing={2}>
+                <Grid item xs={12} md={4} lg={3}>
+                    <HomeProfileCard
+                        teamNumber={teams.length}
+                        skillNumber={skills.length}
+                    />
                 </Grid>
-            </Grid>
-            <Grid container flexDirection='column' alignItems='center'>
-                <Title>Hard Skills</Title>
-                <Grid container alignItems='center' justifyContent='space-around' gap='10px'>
-                    {skillsMap(skills, 1)}
-                </Grid>
-            </Grid>
-            <Grid container flexDirection='column' alignItems='center'>
-                <Title>Soft Skills</Title>
-                <Grid container alignItems='center' justifyContent='space-around' gap='10px'>
-                    {skillsMap(skills, 0)}
+                <Grid item xs={12} md={8} lg={9}>
+                    <Grid container flexDirection='column' spacing={2}>
+                        <Grid item xs={12}>
+                            <HomeTeamCard />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} md={6}>
+                                    <HomeSkillsCard softSkill={0} />
+                                </Grid>
+                                <Grid item xs={12} md={6}>
+                                    <HomeSkillsCard softSkill={1} />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Container>

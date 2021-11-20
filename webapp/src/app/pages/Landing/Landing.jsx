@@ -24,14 +24,14 @@ const Landing = () => {
     return (
         <>
             <Container>
-                <Grid container alignItems='stretch' justifyContent='space-between'>
+                <Grid container alignItems='stretch' justifyContent='space-between' sx={{p: 0}}>
                     <Grid item xs={12} sx={{ display: { xs: 'inline', md: 'none' } }} >
                         <MobileImg src={mobile} alt="Desenvolvedor" />
                     </Grid>
                     <Grid item md={8} sx={{ display: { xs: 'none', md: 'inline' } }} >
                             <DesktopImg src={desktop} alt="Time" />
                     </Grid>
-                    <Grid item sm={12} md={4}>
+                    <Grid item sm={12} md={4} sx={{height: '100%', background: '#FFF'}}>
                         <Grid container justifyContent='center' flexDirection='column' alignItems='center' sx={{ height: '100%' }}>
                             <Typography variant='h4' component='h1' sx={{ textAlign: 'center', mb: 2 }}>Find the perfect team</Typography>
                             <Typography variant='h6' component='h2' sx={{ textAlign: 'center', mb: 5 }}>Building your project is way easier with the right people</Typography>

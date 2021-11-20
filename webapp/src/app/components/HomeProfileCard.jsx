@@ -1,45 +1,91 @@
-import { Button, Card, CardActions, CardContent, CardHeader, Grid, Typography } from '@mui/material'
+import { Avatar, Button, Card, CardContent, CardHeader, Grid, Typography } from '@mui/material'
 import { Link } from 'react-router-dom';
 import React from 'react'
-import { lightPrimaryColour } from '../../core/utils/Variables'
-import styled from 'styled-components';
-import { Edit } from '@mui/icons-material';
+import { primaryColour, secondaryColour } from '../../core/utils/Variables'
+import { Code, Edit, People } from '@mui/icons-material';
+import { styled } from '@mui/styles';
+import { useUserInfo } from '../../core/hooks/useUserInfo'
+import { useSkills } from '../../core/hooks/useSkills';
+import { useTeams } from '../../core/hooks/useTeams';
+import transformNumber from '../../core/utils/TransformNumber';
 
-const Text = styled(Typography)`
-    font-weight: 400;
-    text-align: left;
-    letter-spacing: 0.3px;
-    word-wrap: break-word;
-`
+const Text = styled(Typography)({
+    fontWeight: '300',
+    textAlign: 'left',
+    color: 'white',
+    letterSpacing: '0.3px',
+    wordWrap: 'break-word',
+    marginTop: 5,
+    marginBottom: 10
+});
 
-const CategoryText = styled(Typography)`
-    font-weight: 700;
-    text-align: right;
-    letter-spacing: 0.3px;
-`
+const CategoryText = styled(Typography)({
+    fontWeight: '500',
+    fontSize: '1.5em',
+    color: 'white',
+    textAlign: 'left',
+    marginTop: 10,
+    marginBottom: 5
+});
 
-const HomeProfileCard = (props) => {
+const HomeProfileCard = () => {
+    const { firstName, pronoun, email, phone_number } = useUserInfo();
+    const { skills } = useSkills();
+    const { teams } = useTeams();
+
+
     return (
-        <Card sx={{ width: '310px' }}>
-            <CardHeader sx={{ background: lightPrimaryColour, padding: '8px' }}></CardHeader>
-            <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px', color: 'black' }}>
-                <Grid container>
-                    <Grid item xs={4} sx={{ textAlign: 'right', pr: 1 }}>
-                        <CategoryText sx={{ mt: 2, mb: 2 }}>Pronouns: </CategoryText>
-                        <CategoryText sx={{ mt: 2, mb: 2 }}>Email: </CategoryText>
-                        <CategoryText sx={{ mt: 2, mb: 2 }}>Phone: </CategoryText>
-                    </Grid>
-                    <Grid item xs={8}>
-                        <Text sx={{ mt: 2, mb: 2 }}>{props.pronoun}</Text>
-                        <Text sx={{ mt: 2, mb: 2 }}>{props.email}</Text>
-                        <Text sx={{ mt: 2, mb: 2 }}>{props.phone_number}</Text>
-                    </Grid>
+        <Card sx={{ width: '100%', height: '100%', background: primaryColour, p: 1, minWidth: '320px', borderRadius: 4 }}>
+            <CardHeader
+                sx={{ pt: 1.5, pb: 1.5 }}
+                title={<Typography
+                    variant='h5'
+                    sx={{ textTransform: 'uppercase', fontWeight: '500' }}>
+                    {firstName}
+                </Typography>}
+                avatar={<Avatar sx={{
+                    bgcolor: secondaryColour,
+                    color: 'black',
+                    fontSize: '2em',
+                    fontWeight: 500,
+                    width: '75px',
+                    height: '75px'
+                }}>{firstName.charAt(0)}</Avatar>}
+            />
+            <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
+                <Grid container flexDirection='column'>
+                    <CategoryText>Pronouns: </CategoryText>
+                    <Text>{pronoun}</Text>
+                    <CategoryText>Email: </CategoryText>
+                    <Text>{email}</Text>
+                    <CategoryText>Phone: </CategoryText>
+                    <Text>{transformNumber(phone_number)}</Text>
+                    <Button
+                        endIcon={<Edit />}
+                        variant='contained'
+                        sx={{ width: '100%', mb: 3 }}
+                        component={Link}
+                        to='/editprofile'>Edit Profile</Button>
                 </Grid>
             </CardContent>
-            <CardActions>
-                <Button endIcon={<Edit />} variant='outlined' sx={{ width: '100%' }}
-                    component={Link} to='/editprofile'>Edit Profile</Button>
-            </CardActions>
+            <CardContent>
+                <CategoryText>Teams: </CategoryText>
+                <Text>You currently are in {teams.length} teams!</Text>
+                <Button
+                    endIcon={<People />}
+                    variant='contained'
+                    sx={{ width: '100%', mb: 5 }}
+                    component={Link}
+                    to='/team'>Manage Teams</Button>
+                <CategoryText>Skills: </CategoryText>
+                <Text>You currently have {skills.length} skills!</Text>
+                <Button
+                    endIcon={<Code />}
+                    variant='contained'
+                    sx={{ width: '100%' }}
+                    component={Link}
+                    to='/skill'>Manage Skills</Button>
+            </CardContent>
         </Card>
     )
 }

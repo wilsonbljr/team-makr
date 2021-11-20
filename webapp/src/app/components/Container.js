@@ -4,7 +4,7 @@ const Container = styled.section`
     min-height: calc(100vh - 56px);
     width: 100%;
     overflow: auto;
-    padding: 25px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

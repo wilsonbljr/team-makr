@@ -8,15 +8,9 @@ import ConfirmDeleteModal from '../../components/ConfirmDeleteModal';
 import Container from '../../components/Container'
 import TeamProfileCard from '../../components/TeamProfileCard';
 
-const Teams = () => {
+const Skills = () => {
     const { token } = useAuth();
-    const { id } = useParams();
-    const [team, setTeam] = useState({ id: null, name: '', description: '', users: [] })
     const [modal, setModal] = useState(false);
-
-    useEffect(() => {
-        getTeam(id, setTeam, token);
-    }, [])
 
     return (
         <>
@@ -35,4 +29,4 @@ const Teams = () => {
     )
 }
 
-export default Teams
+export default Skills;

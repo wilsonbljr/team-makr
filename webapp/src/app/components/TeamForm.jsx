@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Button } from '@mui/material';
 import { createTeam, getUserTeams } from '../../core/services/team.service';
 import { useAuth } from '../../auth/AuthContext';
-import ModalInput from './ModalInput';
 import GeneralInput from './GeneralInput'
 
 const StyledForm = styled.form`

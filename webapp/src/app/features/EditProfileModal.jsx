@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 import { Box } from '@mui/system';
 import { Alert, Modal, Snackbar, Typography, IconButton } from '@mui/material';
-import TeamForm from '../components/TeamForm';
 import { darkerPrimaryColour, primaryColour } from '../../core/utils/Variables';
 import { Close } from '@mui/icons-material';
+import EditProfileForm from '../components/EditProfileForm';
 
 const ModalContent = styled(Box)`
     position: absolute;
@@ -17,7 +17,7 @@ const ModalContent = styled(Box)`
     border: 2px solid ${primaryColour};
 `
 
-const TeamModal = (props) => {
+const EditProfileModal = (props) => {
     const [snack, setSnack] = useState(false);
     const closeModal = () => props.setModal(false);
     const closeSnack = () => setSnack(false);
@@ -27,20 +27,20 @@ const TeamModal = (props) => {
         <>
             <Modal open={props.modal} onClose={closeModal}>
                 <ModalContent sx={{ boxShadow: 24, p: 3, pt: 2 }}>
-                    <Typography variant='h5' sx={{ mb: 4, textAlign: 'center', fontWeight: 500}}>Create new Team</Typography>
+                    <Typography variant='h5' sx={{ mb: 4, textAlign: 'center', fontWeight: 500}}>Edit your profile</Typography>
                     <IconButton aria-label="Close Modal" sx={{ position: 'absolute', top: '6px', right: '6px' }} onClick={() => closeModal()}>
                         <Close sx={{color: 'white'}} />
                     </IconButton>
-                    <TeamForm closeModal={closeModal} openSnack={openSnack} setTeams={props.setTeams} />
+                    <EditProfileForm closeModal={closeModal} openSnack={openSnack} />
                 </ModalContent>
             </Modal>
             <Snackbar open={snack} autoHideDuration={5000} onClose={closeSnack} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
                 <Alert severity="success">
-                    Team created
+                    Profile updated!
                 </Alert>
             </Snackbar>
         </>
     )
 }
 
-export default TeamModal;
+export default EditProfileModal;

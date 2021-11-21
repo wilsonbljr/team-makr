@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTeams } from '../../../core/hooks/useTeams';
 import { useSkills } from '../../../core/hooks/useSkills';
 import styled from 'styled-components';
@@ -8,6 +8,7 @@ import Container from '../../components/Container'
 import HomeProfileCard from '../../components/HomeProfileCard';
 import HomeTeamCard from '../../features/HomeTeamCard';
 import HomeSkillsCard from '../../features/HomeSkillsCard';
+import EditProfileModal from '../../features/EditProfileModal';
 
 const Welcome = styled(Typography)`
     text-align: center;
@@ -24,6 +25,7 @@ const Title = styled(Welcome)`
 const Home = () => {
     const { teams } = useTeams();
     const { skills } = useSkills();
+    const [modal, setModal] = useState(false);
 
     return (
         <Container>
@@ -32,6 +34,7 @@ const Home = () => {
                     <HomeProfileCard
                         teamNumber={teams.length}
                         skillNumber={skills.length}
+                        setModal={setModal}
                     />
                 </Grid>
                 <Grid item xs={12} md={8} lg={9}>
@@ -52,6 +55,7 @@ const Home = () => {
                     </Grid>
                 </Grid>
             </Grid>
+            <EditProfileModal modal={modal} setModal={setModal}/>
         </Container>
     )
 }

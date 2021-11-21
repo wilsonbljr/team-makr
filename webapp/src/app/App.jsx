@@ -14,7 +14,6 @@ import Register from './pages/Register/Register'
 import SuccessfulRegister from './pages/Register/SuccessfulRegister'
 
 import Home from './pages/Home/Home'
-import EditProfile from './pages/Home/EditProfile'
 
 import TeamsUser from './pages/Team/TeamsUser'
 import Teams from './pages/Team/Teams'
@@ -44,7 +43,6 @@ function App() {
           <Route element={<RequireAuth />}>
 
             <Route path='/home' element={<Home />} />
-            <Route path='/editprofile' element={<EditProfile />} />
             <Route path='/team' element={<TeamsUser />} />
             <Route path='/team/:id' element={<Teams />} />
 

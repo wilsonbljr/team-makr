@@ -5,8 +5,9 @@ import { Button, Grid, Typography } from '@mui/material';
 import Container from '../../components/Container'
 import { getUserTeams } from '../../../core/services/team.service';
 import { useAuth } from '../../../auth/AuthContext';
-import TeamCard from '../../components/TeamCard';
 import TeamModal from '../../features/TeamModal';
+import TeamList from '../../components/TeamList';
+import HomeTeamCard from '../../features/HomeTeamCard';
 
 const TeamsContainer = styled(Container)`
     justify-content: flex-start;
@@ -31,21 +32,11 @@ const TeamsUser = () => {
     }, [])
 
     return (
-        <>
-            <TeamsContainer>
-                <Grid container sx={{ maxWidth: '400px' }} justifyContent='space-between'>
-                    <Title>Teams</Title>
-                    <Button sx={{ maxWidth: '190px', pt: 1, pb: 1, pr: 2, pl: 2 }} variant='outlined' onClick={openModal}>Create Team</Button>
-                </Grid>
-                <Grid container alignItems='center' justifyContent='space-around' gap='10px' sx={{ mt: 3 }}>
-                    {teams.map((team) => (
-                        <TeamCard key={team.id} id={team.id} name={team.name} description={team.description} navigate={navigate} />
-                    ))}
-                </Grid>
-            </TeamsContainer>
+        <Container>
+            <HomeTeamCard openModal={openModal}/>
             <TeamModal modal={modal} setModal={setModal} setTeams={setTeams} />
-        </>
+        </Container>
     )
 }
 
-export default TeamsUser
+export default TeamsUser;

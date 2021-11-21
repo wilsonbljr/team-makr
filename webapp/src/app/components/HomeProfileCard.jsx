@@ -28,7 +28,7 @@ const CategoryText = styled(Typography)({
     marginBottom: 5
 });
 
-const HomeProfileCard = () => {
+const HomeProfileCard = (props) => {
     const { firstName, pronoun, email, phone_number } = useUserInfo();
     const { skills } = useSkills();
     const { teams } = useTeams();
@@ -64,8 +64,7 @@ const HomeProfileCard = () => {
                         endIcon={<Edit />}
                         variant='contained'
                         sx={{ width: '100%', mb: 3 }}
-                        component={Link}
-                        to='/editprofile'>Edit Profile</Button>
+                        onClick={() => props.setModal(true)}>Edit Profile</Button>
                 </Grid>
             </CardContent>
             <CardContent>

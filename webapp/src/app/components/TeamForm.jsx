@@ -4,6 +4,7 @@ import { Button } from '@mui/material';
 import { createTeam, getUserTeams } from '../../core/services/team.service';
 import { useAuth } from '../../auth/AuthContext';
 import ModalInput from './ModalInput';
+import GeneralInput from './GeneralInput'
 
 const StyledForm = styled.form`
     display: flex;
@@ -30,10 +31,10 @@ const TeamForm = (props) => {
 
     return (
         <StyledForm onSubmit={event => { teamForm(event) }}>
-            <ModalInput onChange={(event) => {
+            <GeneralInput onChange={(event) => {
                 setTeamName(event.target.value);
             }} id='name' label='Team name' variant='outlined' type="text" required />
-            <ModalInput onChange={(event) => {
+            <GeneralInput onChange={(event) => {
                 setTeamDesc(event.target.value);
             }} id='description' multiline label='Description' variant='outlined' type="text" required />
             <Button type="submit" variant='outlined'>Create</Button>

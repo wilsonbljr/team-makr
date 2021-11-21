@@ -52,7 +52,7 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     "&:last-child": {
-                        paddingBottom: 0
+                        paddingBottom: 10
                     }
                 }
             }

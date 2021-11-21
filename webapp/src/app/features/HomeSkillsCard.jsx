@@ -12,14 +12,19 @@ const HomeSkillsCard = (props) => {
         const array = skills.find(skill => skill.softSkill !== props.softSkill);
         if (array === 0 || array === undefined) {
             // If there isn't returns a message instead of the card
-            return <Typography sx={{pl: 2, pb: 1}} variant='body1'>You haven't added any skills yet</Typography>
+            return (
+                <>
+                <Divider />
+                <Typography sx={{ pl: 2, pb: 2, pt: 2 }} variant='body1'>You haven't added any skills yet</Typography>
+                </>
+            )
         } else {
             return skills.map((skill) => {
                 if (skill.softSkill !== props.softSkill && skill.id !== null) {
                     return (
                         <>
-                        <Divider />
-                        <SkillList id={skill.id} level={skill.level} name={skill.name} />
+                            <Divider />
+                            <SkillList id={skill.id} level={skill.level} name={skill.name} />
                         </>
                     )
                 }
@@ -38,7 +43,7 @@ const HomeSkillsCard = (props) => {
                 </Typography>}
             />
             <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px', p: 0 }}>
-                <List sx={{alignItems: 'center'}}>
+                <List sx={{ alignItems: 'center' }}>
                     {skillsMap()}
                     <Divider />
                 </List>

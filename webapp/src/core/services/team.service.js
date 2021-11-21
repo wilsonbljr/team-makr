@@ -2,7 +2,7 @@ import api from './api.service';
 
 // Get teams from a certain user
 export const getUserTeams = async (id, setData, token) => {
-    const status = await api.get('/person/' + id + '/team', { headers: { Authorization: 'Bearer ' + token } })
+    const status = await api.get('/person/' + id + '/team?user_active=true', { headers: { Authorization: 'Bearer ' + token } })
         .then(res => {
             setData(res.data);
             return res.status;

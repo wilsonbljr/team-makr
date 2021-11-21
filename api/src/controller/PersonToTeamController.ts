@@ -11,10 +11,11 @@ export class PersonToTeamController {
         if (active == "true") {
             try {
                 const teams = await getRepository(PersonToTeam).query(`
-                    SELECT t.id as id, t.name AS name, t.description AS description
+                    SELECT t.id as id, t.name AS name, t.description AS description, pt.user_active as user_active, pt.leader as leader
                     FROM person_to_team pt LEFT JOIN team t ON  pt.teamId = t.id 
-                    WHERE ( pt.personId = ? AND pt.user_active != 0 AND t.deleted IS NULL ) 
+                    WHERE ( pt.personId = ? AND pt.user_active = 1 AND t.deleted IS NULL ) 
                 `, [id]);
+
                 logger.log('info', 'User: ' + req.user.id + ', Method: getPersonTeam, Active = true');
                 return res.status(200).json(teams)
             } catch (error) {
@@ -24,7 +25,7 @@ export class PersonToTeamController {
         } else if (active == "false") {
             try {
                 const teams = await getRepository(PersonToTeam).query(`
-                SELECT t.id as id, t.name AS name, t.description AS description 
+                    SELECT t.id as id, t.name AS name, t.description AS description, pt.user_active as user_active, pt.leader as leader
                     FROM person_to_team pt LEFT JOIN team t ON  pt.teamId = t.id 
                     WHERE ( pt.personId = ? AND pt.user_active = 0 AND t.deleted IS NULL ) 
                 `, [id]);
@@ -37,11 +38,10 @@ export class PersonToTeamController {
         } else {
             try {
                 const teams = await getRepository(PersonToTeam).query(`
-                SELECT t.id as id, t.name AS name, t.description AS description 
+                    SELECT t.id as id, t.name AS name, t.description AS description, pt.user_active as user_active, pt.leader as leader
                     FROM person_to_team pt LEFT JOIN team t ON  pt.teamId = t.id 
                     WHERE ( pt.personId = ? AND t.deleted IS NULL ) 
                 `, [id]);
-                console.log(id)
                 logger.log('info', 'User: ' + req.user.id + ', Method: getPersonTeam, Active = null');
                 return res.status(200).json(teams)
             } catch (error) {

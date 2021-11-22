@@ -59,7 +59,7 @@ const RegisterCard = () => {
                         <Button component={Link} to="/login" variant="outlined" >Back to Login</Button>
                     </ButtonContainer>
                 </CustomStyledForm>
-                <Snackbar open={openSnack} autoHideDuration={5000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+                <Snackbar open={openSnack} autoHideDuration={5000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
                     <Alert severity="error">
                         Email already exists
                     </Alert>

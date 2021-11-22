@@ -24,6 +24,7 @@ import ErrorLayout from './pages/Error/ErrorLayout'
 import ErrorNotFoundCard from './components/ErrorNotFoundCard'
 import ErrorInternalServerCard from './components/ErrorInternalServerCard'
 import ErrorUnauthorizedCard from './components/ErrorUnauthorizedCard'
+import Search from './pages/Search/Search'
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
           <Route path='/team' element={<TeamsUser />} />
           <Route path='/team/:id' element={<Teams />} />
           <Route path='/skill' element={<Skills />} />
+          <Route path='/search' element={<Search />} />
 
         </Route>
 
@@ -59,7 +61,7 @@ function App() {
           <Route path='/unauthorized' element={<ErrorUnauthorizedCard />} />
           <Route path='/internal' element={<ErrorInternalServerCard />} />
           <Route path='/*' element={<ErrorNotFoundCard />} />
-          
+
         </Route>
       </Routes>
     </Router>

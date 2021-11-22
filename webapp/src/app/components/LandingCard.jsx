@@ -15,7 +15,6 @@ const LandingCard = () => {
                     <Button component={Link} to="/login" variant='contained' sx={{ width: '80%', mb: 2 }}>Get Started</Button>
                 </Grid>
             </CardContent>
-
     )
 }
 

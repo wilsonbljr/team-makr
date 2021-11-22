@@ -52,7 +52,7 @@ const LoginCard = () => {
                     <Button component={Link} to="/register" variant="outlined" >Register</Button>
                     </ButtonContainer>
                 </CustomStyledForm>
-                <Snackbar open={openSnack} autoHideDuration={5000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+                <Snackbar open={openSnack} autoHideDuration={5000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
                     <Alert severity="error">
                         Invalid email or password
                     </Alert>

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { SwipeableDrawer, Divider, List, ListItemText, Typography } from '@mui/material'
 import { AppBar, Box, Toolbar, IconButton, ListItemButton, ListItemIcon } from '@mui/material'
-import { AppRegistration, Code, Home, Login, People, Menu, Logout } from '@mui/icons-material'
+import { AppRegistration, Code, Home, Login, People, Menu, Logout, Search } from '@mui/icons-material'
 
 import logo from '../../assets/logo.svg'
 import { primaryColour } from '../../core/utils/Variables'
@@ -40,6 +40,7 @@ const checkLoggedIn = (user, navigate, setOpen, logout) => {
                     <ListItemIcon><Home sx={{ color: 'white' }} /></ListItemIcon>
                     <ListItemText primary={<ListText variant="p">Home</ListText>} />
                 </ListItemButton>
+
                 <ListItemButton divider sx={{ height: '60px', color: 'white' }} onClick={() => {
                     navigate('/team')
                     setOpen(false)
@@ -47,6 +48,7 @@ const checkLoggedIn = (user, navigate, setOpen, logout) => {
                     <ListItemIcon><People sx={{ color: 'white' }} /></ListItemIcon>
                     <ListItemText primary={<ListText variant="p">Teams</ListText>} />
                 </ListItemButton>
+                
                 <ListItemButton divider sx={{ height: '60px', color: 'white' }} onClick={() => {
                     navigate('/skill')
                     setOpen(false)
@@ -54,6 +56,15 @@ const checkLoggedIn = (user, navigate, setOpen, logout) => {
                     <ListItemIcon><Code sx={{ color: 'white' }} /></ListItemIcon>
                     <ListItemText primary={<ListText variant="p">Skills</ListText>} />
                 </ListItemButton>
+
+                <ListItemButton divider sx={{ height: '60px', color: 'white' }} onClick={async () => {
+                    navigate('/search')
+                    setOpen(false)
+                }}>
+                    <ListItemIcon><Search sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary={<ListText variant="p">Search</ListText>} />
+                </ListItemButton>
+
                 <ListItemButton divider sx={{ height: '60px', color: 'white' }} onClick={async () => {
                     await logout()
                     setOpen(false)
@@ -109,7 +120,7 @@ const Header = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar sx={{backgroundColor: primaryColour}} position="static">
+            <AppBar sx={{ backgroundColor: primaryColour }} position="static">
                 <Toolbar sx={{ justifyContent: 'space-between' }}>
                     <IconButton
                         size="large"

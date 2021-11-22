@@ -49,6 +49,7 @@ const TeamProfileCard = (props) => {
                     <Text>{props.description}</Text>
                     <CategoryText>Members: </CategoryText>
                     <Text>There are currently {props.users.length} member(s) in this team.</Text>
+                    <CategoryText sx={{ pt: 3 }}>Leave team</CategoryText>
                     <Button
                         color='error'
                         variant='contained'

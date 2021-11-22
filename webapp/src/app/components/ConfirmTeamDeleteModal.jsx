@@ -56,10 +56,10 @@ const ConfirmDeleteModal = (props) => {
                     <Grid container justifyContent='center' alignItems='center'>
                         <Typography variant='h6' sx={{ mb: 2, textAlign: 'center' }}>LEAVE TEAM</Typography>
                         <IconButton aria-label="Close Modal" sx={{ position: 'absolute', top: '6px', right: '6px' }} onClick={() => closeModal()}>
-                            <Close sx={{color: 'white'}} />
+                            <Close sx={{ color: 'white' }} />
                         </IconButton>
                         <Typography variant='body1' sx={{ textAlign: 'center' }}>If you are the leader of this team, the team will be DELETED</Typography>
-                        <Button onClick={event => handleDelete(event)} variant='contained' color='error' sx={{ mt: 2 }}>CONFIRM</Button>
+                        <Button onClick={event => handleDelete(event)} variant='contained' color='error' sx={{ mt: 2, minWidth: '190px' }}>CONFIRM</Button>
                     </Grid>
                 </ModalContent>
             </Modal>

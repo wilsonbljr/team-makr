@@ -11,4 +11,4 @@ The development of this application will use MySQL (database), NodeJS with Expre
 
 # Development Status
 
-I'm done with the API for now, and started the Web App development with React
+I'm done with the API for now, and almost done with the React Web App development.

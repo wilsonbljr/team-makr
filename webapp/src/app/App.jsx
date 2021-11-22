@@ -2,14 +2,16 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { CssBaseline } from '@mui/material'
 import Header from './features/Header'
 
-import LandingCard from './components/LandingCard'
-import LoginCard from './features/LoginCard'
 import LandingLayout from './pages/Landing/LandingLayout'
+import LandingCard from './components/LandingCard'
+import LoginCard from './components/LoginCard'
+import RecoverPasswordCard from './components/RecoverPasswordCard'
+import RegisterCard from './components/RegisterCard'
+import SuccessfulLoginCard from './components/SuccessfulLoginCard'
+import SuccessfulPasswordResetCard from './components/SuccessfulPasswordResetCard'
+import SuccessfulRegisterCard from './components/SuccessfulRegisterCard'
 
-import SuccessfulLogin from './pages/Login/SuccessfulLogin'
-import SuccessfulPassword from './pages/RecoverPassword/SuccessfulPassword'
-import SuccessfulLogout from './pages/Login/SuccessfulLogout'
-import SuccessfulRegister from './pages/Register/SuccessfulRegister'
+import SuccessfulLogout from './pages/Success/SuccessfulLogout'
 
 import Home from './pages/Home/Home'
 import TeamsUser from './pages/Team/TeamsUser'
@@ -32,6 +34,11 @@ function App() {
 
           <Route path='/' element={<LandingCard />} />
           <Route path='/login' element={<LoginCard />} />
+          <Route path='/login/success' element={<SuccessfulLoginCard />} />
+          <Route path='/forgot-password' element={<RecoverPasswordCard />} />
+          <Route path='/forgot-password/success' element={<SuccessfulPasswordResetCard />} />
+          <Route path='/register' element={<RegisterCard />} />
+          <Route path='/register/success' element={<SuccessfulRegisterCard />} />
           
         </Route>
 
@@ -44,10 +51,7 @@ function App() {
 
         </Route>
 
-        <Route path='/login/success' element={<SuccessfulLogin />} />
         <Route path='/logout-success' element={<SuccessfulLogout />} />
-        <Route path='/forgot-password/success' element={<SuccessfulPassword />} />
-        <Route path='/register/success' element={<SuccessfulRegister />} />
 
         <Route path='/unauthorized' element={<Unauthorized />} />
         <Route path='/internal' element={<InternalServer />} />

@@ -3,32 +3,9 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components';
 import { useAuth } from '../../auth/AuthContext'
-import { StyledForm } from '../components/StyledForm'
-import GeneralInput from '../components/GeneralInput'
-import { secondaryColour } from '../../core/utils/Variables';
-
-const CustomStyledForm = styled(StyledForm)`
-    width: 100%;
-    max-width: 400px;
-`
-
-const ButtonContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 2vh;
-`
-
-const ForgotPassword = styled(Link)`
-    text-decoration: none;
-    color: ${secondaryColour};
-    text-align: right;
-    margin-top: 1vh;
-`
-
-const PasswordContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-`
+import { StyledForm } from './StyledForm'
+import GeneralInput from './GeneralInput'
+import { ButtonContainer, CustomStyledForm, ForgotPassword, PasswordContainer } from './LandingStyledComponents';
 
 const LoginCard = () => {
     const [email, setEmail] = useState('');

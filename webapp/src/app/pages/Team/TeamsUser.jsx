@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Container from '../../components/Container'
 import TeamModal from '../../features/TeamModal';
 import HomeTeamCard from '../../features/HomeTeamCard';
+import { Box } from '@mui/system';
 
 
 const TeamsUser = () => {
@@ -10,8 +11,10 @@ const TeamsUser = () => {
 
     return (
         <Container>
-            <HomeTeamCard openModal={openModal}/>
-            <TeamModal modal={modal} setModal={setModal} />
+            <Box sx={{maxWidth: '1540px'}}>
+                <HomeTeamCard openModal={openModal} />
+                <TeamModal modal={modal} setModal={setModal} />
+            </Box>
         </Container>
     )
 }

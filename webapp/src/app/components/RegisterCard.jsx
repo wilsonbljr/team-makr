@@ -1,27 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Snackbar, Alert } from '@mui/material';
+import { Button, Snackbar, Alert, CardContent, Grid, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components'
-import Container from '../../components/Container'
-import { registerUser } from '../../../core/services/user.service';
-import GeneralInput from '../../components/GeneralInput';
+import { registerUser } from '../../core/services/user.service';
+import GeneralInput from './GeneralInput';
+import { ButtonContainer, CustomStyledForm } from './LandingStyledComponents';
 
-const StyledForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 3vh;
-`
-
-const Title = styled.h1`
-    font-weight: 700;
-    font-size: 1.75em;
-`
-
-const ButtonContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 2vh;
-`
 
 function handleSubmit(event, name, pronouns, phone, email, password, navigate, snack) {
     event.preventDefault();
@@ -34,7 +17,7 @@ function handleSubmit(event, name, pronouns, phone, email, password, navigate, s
     })
 };
 
-const Register = () => {
+const RegisterCard = () => {
     const [name, setName] = useState('');
     const [pronouns, setPronouns] = useState('');
     const [phone, setPhone] = useState('');
@@ -50,13 +33,14 @@ const Register = () => {
         setOpenSnack(false)
     }
 
-        return (
-            <Container>
-                <Title>Register Account</Title>
-                <StyledForm onSubmit={event => { handleSubmit(event, name, pronouns, phone, email, password, navigate, setOpenSnack) }}>
+    return (
+        <CardContent sx={{ p: 2, pt: 4, height: '100%' }}>
+            <Grid container flexDirection='column' alignItems='center' sx={{ height: '100%' }} justifyContent='center'>
+                <Typography variant='h4' component='h1' sx={{ mb: 4, fontWeight: 500 }}>Register Account</Typography>
+                <CustomStyledForm onSubmit={event => { handleSubmit(event, name, pronouns, phone, email, password, navigate, setOpenSnack) }}>
                     <GeneralInput onChange={(event) => {
                         setName(event.target.value);
-                    }} id='name' label='Name' variant='outlined' type="text" required/>
+                    }} id='name' label='Name' variant='outlined' type="text" required />
                     <GeneralInput onChange={(event) => {
                         setPronouns(event.target.value);
                     }} id='pronoun' label='Pronouns' variant='outlined' type="text" />
@@ -65,25 +49,26 @@ const Register = () => {
                     }} id='phone' label='Phone Number' variant='outlined' type="tel" />
                     <GeneralInput onChange={(event) => {
                         setEmail(event.target.value);
-                    }} id='email' label='E-mail' variant='outlined' type="email" required/>
+                    }} id='email' label='E-mail' variant='outlined' type="email" required />
                     <GeneralInput onChange={(event) => {
                         setPassword(event.target.value);
-                    }} id='password' label='Password' variant='outlined' type="password" required/>
+                    }} id='password' label='Password' variant='outlined' type="password" required />
 
                     <ButtonContainer>
                         <Button type="submit" variant="contained" >Register</Button>
                         <Button component={Link} to="/login" variant="outlined" >Back to Login</Button>
                     </ButtonContainer>
-                </StyledForm>
+                </CustomStyledForm>
                 <Snackbar open={openSnack} autoHideDuration={5000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
                     <Alert severity="error">
                         Email already exists
                     </Alert>
                 </Snackbar>
-            </Container>
-        )
-    }
+            </Grid>
+        </CardContent>
+    )
+}
 
-export default Register
+export default RegisterCard;
 
 

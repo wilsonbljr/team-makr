@@ -1,22 +1,30 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Typography } from '@mui/material';
-import TransitionContainer from '../../components/TransitionContainer';
-import TransitionImage from '../../components/TransitionImage';
-import successImg from '../../../assets/logout.svg'
+import { Card, CardContent, Grid, Typography } from '@mui/material';
+import logoutImg from '../../../assets/logout.svg'
+import { primaryColour } from '../../../core/utils/Variables';
+import { Image } from 'mui-image';
 
-const SuccessfulLogout = () => {
+
+const SuccessfulLogout = ({ children }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
         setTimeout(() => navigate('/'), 5000)
     })
+
     return (
-        <TransitionContainer>
-            <TransitionImage src={successImg} />
-            <Typography sx={{ mt: 2, fontWeight: 700 }} variant="h4" component="h1">Logout successful</Typography>
-            <Typography variant="h5" component="h2">We hope to see you again</Typography>
-        </TransitionContainer>
+        <Grid container sx={{ p: 3 }}>
+            <Card sx={{ width: '100%', height: { md: '100%' }, background: primaryColour, minWidth: '320px', borderRadius: 4 }}>
+                <CardContent sx={{ p: 2, pt: 4, height: '100%' }}>
+                    <Grid container flexDirection='column' alignItems='center'>
+                        <Image src={logoutImg} sx={{ maxWidth: '800px' }} />
+                        <Typography variant='h4' component='h1' sx={{ mt: 4, fontWeight: 500, textAlign: 'center' }}>Logout successful</Typography>
+                        <Typography variant='h6' component='h2' sx={{ mb: 2, mt: 1, fontWeight: 300, textAlign: 'center' }}>We hope to see you again</Typography>
+                    </Grid>
+                </CardContent>
+            </Card>
+        </Grid>
     )
 }
 

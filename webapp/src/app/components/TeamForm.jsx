@@ -5,12 +5,7 @@ import { createTeam } from '../../core/services/team.service';
 import { useAuth } from '../../auth/AuthContext';
 import { useTeams } from '../../core/hooks/useTeams'
 import GeneralInput from './GeneralInput'
-
-const StyledForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 3vh;
-`
+import { StyledForm } from './StyledForm';
 
 const TeamForm = (props) => {
     const [teamName, setTeamName] = useState('');

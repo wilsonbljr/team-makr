@@ -1,10 +1,11 @@
-import { Card, CardContent, CardHeader, Divider, Grid, Typography } from '@mui/material'
+import { Card, CardContent, CardHeader, Grid, Typography } from '@mui/material'
 import React from 'react'
 import { primaryColour, secondaryColour } from '../../core/utils/Variables'
 import { Code } from '@mui/icons-material';
 import { useSkills } from '../../core/hooks/useSkills';
 import { CardCategoryText, CardText } from './CardText';
 import AddSkillForm from './AddSkillForm';
+import RemoveSkillForm from './RemoveSkillForm';
 
 const SkillsProfileCard = () => {
     const { skills } = useSkills();
@@ -29,9 +30,11 @@ const SkillsProfileCard = () => {
             <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
                 <Grid container flexDirection='column'>
                     <CardText>You currently have {skills.length} skill(s) registered in your profile.</CardText>
-                    <CardCategoryText sx={{pt: 4}}>Add new skill</CardCategoryText>
-                    <CardText sx={{pb: 4}}>To edit your skills just add it again with the new level.</CardText>
+                    <CardCategoryText sx={{ pt: 4 }}>Add new skill</CardCategoryText>
+                    <CardText sx={{ pb: 4 }}>To edit your skills just add it again with the new level.</CardText>
                     <AddSkillForm />
+                    <CardCategoryText sx={{ pt: 3, pb: 2 }}>Remove skill</CardCategoryText>
+                    <RemoveSkillForm />
                 </Grid>
             </CardContent>
         </Card>

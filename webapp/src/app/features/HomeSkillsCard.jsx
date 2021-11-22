@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardContent, CardHeader, Divider, Grid, List, ListItem, ListItemText, Rating, Typography } from '@mui/material';
+import { Card, CardContent, CardHeader, Divider, List, Typography } from '@mui/material';
 import { primaryColour } from '../../core/utils/Variables';
 import { useSkills } from '../../core/hooks/useSkills';
 import SkillList from '../components/SkillList';

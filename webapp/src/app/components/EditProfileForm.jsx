@@ -1,16 +1,10 @@
 import React, { useState } from 'react'
-import styled from 'styled-components';
 import { Alert, Button } from '@mui/material';
 import { useAuth } from '../../auth/AuthContext';
 import GeneralInput from './GeneralInput'
 import { useUserInfo } from '../../core/hooks/useUserInfo';
 import { updateUser } from '../../core/services/user.service';
-
-const StyledForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 3vh;
-`
+import { StyledForm } from './StyledForm';
 
 const EditProfileForm = (props) => {
     const [pronouns, setPronouns] = useState('');

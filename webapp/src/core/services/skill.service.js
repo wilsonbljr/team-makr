@@ -20,13 +20,16 @@ export const getAllSkills = async (setData, token) => {
 
 // Add relationship between user and skill
 export const addUserToSkill = async (user, skillId, level, token) => {
-    console.log(user)
-    console.log(skillId)
-    console.log(level)
-    console.log(token)
     const status = await api.put('/person/' + user + '/skill/' + skillId, { level }, { headers: { Authorization: 'Bearer ' + token } })
         .then(res => res.status)
         .catch(err => err.message);
-    console.log(status);
+    return status;
+}
+
+// Removes relationship between user and skill
+export const removeUserToSkill = async (user, skillId, token) => {
+    const status = await api.delete('/person/' + user + '/skill/' + skillId, { headers: { Authorization: 'Bearer ' + token } })
+        .then(res => res.status)
+        .catch(err => err.message);
     return status;
 }

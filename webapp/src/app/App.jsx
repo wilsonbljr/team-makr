@@ -18,11 +18,12 @@ import TeamsUser from './pages/Team/TeamsUser'
 import Teams from './pages/Team/Teams'
 import Skills from './pages/Skills/Skills'
 
-import Unauthorized from './pages/Error/Unauthorized'
-import InternalServer from './pages/Error/InternalServer'
-import NotFound from './pages/Error/NotFound'
-
 import RequireAuth from '../auth/RequireAuth'
+
+import ErrorLayout from './pages/Error/ErrorLayout'
+import ErrorNotFoundCard from './components/ErrorNotFoundCard'
+import ErrorInternalServerCard from './components/ErrorInternalServerCard'
+import ErrorUnauthorizedCard from './components/ErrorUnauthorizedCard'
 
 function App() {
   return (
@@ -39,7 +40,7 @@ function App() {
           <Route path='/forgot-password/success' element={<SuccessfulPasswordResetCard />} />
           <Route path='/register' element={<RegisterCard />} />
           <Route path='/register/success' element={<SuccessfulRegisterCard />} />
-          
+
         </Route>
 
         <Route element={<RequireAuth />}>
@@ -53,9 +54,13 @@ function App() {
 
         <Route path='/logout-success' element={<SuccessfulLogout />} />
 
-        <Route path='/unauthorized' element={<Unauthorized />} />
-        <Route path='/internal' element={<InternalServer />} />
-        <Route path='/*' element={<NotFound />} />
+        <Route element={<ErrorLayout />}>
+
+          <Route path='/unauthorized' element={<ErrorUnauthorizedCard />} />
+          <Route path='/internal' element={<ErrorInternalServerCard />} />
+          <Route path='/*' element={<ErrorNotFoundCard />} />
+          
+        </Route>
       </Routes>
     </Router>
   );

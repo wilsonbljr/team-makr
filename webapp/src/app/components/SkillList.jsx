@@ -8,7 +8,7 @@ const SkillList = (props) => {
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <ListItem sx={{ maxWidth: '700px' }}>
-                <Grid container justifyContent='center'>
+                <Grid container justifyContent='center' alignItems='center'>
                     <Grid item xs={6}>
                         <ListItemText primary={<Typography variant='h6'>{props.name}</Typography>} sx={{ textAlign: 'center', minWidth: '150px', flexGrow: '1' }} />
                     </Grid>

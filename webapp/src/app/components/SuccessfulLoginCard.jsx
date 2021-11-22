@@ -16,7 +16,7 @@ const SuccessfulLoginCard = () => {
         <CardContent sx={{ p: 2, pt: 4, height: '100%' }}>
             <Grid container flexDirection='column' alignItems='center'>
                 <Image src={successImg} />
-                <Typography variant='h4' component='h1' sx={{ mb: 2, mt: 4, fontWeight: 500 }}>Login successful</Typography>
+                <Typography variant='h4' component='h1' sx={{ mb: 2, mt: 4, fontWeight: 500, textAlign: 'center' }}>Login successful</Typography>
                 <Typography variant='h6' component='h2'>Redirecting to your home</Typography>
             </Grid>
         </CardContent>

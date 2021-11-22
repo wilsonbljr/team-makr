@@ -10,7 +10,6 @@ const LandingLayout = ({ children }) => {
     return (
         <Grid container spacing={2} sx={{ p: 2.5 }}>
             <Grid item xs={12} md={8} lg={9} sx={{ display: { xs: 'none', md: 'inline' } }}>
-
                 <Card sx={{ width: '100%', height: '100%', maxHeight: '96vh', background: primaryColour, p: 1, minWidth: '320px', borderRadius: 4 }}>
                     <CardContent sx={{ p: 2, pt: 4 }}>
                         <Grid container flexDirection='row' alignItems='center'>

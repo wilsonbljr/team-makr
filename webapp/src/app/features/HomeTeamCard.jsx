@@ -22,7 +22,7 @@ const HomeTeamCard = (props) => {
             <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
                 <Grid container spacing={1} justifyContent='center' alignItems='center' flexWrap='wrap'>
                     {teams.length !== 0 ? teams.map((team) => (
-                        <Grid item xs={12} lg={6}>
+                        <Grid item xs={12} lg={6} key={team.id}>
                             <TeamList name={team.name} id={team.id} description={team.description} leader={team.leader} />
                         </Grid>
                     ))

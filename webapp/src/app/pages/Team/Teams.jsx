@@ -4,7 +4,7 @@ import { getTeam } from '../../../core/services/team.service';
 import { useParams } from 'react-router';
 import { useAuth } from '../../../auth/AuthContext';
 import TeamMemberCard from '../../features/TeamMemberCard';
-import ConfirmDeleteModal from '../../components/ConfirmDeleteModal';
+import ConfirmDeleteModal from '../../components/ConfirmTeamDeleteModal';
 import Container from '../../components/Container'
 import TeamProfileCard from '../../components/TeamProfileCard';
 

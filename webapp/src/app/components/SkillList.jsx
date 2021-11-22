@@ -9,10 +9,10 @@ const SkillList = (props) => {
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <ListItem sx={{ maxWidth: '700px' }}>
                 <Grid container justifyContent='center'>
-                    <Grid xs={6}>
+                    <Grid item xs={6}>
                         <ListItemText primary={<Typography variant='h6'>{props.name}</Typography>} sx={{ textAlign: 'center', minWidth: '150px', flexGrow: '1' }} />
                     </Grid>
-                    <Grid xs={6}>
+                    <Grid item xs={6}>
                         <Tooltip disableFocusListener placement='top' title={<Typography variant='body2'>{skillTooltip[props.level]}</Typography>}>
                             <Grid container flexDirection='column' sx={{ flexGrow: '1' }} alignItems='center'>
                                 <Rating

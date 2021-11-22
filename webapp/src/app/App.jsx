@@ -23,6 +23,7 @@ import NotFound from './pages/Error/NotFound'
 
 import RequireAuth from '../auth/RequireAuth'
 import Unauthorized from './pages/Error/Unauthorized'
+import Skills from './pages/Skills/Skills'
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
             <Route path='/home' element={<Home />} />
             <Route path='/team' element={<TeamsUser />} />
             <Route path='/team/:id' element={<Teams />} />
+            <Route path='/skill' element={<Skills />} />
 
           </Route>
           

@@ -21,13 +21,13 @@ const TeamList = (props) => {
                         <OpenInNew sx={{color: 'white'}} />
                     </IconButton>}>
                 <Grid container justifyContent='center'>
-                    <Grid xs={12} sm={6}>
+                    <Grid item xs={12} sm={6}>
                         <ListItemText
                             primary={<Typography variant='h6'>{props.name}</Typography>}
                             secondary={<Typography variant='body2' sx={{fontWeight: 300}}>{props.description}</Typography>}
-                            sx={{ minWidth: '150px', flexGrow: '1' }} />
+                            sx={{ minWidth: '150px', flexGrow: '1', wordWrap: 'break-word', pr: 1 }} />
                     </Grid>
-                    <Grid sm={6} sx = {{display: { xs: 'none', sm: 'block'}}}>
+                    <Grid item sm={6} sx = {{display: { xs: 'none', sm: 'block'}}}>
                             <Grid container flexDirection='column' sx={{ flexGrow: '1' }} alignItems='center'>
                                 {RoleIcon[props.leader]}
                                 <Typography sx={{ fontWeight: 500, mt: 1 }} variant='body1'>{teamRoles[props.leader]}</Typography>

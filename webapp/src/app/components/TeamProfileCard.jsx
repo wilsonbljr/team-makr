@@ -1,13 +1,7 @@
-import { Avatar, Button, Card, CardContent, CardHeader, Grid, Typography } from '@mui/material'
-import { Link } from 'react-router-dom';
 import React from 'react'
+import { Avatar, Button, Card, CardContent, CardHeader, Grid, Typography } from '@mui/material'
 import { primaryColour, secondaryColour } from '../../core/utils/Variables'
-import { Code, Edit, People } from '@mui/icons-material';
 import { styled } from '@mui/styles';
-import { useUserInfo } from '../../core/hooks/useUserInfo'
-import { useSkills } from '../../core/hooks/useSkills';
-import { useTeams } from '../../core/hooks/useTeams';
-import transformNumber from '../../core/utils/TransformNumber';
 
 const Text = styled(Typography)({
     fontWeight: '300',

@@ -1,29 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Grid } from '@mui/material';
-import { getTeam } from '../../../core/services/team.service';
-import { useParams } from 'react-router';
-import { useAuth } from '../../../auth/AuthContext';
-import TeamMemberCard from '../../features/TeamMemberCard';
-import ConfirmDeleteModal from '../../components/ConfirmDeleteModal';
 import Container from '../../components/Container'
-import TeamProfileCard from '../../components/TeamProfileCard';
+import SkillsProfileCard from '../../components/SkillsProfileCard';
+import HomeSkillsCard from '../../features/HomeSkillsCard';
 
 const Skills = () => {
-    const { token } = useAuth();
-    const [modal, setModal] = useState(false);
-
     return (
         <>
             <Container>
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={4} lg={3}>
-                        <TeamProfileCard name={team.name} description={team.description} users={team.users} setModal={setModal} />
+                        <SkillsProfileCard />
                     </Grid>
                     <Grid item xs={12} md={8} lg={9}>
-                        <TeamMemberCard team={team} />
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} md={6}>
+                                <HomeSkillsCard softSkill={0} />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <HomeSkillsCard softSkill={1} />
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
-                <ConfirmDeleteModal modal={modal} setModal={setModal} team={team} />
             </Container>
         </>
     )

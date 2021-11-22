@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
 import { Button } from '@mui/material';
-import { createTeam, getUserTeams } from '../../core/services/team.service';
+import { createTeam } from '../../core/services/team.service';
 import { useAuth } from '../../auth/AuthContext';
+import { useTeams } from '../../core/hooks/useTeams'
 import GeneralInput from './GeneralInput'
 
 const StyledForm = styled.form`
@@ -15,6 +16,7 @@ const TeamForm = (props) => {
     const [teamName, setTeamName] = useState('');
     const [teamDesc, setTeamDesc] = useState('');
     const { user, token } = useAuth();
+    const { setCurrentUserTeams } = useTeams();
 
     const teamForm = event => {
         event.preventDefault();
@@ -23,7 +25,7 @@ const TeamForm = (props) => {
             if (status === 201) {
                 props.closeModal();
                 props.openSnack();
-                getUserTeams(user, props.setTeams, token);
+                setCurrentUserTeams(user, token);
             }
         })
     }

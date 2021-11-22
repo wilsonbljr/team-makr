@@ -31,7 +31,7 @@ const TeamModal = (props) => {
                     <IconButton aria-label="Close Modal" sx={{ position: 'absolute', top: '6px', right: '6px' }} onClick={() => closeModal()}>
                         <Close sx={{color: 'white'}} />
                     </IconButton>
-                    <TeamForm closeModal={closeModal} openSnack={openSnack} setTeams={props.setTeams} />
+                    <TeamForm closeModal={closeModal} openSnack={openSnack} />
                 </ModalContent>
             </Modal>
             <Snackbar open={snack} autoHideDuration={5000} onClose={closeSnack} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>

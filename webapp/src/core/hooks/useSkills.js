@@ -1,15 +1,19 @@
 import { createContext, useContext, useState } from 'react';
-import { getUserSkills } from '../services/skill.service';
+import { getAllSkills, getUserSkills } from '../services/skill.service';
 
 
 const SkillsContext = createContext({
     skills: null,
+    allSkills: null,
     setCurrentUserSkills: () => { },
-    unsetCurrentUserSkills: () => { }
+    unsetCurrentUserSkills: () => { },
+    setCurrentAllSkills: () => { },
+    unsetCurrentAllSkills: () => { }
 })
 
 export const SkillsContextProvider = ({ children }) => {
     const [skills, setSkills] = useState();
+    const [allSkills, setAllSkills] = useState();
 
     const setCurrentUserSkills = async (user, token) => {
         await getUserSkills(user, setSkills, token)
@@ -20,10 +24,22 @@ export const SkillsContextProvider = ({ children }) => {
         setSkills(null);
     }
 
+    const setCurrentAllSkills = async (token) => {
+        await getAllSkills(setAllSkills, token)
+            .catch(err => err.message);
+    }
+
+    const unsetCurrentAllSkills = () => {
+        setAllSkills(null);
+    }
+
     const contextValue = {
         skills,
+        allSkills,
         setCurrentUserSkills,
-        unsetCurrentUserSkills
+        unsetCurrentUserSkills,
+        setCurrentAllSkills,
+        unsetCurrentAllSkills
     }
 
     return (

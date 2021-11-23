@@ -16,22 +16,20 @@ const Teams = () => {
 
     useEffect(() => {
         getTeam(id, setTeam, token);
-    }, [])
+    }, [id, token])
 
     return (
-        <>
-            <Container>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} md={4} lg={3}>
-                        <TeamProfileCard name={team.name} description={team.description} users={team.users} setModal={setModal} />
-                    </Grid>
-                    <Grid item xs={12} md={8} lg={9}>
-                        <TeamMemberCard team={team} />
-                    </Grid>
+        <Container>
+            <Grid container spacing={2}>
+                <Grid item xs={12} md={4} lg={3}>
+                    <TeamProfileCard name={team.name} description={team.description} users={team.users} setModal={setModal} />
                 </Grid>
-                <ConfirmDeleteModal modal={modal} setModal={setModal} team={team} />
-            </Container>
-        </>
+                <Grid item xs={12} md={8} lg={9}>
+                    <TeamMemberCard team={team} />
+                </Grid>
+            </Grid>
+            <ConfirmDeleteModal modal={modal} setModal={setModal} team={team} />
+        </Container>
     )
 }
 

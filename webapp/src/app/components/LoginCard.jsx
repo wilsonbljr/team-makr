@@ -1,9 +1,7 @@
 import { Alert, Button, CardContent, Grid, Snackbar, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import styled from 'styled-components';
 import { useAuth } from '../../auth/AuthContext'
-import { StyledForm } from './StyledForm'
 import GeneralInput from './GeneralInput'
 import { ButtonContainer, CustomStyledForm, ForgotPassword, PasswordContainer } from './LandingStyledComponents';
 

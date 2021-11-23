@@ -41,7 +41,7 @@ const AutoCompleteSkill = (props) => {
         })();
 
         return () => active = false;
-    }, [loading])
+    }, [loading, token])
 
     useEffect(() => {
         if (!open) {

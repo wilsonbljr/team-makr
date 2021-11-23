@@ -1,7 +1,6 @@
-import { Button, Card, CardContent, Grid, Typography } from '@mui/material'
+import { Button, CardContent, Grid, Typography } from '@mui/material'
 import { Image } from 'mui-image'
-import React from 'react'
-import { primaryColour } from '../../core/utils/Variables'
+import React from 'react';
 import mobile from '../../assets/mobile.svg'
 import { Link } from 'react-router-dom'
 

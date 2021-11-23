@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useAuth } from '../../auth/AuthContext';
 import { useSkills } from '../../core/hooks/useSkills';
 import { removeUserToSkill } from '../../core/services/skill.service';
-import { Alert, Button, MenuItem, Select, Snackbar } from '@mui/material';
+import { Alert, Button, MenuItem, Snackbar } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { StyledForm } from './StyledForm';
 import { makeStyles } from '@mui/styles';

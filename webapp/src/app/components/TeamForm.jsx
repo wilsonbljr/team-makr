@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
-import styled from 'styled-components';
+import React, { useState } from 'react';
 import { Button } from '@mui/material';
 import { createTeam } from '../../core/services/team.service';
 import { useAuth } from '../../auth/AuthContext';
-import { useTeams } from '../../core/hooks/useTeams'
-import GeneralInput from './GeneralInput'
+import { useTeams } from '../../core/hooks/useTeams';
+import GeneralInput from './GeneralInput';
 import { StyledForm } from './StyledForm';
 
 const TeamForm = (props) => {

@@ -48,7 +48,7 @@ const ConfirmDeleteModal = (props) => {
                 }, 3000);
             });
     }
-    console.log(props)
+    
     return (
         <>
             <Modal open={props.modal} onClose={closeModal}>

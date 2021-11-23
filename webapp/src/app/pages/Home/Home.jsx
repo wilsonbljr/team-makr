@@ -1,26 +1,13 @@
 import React, { useState } from 'react';
 import { useTeams } from '../../../core/hooks/useTeams';
 import { useSkills } from '../../../core/hooks/useSkills';
-import styled from 'styled-components';
 
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import Container from '../../components/Container'
 import HomeProfileCard from '../../components/HomeProfileCard';
 import HomeTeamCard from '../../features/HomeTeamCard';
 import HomeSkillsCard from '../../features/HomeSkillsCard';
 import EditProfileModal from '../../features/EditProfileModal';
-
-const Welcome = styled(Typography)`
-    text-align: center;
-    font-weight: 900;
-    font-size: 1.4em;
-`
-
-const Title = styled(Welcome)`
-    text-align: left;
-    margin-bottom: 1vh;
-    margin-top: 3vh;
-`
 
 const Home = () => {
     const { teams } = useTeams();

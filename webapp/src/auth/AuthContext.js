@@ -16,7 +16,7 @@ export const AuthContextProvider = ({ children }) => {
     const [token, setToken] = useState();
     const { setCurrentUserInfo, unsetCurrentUserInfo } = useUserInfo();
     const { setCurrentUserTeams } = useTeams();
-    const { setCurrentUserSkills } = useSkills();
+    const { setCurrentUserSkills, setCurrentAllSkills } = useSkills();
 
     const setCurrentUser = async (email, password) => {
         const status = await login(email, password)
@@ -29,6 +29,7 @@ export const AuthContextProvider = ({ children }) => {
                 await setCurrentUserInfo(userId, token);
                 await setCurrentUserTeams(userId, token);
                 await setCurrentUserSkills(userId, token);
+                await setCurrentAllSkills(token);
             }).catch(err => err.message);
         return status;
     }

@@ -19,15 +19,16 @@ const HomeSkillsCard = (props) => {
                 </>
             )
         } else {
-            return skills.map((skill) => {
+            return skills.map((skill, index) => {
                 if (skill.softSkill !== props.softSkill && skill.id !== null) {
                     return (
                         <>
                             <Divider />
-                            <SkillList id={skill.id} level={skill.level} name={skill.name} />
+                            <SkillList key={index} id={skill.id} level={skill.level} name={skill.name} />
                         </>
                     )
                 }
+                return (<> </>);
             })
         }
     }

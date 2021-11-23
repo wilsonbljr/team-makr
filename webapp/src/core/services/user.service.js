@@ -1,5 +1,19 @@
 import api from './api.service';
 
+// Get users based on name and skill, used for search
+export const searchUsers = async (firstName, lastName, skillId, token) => {
+    // Makes the object with only the received info
+    const params = {
+        ...(firstName && { firstName }),
+        ...(lastName && { lastName }),
+        ...(skillId && { skillId })
+    };
+    const res = await api.get('/person', { headers: { Authorization: 'Bearer ' + token }, params})
+        .then(res => res)
+        .catch(err => err.message);
+    return res.data;
+}
+
 // Get user info
 export const getUser = async (id, token) => {
     const status = await api.get('/person/' + id, { headers: { Authorization: 'Bearer ' + token } })

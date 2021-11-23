@@ -11,7 +11,7 @@ const TeamsUser = () => {
 
     return (
         <Container>
-            <Box sx={{maxWidth: '1540px'}}>
+            <Box sx={{maxWidth: '1540px', minWidth: { lg: '1000px'}}}>
                 <HomeTeamCard openModal={openModal} />
                 <TeamModal modal={modal} setModal={setModal} />
             </Box>

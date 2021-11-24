@@ -50,7 +50,7 @@ const Header = () => {
                         {user ? <Button
                             startIcon={<Search />}
                             variant='outlined'
-                            sx={{ width: { xs: '126px', sm: '200px', lg: '300px' }, mr: 2, p: { xs: 0, sm: 1, lg: 2 } }}
+                            sx={{ width: { xs: '126px', sm: '200px', lg: '250px' }, mr: 2, p: { xs: 0, sm: 1, lg: 1 } }}
                             component={Link}
                             to='/search'
                         >Search</Button> : <> </>}

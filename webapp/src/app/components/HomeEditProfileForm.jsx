@@ -20,7 +20,7 @@ const HomeEditProfileForm = (props) => {
     const editForm = event => {
         event.preventDefault();
         updateUser(user, pronouns, phone, password, token).then(async res => {
-            if (res.status === 201) {
+            if (res.status === 200) {
                 await setCurrentUserInfo(user, token);
                 props.closeModal();
                 props.openSnack();

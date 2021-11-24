@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import { Search } from '@mui/icons-material';
 
 import StyledForm from './StyledForm';
@@ -15,7 +15,7 @@ const CustomStyledForm = styled(StyledForm)`
 const AdminFilterDateForm = (props) => {
 
     return (
-        <CustomStyledForm onSubmit={event => { props.filter(event) }}>
+        <CustomStyledForm onSubmit={event => { props.getLogsForm(event) }}>
             <StyledInput
                 id='initialDate'
                 label='Initial Date'
@@ -23,6 +23,7 @@ const AdminFilterDateForm = (props) => {
                 variant='outlined'
                 type="text"
                 onChange={(event) => { props.setInitialDate(event.target.value) }}
+                helperText='YYYY-MM-DD'
                 required
             />
             <StyledInput
@@ -32,9 +33,13 @@ const AdminFilterDateForm = (props) => {
                 variant='outlined'
                 type="text"
                 onChange={(event) => { props.setFinalDate(event.target.value) }}
+                helperText='YYYY-MM-DD'
                 required
             />
-            <Button type="submit" variant="outlined" endIcon={<Search />} >Filter</Button>
+            <Grid container flexDirection='column' sx={{maxWidth: '170px', textAlign: 'center'}}>
+                <Button type="submit" variant="outlined" endIcon={<Search />} sx={{ height: '55px', mb: 0.4 }}>Filter</Button>
+                <Typography variant='caption'>Press filter to search</Typography>
+            </Grid>
         </CustomStyledForm>
     )
 }

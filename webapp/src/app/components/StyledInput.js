@@ -20,6 +20,9 @@ const StyledInput = styled(TextField)({
             borderColor: '#a0a1a3',
             color: '#a0a1a3'
         }
+    },
+    "& .MuiFormHelperText-root": {
+        color: '#FFF',
     }
 });
 

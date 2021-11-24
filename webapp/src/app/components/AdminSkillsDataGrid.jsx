@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useSkills } from '../../core/hooks/useSkills';
 

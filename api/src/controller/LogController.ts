@@ -17,36 +17,36 @@ export class LogController {
             try {
                 const repository = getRepository(Log);
                 const logs = await repository.find({
-                    where: { created: Between(after, before) }
+                    where: { timestamp: Between(after, before) }
                 });
                 logger.log('info', 'User: ' + req.user.id + ', Method: getLogs, before & after: undefined');
                 return res.status(200).json(logs);
             } catch (error) {
-                logger.log('error', 'Method: getLogs, before & after: undefined, error: ' + error);
+                logger.log('error', 'Method: getLogs, before & after: defined, error: ' + error);
                 return res.status(500).json(error.message);
             };
         } else if (before != undefined) {
             try {
                 const repository = getRepository(Log);
                 const logs = await repository.find({
-                    where : { created: LessThan(before) }
+                    where : { timestamp: LessThan(before) }
                 });
                 logger.log('info', 'User: ' + req.user.id + ', Method: getLogs, after: undefined');
                 return res.status(200).json(logs);
             } catch (error) {
-                logger.log('error', 'Method: getLogs, after: undefined, error: ' + error);
+                logger.log('error', 'Method: getLogs, after: defined, error: ' + error);
                 return res.status(500).json(error.message);
             };
         } else if (after != undefined) {
             try {
                 const repository = getRepository(Log);
                 const logs = await repository.find({
-                    where : { created: MoreThan(after) }
+                    where : { timestamp: MoreThan(after) }
                 });
                 logger.log('info', 'User: ' + req.user.id + ', Method: getLogs, before: undefined');
                 return res.status(200).json(logs);
             } catch (error) {
-                logger.log('error', 'Method: getLogs, before: undefined, error: ' + error);
+                logger.log('error', 'Method: getLogs, before: defined, error: ' + error);
                 return res.status(500).json(error.message);
             };
         } else {

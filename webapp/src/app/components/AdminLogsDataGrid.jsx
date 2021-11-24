@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../auth/AuthContext';
-import { getLogs } from '../../core/services/logs.service';
+import React from 'react';
 
 import { DataGrid } from '@mui/x-data-grid';
+import { Stack } from '@mui/material';
 
 const columns = [
     {
         field: 'id',
         headerName: 'ID',
-        width: 50
+        width: 60
     },
     {
         field: 'level',
@@ -28,23 +27,22 @@ const columns = [
 ]
 
 
-const AdminLogsDataGrid = () => {
-    const { token } = useAuth();
-    const [logs, setLogs] = useState([]);
-
-    useEffect(() => {
-        getLogs(setLogs, token);
-    }, [token])
-
+const AdminLogsDataGrid = (props) => {
     return (
         <DataGrid
             autoHeight={true}
-            rows={logs}
+            rows={props.logs}
             columns={columns}
             pageSize={10}
             rowsPerPageOptions={[10]}
             disableColumnFilter
             disableColumnMenu
+            components={{
+                NoRowsOverlay: () => (
+                    <Stack height="100%" sx={{pt: 10}} alignItems="center" justifyContent="center">
+                        No rows in DataGrid
+                    </Stack>
+                ) }}
         />
     )
 }

@@ -65,7 +65,10 @@ export class PersonController {
         const { id } = req.params;
         try {
             const repository = getRepository(Person);
-            const person = await repository.findByIds(id);
+            const person = await repository.findByIds(id, {
+                select:
+                    ['id', 'firstName', 'lastName', 'pronoun', 'admin', 'email', 'phone_number']
+            });
             logger.log('info', 'User: ' + req.user.id + ', Method: getPerson');
             return res.status(200).json(person);
         } catch (error) {

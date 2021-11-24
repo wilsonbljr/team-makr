@@ -7,6 +7,7 @@ const UserInfoContext = createContext({
     phone_number: null,
     pronoun: null,
     email: null,
+    admin: null,
     setCurrentUserInfo: () => { },
     unsetCurrentUserInfo: () => { }
 })
@@ -17,6 +18,7 @@ export const UserInfoContextProvider = ({ children }) => {
     const [pronoun, setPronoun] = useState();
     const [email, setEmail] = useState();
     const [phone_number, setPhoneNumber] = useState();
+    const [admin, setAdmin] = useState();
 
     const setCurrentUserInfo = async (user, token) => {
         await getUser(user, token)
@@ -26,6 +28,7 @@ export const UserInfoContextProvider = ({ children }) => {
                 setPronoun(res.pronoun);
                 setEmail(res.email);
                 setPhoneNumber(res.phone_number);
+                setAdmin(res.admin);
             })
             .catch(err => err.message);
     }
@@ -36,6 +39,7 @@ export const UserInfoContextProvider = ({ children }) => {
         setPronoun(null);
         setEmail(null);
         setPhoneNumber(null);
+        setAdmin(null);
     }
 
     const contextValue = {
@@ -44,6 +48,7 @@ export const UserInfoContextProvider = ({ children }) => {
         pronoun,
         email,
         phone_number,
+        admin,
         setCurrentUserInfo,
         unsetCurrentUserInfo
     }

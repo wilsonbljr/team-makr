@@ -45,7 +45,7 @@ const theme = createTheme({
         },
         MuiAppBar: {
             color: 'secondary',
-        },
+        }
     },
     components: {
         MuiCardContent: {
@@ -60,7 +60,7 @@ const theme = createTheme({
         MuiTooltip: {
             styleOverrides: {
                 tooltip: {
-                    color: "white"
+                    htmlColor: "white"
                 }
             }
         }

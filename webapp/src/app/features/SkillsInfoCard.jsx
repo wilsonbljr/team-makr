@@ -3,11 +3,11 @@ import React from 'react'
 import { primaryColour, secondaryColour } from '../../core/utils/Variables'
 import { Code } from '@mui/icons-material';
 import { useSkills } from '../../core/hooks/useSkills';
-import { CardCategoryText, CardText } from './CardText';
-import AddSkillForm from './AddSkillForm';
-import RemoveSkillForm from './RemoveSkillForm';
+import { CardCategoryText, CardText } from '../components/StyledCardText';
+import SkillsAddForm from '../components/SkillsAddForm';
+import SkillsRemoveForm from '../components/SkillsRemoveForm';
 
-const SkillsProfileCard = () => {
+const SkillsInfoCard = () => {
     const { skills } = useSkills();
 
     return (
@@ -32,13 +32,13 @@ const SkillsProfileCard = () => {
                     <CardText>You currently have {skills.length} skill(s) registered in your profile.</CardText>
                     <CardCategoryText sx={{ pt: 4 }}>Add new skill</CardCategoryText>
                     <CardText sx={{ pb: 4 }}>To edit your skills just add it again with the new level.</CardText>
-                    <AddSkillForm />
+                    <SkillsAddForm />
                     <CardCategoryText sx={{ pt: 3, pb: 2 }}>Remove skill</CardCategoryText>
-                    <RemoveSkillForm />
+                    <SkillsRemoveForm />
                 </Grid>
             </CardContent>
         </Card>
     )
 }
 
-export default SkillsProfileCard;
+export default SkillsInfoCard;

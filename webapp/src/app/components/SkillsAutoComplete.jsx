@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '../../auth/AuthContext';
 import { getAllSkills } from '../../core/services/skill.service'
-import GeneralInput from './GeneralInput';
 import { makeStyles } from '@mui/styles';
 import { Autocomplete, CircularProgress, Paper } from '@mui/material';
-import { darkerPrimaryColour } from '../../core/utils/Variables';
+
+import StyledInput from './StyledInput';
+
+import { darkerPrimaryColour, iconColor } from '../../core/utils/Variables';
 
 const useStyles = makeStyles(theme => ({
     clearIndicator: {
-        color: "white",
+        color: iconColor,
     },
     popupIndicator: {
-        color: "white"
+        color: iconColor
     }
 }));
-
 
 const CustomPaper = (props) => {
     return <Paper elevation={8} sx={{ background: darkerPrimaryColour }} {...props} />;
 };
 
-const AutoCompleteSkill = (props) => {
+const SkillsAutoComplete = (props) => {
     const { token } = useAuth();
     const [open, setOpen] = useState(false);
     const [skillsOptions, setSkillsOptions] = useState([]);
@@ -73,14 +74,14 @@ const AutoCompleteSkill = (props) => {
             popupIndicator: classes.popupIndicator
         }}
         renderInput={(params) => (
-            <GeneralInput
+            <StyledInput
                 {...params}
                 label='Search Skills'
                 InputProps={{
                     ...params.InputProps,
                     endAdornment: (
                         <React.Fragment>
-                            {loading ? <CircularProgress sx={{ color: 'white' }} size={20} /> : null}
+                            {loading ? <CircularProgress sx={{ color: iconColor }} size={20} /> : null}
                             {params.InputProps.endAdornment}
                         </React.Fragment>
                     )
@@ -91,4 +92,4 @@ const AutoCompleteSkill = (props) => {
     )
 }
 
-export default AutoCompleteSkill;
+export default SkillsAutoComplete;

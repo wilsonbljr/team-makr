@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { CssBaseline } from '@mui/material'
+
 import Header from './features/Header'
 
 import LandingLayout from './pages/Landing/LandingLayout'
@@ -12,20 +13,19 @@ import SuccessfulPasswordResetCard from './components/SuccessfulPasswordResetCar
 import SuccessfulRegisterCard from './components/SuccessfulRegisterCard'
 
 import SuccessfulLogout from './pages/Success/SuccessfulLogout'
+import RequireAuth from '../auth/RequireAuth'
 
 import Home from './pages/Home/Home'
-import TeamsUser from './pages/Team/TeamsUser'
+import TeamProfile from './pages/Team/TeamProfile'
 import Teams from './pages/Team/Teams'
 import Skills from './pages/Skills/Skills'
-
-import RequireAuth from '../auth/RequireAuth'
+import Search from './pages/Search/Search'
+import User from './pages/User/User'
 
 import ErrorLayout from './pages/Error/ErrorLayout'
 import ErrorNotFoundCard from './components/ErrorNotFoundCard'
 import ErrorInternalServerCard from './components/ErrorInternalServerCard'
 import ErrorUnauthorizedCard from './components/ErrorUnauthorizedCard'
-import Search from './pages/Search/Search'
-import Users from './pages/User/Users'
 
 function App() {
   return (
@@ -48,11 +48,11 @@ function App() {
         <Route element={<RequireAuth />}>
 
           <Route path='/home' element={<Home />} />
-          <Route path='/team' element={<TeamsUser />} />
-          <Route path='/team/:id' element={<Teams />} />
+          <Route path='/team' element={<Teams />} />
           <Route path='/skill' element={<Skills />} />
           <Route path='/search' element={<Search />} />
-          <Route path='/u/:id' element={<Users />} />
+          <Route path='/u/:id' element={<User />} />
+          <Route path='/team/:id' element={<TeamProfile />} />
 
         </Route>
 

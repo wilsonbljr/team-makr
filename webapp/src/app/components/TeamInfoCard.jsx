@@ -1,12 +1,12 @@
 import React from 'react'
-import { Avatar, Button, Card, CardContent, CardHeader, Divider, Grid, Typography } from '@mui/material'
-import { primaryColour, secondaryColour } from '../../core/utils/Variables'
 import { styled } from '@mui/styles';
+import { Avatar, Button, Card, CardContent, CardHeader, Divider, Grid, Typography } from '@mui/material'
+
+import { primaryColour, secondaryColour } from '../../core/utils/Variables'
 
 const Text = styled(Typography)({
     fontWeight: '300',
     textAlign: 'left',
-    color: 'white',
     letterSpacing: '0.3px',
     wordWrap: 'break-word',
     marginTop: 5,
@@ -16,13 +16,12 @@ const Text = styled(Typography)({
 const CategoryText = styled(Typography)({
     fontWeight: '500',
     fontSize: '1.5em',
-    color: 'white',
     textAlign: 'left',
     marginTop: 10,
     marginBottom: 5
 });
 
-const TeamProfileCard = (props) => {
+const TeamInfoCard = (props) => {
     const openModal = () => props.setModal(true);
 
     return (
@@ -62,4 +61,4 @@ const TeamProfileCard = (props) => {
     )
 }
 
-export default TeamProfileCard;
+export default TeamInfoCard;

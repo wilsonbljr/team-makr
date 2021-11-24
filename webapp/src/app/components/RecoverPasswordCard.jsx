@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Alert, Button, CardContent, Grid, Snackbar, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components'
 import { forgotPasswordEmail, resetPassword } from '../../core/services/password.service';
-import GeneralInput from './GeneralInput';
-import { StyledForm } from './StyledForm';
+import styled from 'styled-components'
+import { Alert, Button, CardContent, Grid, Snackbar, Typography } from '@mui/material';
+
+import StyledForm from './StyledForm';
+import StyledInput from './StyledInput';
 
 const CustomStyledForm = styled(StyledForm)`
     width: 100%;
@@ -17,9 +18,6 @@ const ButtonContainer = styled.div`
     flex-direction: column;
     gap: 2vh;
 `
-
-
-
 
 const RecoverPasswordCard = () => {
     const [email, setEmail] = useState('');
@@ -45,7 +43,7 @@ const RecoverPasswordCard = () => {
             setSnackError(true)
         });
     }
-    
+
     function resetPasswordForm(event) {
         event.preventDefault();
         resetPassword(email, password, passwordToken).then(() => {
@@ -53,24 +51,24 @@ const RecoverPasswordCard = () => {
         }).catch((error) => {
             setSnackError(true)
         });
-    }    
+    }
 
     return (
         <CardContent sx={{ p: 2, pt: 4, height: '100%' }}>
             <Grid container flexDirection='column' alignItems='center' sx={{ height: '100%' }} justifyContent='center'>
                 <Typography variant='h4' component='h1' sx={{ mb: 4, fontWeight: 500 }}>Recover password</Typography>
                 <CustomStyledForm onSubmit={event => { sendRecoveryEmail(event) }}>
-                    <GeneralInput onChange={(event) => {
+                    <StyledInput onChange={(event) => {
                         setEmail(event.target.value);
                     }} id='email' label='E-mail' variant='outlined' type="email" required />
-                    <Button type="submit" variant="contained" sx={{mb: 5}} >Send Token</Button>
+                    <Button type="submit" variant="contained" sx={{ mb: 5 }} >Send Token</Button>
                 </CustomStyledForm>
 
                 <CustomStyledForm onSubmit={event => { resetPasswordForm(event, email, setSnackSent) }}>
-                    <GeneralInput onChange={(event) => {
+                    <StyledInput onChange={(event) => {
                         setPasswordToken(event.target.value);
                     }} id='token' label='Token' variant='outlined' type="text" required />
-                    <GeneralInput onChange={(event) => {
+                    <StyledInput onChange={(event) => {
                         setPassword(event.target.value);
                     }} id='password' label='New Password' variant='outlined' type="password" required />
                     <ButtonContainer>

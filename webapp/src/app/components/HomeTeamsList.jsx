@@ -1,16 +1,18 @@
 import React from 'react'
-import { Grid, IconButton, ListItem, ListItemText, Typography } from '@mui/material';
-import { Groups, OpenInNew, Person } from '@mui/icons-material';
 import { useNavigate } from 'react-router';
 import { Box } from '@mui/system';
+import { Grid, IconButton, ListItem, ListItemText, Typography } from '@mui/material';
+import { Groups, OpenInNew, Person } from '@mui/icons-material';
+
 import { teamRoles } from '../../core/utils/Lists'
+import { iconColor } from '../../core/utils/Variables';
 
 const RoleIcon = {
     0: <Groups />,
     1: <Person />
 }
 
-const TeamList = (props) => {
+const HomeTeamsList = (props) => {
     const navigate = useNavigate();
 
     return (
@@ -18,7 +20,7 @@ const TeamList = (props) => {
             <ListItem
                 secondaryAction={
                     <IconButton onClick={() => navigate('/team/' + props.id)}>
-                        <OpenInNew sx={{ color: 'white' }} />
+                        <OpenInNew sx={{ color: iconColor }} />
                     </IconButton>}>
                 <Grid container justifyContent='center'>
                     <Grid item xs={12} sm={6}>
@@ -39,4 +41,4 @@ const TeamList = (props) => {
     )
 };
 
-export default TeamList;
+export default HomeTeamsList;

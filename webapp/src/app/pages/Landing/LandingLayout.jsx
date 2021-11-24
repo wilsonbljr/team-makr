@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router';
 import { Card, CardContent, Grid, Typography } from '@mui/material';
-import Image from 'mui-image'
+import Image from 'mui-image';
 
 import desktop from '../../../assets/desktop.svg'
 import { primaryColour } from '../../../core/utils/Variables';

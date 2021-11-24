@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import { useTeams } from '../../../core/hooks/useTeams';
 import { useSkills } from '../../../core/hooks/useSkills';
-
 import { Grid } from '@mui/material';
-import Container from '../../components/Container'
+
+import StyledContainer from '../../components/StyledContainer';
 import HomeProfileCard from '../../components/HomeProfileCard';
-import HomeTeamCard from '../../features/HomeTeamCard';
+import HomeTeamsCard from '../../features/HomeTeamsCard';
 import HomeSkillsCard from '../../features/HomeSkillsCard';
-import EditProfileModal from '../../features/EditProfileModal';
+import HomeEditProfileModal from '../../features/HomeEditProfileModal';
 
 const Home = () => {
     const { teams } = useTeams();
     const { skills } = useSkills();
     const [modal, setModal] = useState(false);
 
+
     return (
-        <Container>
+        <StyledContainer>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={4} lg={3}>
                     <HomeProfileCard
@@ -27,7 +28,7 @@ const Home = () => {
                 <Grid item xs={12} md={8} lg={9}>
                     <Grid container flexDirection='column' spacing={2}>
                         <Grid item xs={12}>
-                            <HomeTeamCard />
+                            <HomeTeamsCard />
                         </Grid>
                         <Grid item xs={12}>
                             <Grid container spacing={2}>
@@ -42,8 +43,8 @@ const Home = () => {
                     </Grid>
                 </Grid>
             </Grid>
-            <EditProfileModal modal={modal} setModal={setModal}/>
-        </Container>
+            <HomeEditProfileModal modal={modal} setModal={setModal}/>
+        </StyledContainer>
     )
 }
 

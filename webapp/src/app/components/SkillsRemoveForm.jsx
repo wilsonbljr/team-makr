@@ -2,24 +2,24 @@ import React, { useState } from 'react'
 import { useAuth } from '../../auth/AuthContext';
 import { useSkills } from '../../core/hooks/useSkills';
 import { removeUserToSkill } from '../../core/services/skill.service';
+import { makeStyles } from '@mui/styles';
 import { Alert, Button, MenuItem, Snackbar } from '@mui/material';
 import { Delete } from '@mui/icons-material';
-import { StyledForm } from './StyledForm';
-import { makeStyles } from '@mui/styles';
-import { darkerPrimaryColour } from '../../core/utils/Variables';
-import GeneralInput from './GeneralInput';
+
+import StyledForm from './StyledForm';
+import StyledInput from './StyledInput';
+import { darkerPrimaryColour, iconColor } from '../../core/utils/Variables';
 
 const useStyles = makeStyles(theme => ({
     icon: {
-        fill: 'white',
+        fill: iconColor,
     },
     dropdownStyle: {
         backgroundColor: darkerPrimaryColour,
     }
 }));
 
-
-const RemoveSkillForm = () => {
+const SkillsRemoveForm = () => {
     const { user, token } = useAuth();
     const { skills, setCurrentUserSkills } = useSkills();
     const [skillRemove, setSkillRemove] = useState('');
@@ -49,7 +49,7 @@ const RemoveSkillForm = () => {
 
     return (
         <StyledForm onSubmit={event => { removeSkillFromPerson(event) }}>
-            <GeneralInput
+            <StyledInput
                 labelid='skillSelectLabel'
                 id='skillSelect'
                 value={skillRemove}
@@ -72,7 +72,7 @@ const RemoveSkillForm = () => {
                 {skills.map(skill => (
                     <MenuItem key={skill.id} value={skill.id}>{skill.name}</MenuItem>
                 ))}
-            </GeneralInput>
+            </StyledInput>
             {alert ? <Alert severity="error">Server error, try again</Alert> : <> </>}
             <Button type='submit' variant='contained' color='error' startIcon={<Delete />}>Remove Skill</Button>
             <Snackbar open={snack} autoHideDuration={5000} onClose={closeSnack} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
@@ -84,4 +84,4 @@ const RemoveSkillForm = () => {
     )
 }
 
-export default RemoveSkillForm;
+export default SkillsRemoveForm;

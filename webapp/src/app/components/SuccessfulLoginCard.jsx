@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CardContent, Grid, Typography } from '@mui/material';
-import successImg from '../../assets/loginsuccess.svg'
 import { Image } from 'mui-image';
 
+import successImg from '../../assets/loginsuccess.svg';
 
 const SuccessfulLoginCard = () => {
     const navigate = useNavigate();

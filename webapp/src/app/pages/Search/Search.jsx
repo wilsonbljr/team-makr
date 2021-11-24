@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Grid } from '@mui/material';
-import Container from '../../components/Container'
-import SearchInputCard from '../../features/SearchInputCard';
-import { searchUsers } from '../../../core/services/user.service';
 import { useAuth } from '../../../auth/AuthContext';
+import { searchUsers } from '../../../core/services/user.service';
+import { Grid } from '@mui/material';
+
+import StyledContainer from '../../components/StyledContainer';
+import SearchInputCard from '../../features/SearchInputCard';
 import SearchResultsCard from '../../features/SearchResultsCard';
 
 const Search = () => {
@@ -28,7 +29,7 @@ const Search = () => {
     }
 
     return (
-        <Container>
+        <StyledContainer>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={4} lg={3}>
                     <SearchInputCard
@@ -47,7 +48,7 @@ const Search = () => {
                     </Grid>
                 </Grid>
             </Grid>
-        </Container>
+        </StyledContainer>
     )
 }
 

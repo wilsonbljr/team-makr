@@ -1,6 +1,6 @@
-import { Card, Grid } from '@mui/material';
 import React from 'react';
 import { Outlet } from 'react-router';
+import { Card, Grid } from '@mui/material';
 import { primaryColour } from '../../../core/utils/Variables';
 
 

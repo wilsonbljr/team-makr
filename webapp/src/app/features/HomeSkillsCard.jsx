@@ -1,8 +1,10 @@
 import React from 'react'
-import { Card, CardContent, CardHeader, Divider, List, Typography } from '@mui/material';
-import { primaryColour } from '../../core/utils/Variables';
 import { useSkills } from '../../core/hooks/useSkills';
-import SkillList from '../components/SkillList';
+import { Card, CardContent, CardHeader, Divider, List, Typography } from '@mui/material';
+
+import HomeSkillsList from '../components/HomeSkillsList';
+
+import { primaryColour } from '../../core/utils/Variables';
 
 const HomeSkillsCard = (props) => {
     const { skills } = useSkills();
@@ -24,7 +26,7 @@ const HomeSkillsCard = (props) => {
                     return (
                         <React.Fragment key={skill.id + 3000}>
                             <Divider key={skill.id + 1000} />
-                            <SkillList key={skill.id} id={skill.id} level={skill.level} name={skill.name} />
+                            <HomeSkillsList key={skill.id} id={skill.id} level={skill.level} name={skill.name} />
                         </React.Fragment>
                     )
                 }

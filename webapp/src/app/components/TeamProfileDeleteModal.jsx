@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
-import styled from 'styled-components';
-import { Box } from '@mui/system';
-import { Alert, Modal, Snackbar, Typography, IconButton, Button, Grid } from '@mui/material';
-import { primaryColour } from '../../core/utils/Variables';
-import { Close } from '@mui/icons-material';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../../auth/AuthContext';
 import { leaveTeam } from '../../core/services/team.service';
 import { useTeams } from '../../core/hooks/useTeams';
+import styled from 'styled-components';
+
+import { Box } from '@mui/system';
+import { Alert, Modal, Snackbar, Typography, IconButton, Button, Grid } from '@mui/material';
+import { Close } from '@mui/icons-material';
+
+import { iconColor, primaryColour } from '../../core/utils/Variables';
 
 const ModalContent = styled(Box)`
     position: absolute;
@@ -20,7 +22,7 @@ const ModalContent = styled(Box)`
     border: 2px solid ${primaryColour};
 `
 
-const ConfirmTeamDeleteModal = (props) => {
+const TeamProfileDeleteModal = (props) => {
     const [snack, setSnack] = useState(false);
     const closeModal = () => props.setModal(false);
     const closeSnack = () => setSnack(false);
@@ -56,7 +58,7 @@ const ConfirmTeamDeleteModal = (props) => {
                     <Grid container justifyContent='center' alignItems='center'>
                         <Typography variant='h6' sx={{ mb: 2, textAlign: 'center' }}>LEAVE TEAM</Typography>
                         <IconButton aria-label="Close Modal" sx={{ position: 'absolute', top: '6px', right: '6px' }} onClick={() => closeModal()}>
-                            <Close sx={{ color: 'white' }} />
+                            <Close sx={{ color: iconColor }} />
                         </IconButton>
                         <Typography variant='body1' sx={{ textAlign: 'center' }}>If you are the leader of this team, the team will be DELETED</Typography>
                         <Button onClick={event => handleDelete(event)} variant='contained' color='error' sx={{ mt: 2, minWidth: '190px' }}>CONFIRM</Button>
@@ -72,4 +74,4 @@ const ConfirmTeamDeleteModal = (props) => {
     )
 }
 
-export default ConfirmTeamDeleteModal;
+export default TeamProfileDeleteModal;

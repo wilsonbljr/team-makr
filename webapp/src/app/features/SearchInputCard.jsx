@@ -1,8 +1,10 @@
-import { Card, CardContent, CardHeader, Grid, Typography } from '@mui/material'
 import React from 'react'
-import { primaryColour, secondaryColour } from '../../core/utils/Variables'
+import { Card, CardContent, CardHeader, Grid, Typography } from '@mui/material'
 import { Search } from '@mui/icons-material';
+
 import SearchForm from '../components/SearchForm';
+
+import { primaryColour, secondaryColour } from '../../core/utils/Variables'
 
 const SearchInputCard = (props) => {
     return (

@@ -1,18 +1,20 @@
 import React, { useState } from 'react'
-import { Alert, Button } from '@mui/material';
 import { useAuth } from '../../auth/AuthContext';
-import GeneralInput from './GeneralInput'
 import { useUserInfo } from '../../core/hooks/useUserInfo';
 import { updateUser } from '../../core/services/user.service';
-import { StyledForm } from './StyledForm';
 
-const EditProfileForm = (props) => {
+import { Alert, Button } from '@mui/material';
+
+import StyledForm from './StyledForm';
+import StyledInput from './StyledInput'
+
+const HomeEditProfileForm = (props) => {
+    const { user, token } = useAuth();
+    const { setCurrentUserInfo, firstName, lastName, email } = useUserInfo();
     const [pronouns, setPronouns] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [alert, setAlert] = useState(false);
-    const { user, token } = useAuth();
-    const { setCurrentUserInfo, firstName, lastName, email } = useUserInfo();
 
 
     const editForm = event => {
@@ -34,15 +36,15 @@ const EditProfileForm = (props) => {
 
     return (
         <StyledForm onSubmit={event => { editForm(event) }}>
-            <GeneralInput id='name' label='Name' value={firstName + ' ' + lastName} disabled variant='outlined' type="text" />
-            <GeneralInput onChange={(event) => {
+            <StyledInput id='name' label='Name' value={firstName + ' ' + lastName} disabled variant='outlined' type="text" />
+            <StyledInput onChange={(event) => {
                 setPronouns(event.target.value);
             }} id='pronoun' label='Pronouns' variant='outlined' type="text" />
-            <GeneralInput onChange={(event) => {
+            <StyledInput onChange={(event) => {
                 setPhone(event.target.value);
             }} id='phone' label='Phone Number' variant='outlined' type="tel" />
-            <GeneralInput id='email' label='E-mail' InputLabelProps={{ shrink: true }} disabled value={email} variant='outlined' type="email" />
-            <GeneralInput onChange={(event) => {
+            <StyledInput id='email' label='E-mail' InputLabelProps={{ shrink: true }} disabled value={email} variant='outlined' type="email" />
+            <StyledInput onChange={(event) => {
                 setPassword(event.target.value);
             }} id='password' label='Password' variant='outlined' type="password" />
             {alert ? <Alert severity="error">Server error, try again</Alert> : <> </>}
@@ -51,4 +53,4 @@ const EditProfileForm = (props) => {
     )
 }
 
-export default EditProfileForm;
+export default HomeEditProfileForm;

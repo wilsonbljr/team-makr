@@ -4,7 +4,9 @@ import { useSkills } from '../../core/hooks/useSkills';
 import { Chip, Divider, IconButton, ListItem, ListItemText, Typography } from '@mui/material';
 import { OpenInNew } from '@mui/icons-material';
 import { Box } from '@mui/system';
+
 import { skillLabel } from '../../core/utils/Lists';
+import { iconColor } from '../../core/utils/Variables';
 
 const SearchResultsList = (props) => {
     const navigate = useNavigate();
@@ -16,7 +18,7 @@ const SearchResultsList = (props) => {
                     onClick={() => navigate('/u/' + props.person.id)}
                     secondaryAction={
                         <IconButton onClick={() => navigate('/u/' + props.person.id)} sx={{ display: { xs: 'none', md: 'inline' } }}>
-                            <OpenInNew sx={{ color: 'white' }} />
+                            <OpenInNew sx={{ color: iconColor }} />
                         </IconButton>}>
                     <ListItemText
                         primary={<Typography variant='h6' component='h1'>{props.person.firstName + ' ' + props.person.lastName}</Typography>}

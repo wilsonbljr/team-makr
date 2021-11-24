@@ -1,11 +1,13 @@
 import React from 'react'
-import { Button, Card, CardContent, CardHeader, Grid, Typography } from '@mui/material';
-import { primaryColour } from '../../core/utils/Variables';
 import { useTeams } from '../../core/hooks/useTeams';
-import TeamList from '../components/TeamList';
+import { Button, Card, CardContent, CardHeader, Grid, Typography } from '@mui/material';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 
-const HomeTeamCard = (props) => {
+import HomeTeamsList from '../components/HomeTeamsList';
+
+import { primaryColour } from '../../core/utils/Variables';
+
+const HomeTeamsCard = (props) => {
     const { teams } = useTeams();
 
     return (
@@ -19,11 +21,11 @@ const HomeTeamCard = (props) => {
                 </Typography>}
                 action={props.openModal ? <Button endIcon={<AddBoxIcon />} variant='contained' onClick={() => props.openModal(true)}>CREATE TEAM</Button> : null}
             />
-            <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
+            <CardContent>
                 <Grid container spacing={1} justifyContent='center' alignItems='center' flexWrap='wrap'>
                     {teams.length !== 0 ? teams.map((team) => (
                         <Grid item xs={12} lg={6} key={team.id}>
-                            <TeamList name={team.name} id={team.id} description={team.description} leader={team.leader} />
+                            <HomeTeamsList name={team.name} id={team.id} description={team.description} leader={team.leader} />
                         </Grid>
                     ))
                         : <Typography variant='body1'>You haven't joined any teams yet</Typography>}
@@ -33,4 +35,4 @@ const HomeTeamCard = (props) => {
     )
 };
 
-export default HomeTeamCard;
+export default HomeTeamsCard;

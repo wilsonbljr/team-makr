@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, Grid, Typography } from '@mui/material';
+import { Image } from 'mui-image';
+
 import logoutImg from '../../../assets/logout.svg'
 import { primaryColour } from '../../../core/utils/Variables';
-import { Image } from 'mui-image';
 
 
 const SuccessfulLogout = ({ children }) => {

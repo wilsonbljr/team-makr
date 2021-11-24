@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Button, MenuItem } from '@mui/material';
-import { addUserToTeam, createTeam } from '../../core/services/team.service';
+import { addUserToTeam } from '../../core/services/team.service';
 import { useAuth } from '../../auth/AuthContext';
 import { useTeams } from '../../core/hooks/useTeams';
-import GeneralInput from './GeneralInput';
-import { StyledForm } from './StyledForm';
 import { makeStyles } from '@mui/styles';
+import { Button, MenuItem } from '@mui/material';
+
+import StyledForm from './StyledForm';
+import StyledInput from './StyledInput';
+
 import { darkerPrimaryColour } from '../../core/utils/Variables';
 
 const useStyles = makeStyles(theme => ({
@@ -17,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const UsersAddToTeamForm = (props) => {
+const UserAddToTeamForm = (props) => {
     const classes = useStyles();
     const [teamId, setTeamId] = useState('');
     const { token } = useAuth();
@@ -25,7 +27,7 @@ const UsersAddToTeamForm = (props) => {
 
     const addUserToTeamForm = event => {
         event.preventDefault();
-        addUserToTeam(props.userId ,teamId, token).then((status) => {
+        addUserToTeam(props.userId, teamId, token).then((status) => {
             if (status === 201) {
                 props.closeModal();
                 props.openSnack();
@@ -35,7 +37,7 @@ const UsersAddToTeamForm = (props) => {
 
     return (
         <StyledForm onSubmit={event => { addUserToTeamForm(event) }}>
-            <GeneralInput
+            <StyledInput
                 labelid='teamSelectLabel'
                 id='teamSelect'
                 value={teamId}
@@ -61,10 +63,10 @@ const UsersAddToTeamForm = (props) => {
                 {teams.map(team => (
                     <MenuItem key={team.id} value={team.id}>{team.name}</MenuItem>
                 ))}
-            </GeneralInput>
+            </StyledInput>
             <Button type="submit" variant='outlined'>ADD</Button>
         </StyledForm>
     )
 }
 
-export default UsersAddToTeamForm;
+export default UserAddToTeamForm;

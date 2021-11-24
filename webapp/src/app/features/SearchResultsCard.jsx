@@ -1,7 +1,9 @@
 import React from 'react'
 import { Card, CardContent, CardHeader, Divider, List, Typography } from '@mui/material';
-import { primaryColour } from '../../core/utils/Variables';
+
 import SearchResultsList from '../components/SearchResultsList';
+
+import { primaryColour } from '../../core/utils/Variables';
 
 const SearchResultsCard = (props) => {
 

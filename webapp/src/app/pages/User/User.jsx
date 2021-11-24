@@ -1,15 +1,16 @@
-import { Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import { useAuth } from '../../../auth/AuthContext';
 import { getUserSkills } from '../../../core/services/skill.service';
 import { getUserProfile } from '../../../core/services/user.service';
-import Container from '../../components/Container'
-import UsersAddToTeamModal from '../../features/UsersAddToTeamModal';
-import UsersProfileCard from '../../components/UsersProfileCard';
-import UserSkillsCard from '../../features/UsersSkillsCard';
+import { Grid } from '@mui/material';
 
-const Users = () => {
+import StyledContainer from '../../components/StyledContainer';
+import UserProfileCard from '../../components/UserProfileCard';
+import UserAddToTeamModal from '../../features/UserAddToTeamModal';
+import UserSkillsCard from '../../features/UserSkillsCard';
+
+const User = () => {
     const { token } = useAuth();
     const [userInfo, setUserInfo] = useState({ id: null, firstName: '', lastName: '', pronoun: '', email: '', phone_number: '' });
     const [userSkills, setUserSkills] = useState([]);
@@ -22,10 +23,10 @@ const Users = () => {
     }, [id, token])
 
     return (
-        <Container>
+        <StyledContainer>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={4} lg={3}>
-                    <UsersProfileCard
+                    <UserProfileCard
                         user={userInfo}
                         setModal={setModal}
                     />
@@ -45,9 +46,9 @@ const Users = () => {
                     </Grid>
                 </Grid>
             </Grid>
-            <UsersAddToTeamModal modal={modal} setModal={setModal} userId={id} />
-        </Container>
+            <UserAddToTeamModal modal={modal} setModal={setModal} userId={id} />
+        </StyledContainer>
     )
 }
 
-export default Users;
+export default User;

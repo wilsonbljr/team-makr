@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Button } from '@mui/material';
-import { createTeam } from '../../core/services/team.service';
 import { useAuth } from '../../auth/AuthContext';
 import { useTeams } from '../../core/hooks/useTeams';
-import GeneralInput from './GeneralInput';
-import { StyledForm } from './StyledForm';
+import { createTeam } from '../../core/services/team.service';
+import { Button } from '@mui/material';
+
+import StyledInput from './StyledInput';
+import StyledForm from './StyledForm';
 
 const TeamForm = (props) => {
     const [teamName, setTeamName] = useState('');
@@ -26,10 +27,10 @@ const TeamForm = (props) => {
 
     return (
         <StyledForm onSubmit={event => { teamForm(event) }}>
-            <GeneralInput onChange={(event) => {
+            <StyledInput onChange={(event) => {
                 setTeamName(event.target.value);
             }} id='name' label='Team name' variant='outlined' type="text" required />
-            <GeneralInput onChange={(event) => {
+            <StyledInput onChange={(event) => {
                 setTeamDesc(event.target.value);
             }} id='description' multiline label='Description' variant='outlined' type="text" required />
             <Button type="submit" variant='outlined'>Create</Button>

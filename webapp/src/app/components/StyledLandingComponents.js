@@ -1,7 +1,9 @@
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { StyledForm } from './StyledForm'
-import { secondaryColour } from '../../core/utils/Variables'
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+import StyledForm from './StyledForm';
+
+import { secondaryColour } from '../../core/utils/Variables';
 
 export const CustomStyledForm = styled(StyledForm)`
     width: 100%;

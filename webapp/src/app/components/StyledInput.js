@@ -2,7 +2,7 @@ import { TextField } from '@mui/material';
 import { styled } from '@mui/system';
 
 
-const GeneralInput = styled(TextField)({
+const StyledInput = styled(TextField)({
     '& label': {
         color: 'white'
     },
@@ -23,4 +23,4 @@ const GeneralInput = styled(TextField)({
     }
 });
 
-export default GeneralInput;
+export default StyledInput;

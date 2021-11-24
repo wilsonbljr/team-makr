@@ -1,11 +1,12 @@
-import { Avatar, Button, Card, CardContent, CardHeader, Divider, Grid, Typography } from '@mui/material'
 import React from 'react'
-import { primaryColour, secondaryColour } from '../../core/utils/Variables'
+import { Avatar, Button, Card, CardContent, CardHeader, Divider, Grid, Typography } from '@mui/material'
 import { Add } from '@mui/icons-material';
-import transformNumber from '../../core/utils/TransformNumber';
-import { CardCategoryText, CardText } from './CardText';
+import { CardCategoryText, CardText } from './StyledCardText';
 
-const UsersProfileCard = (props) => {
+import { primaryColour, secondaryColour } from '../../core/utils/Variables'
+import transformNumber from '../../core/utils/TransformNumber';
+
+const UserProfileCard = (props) => {
 
     return (
         <Card sx={{ width: '100%', height: '100%', background: primaryColour, p: 1, minWidth: '320px', borderRadius: 4 }}>
@@ -46,4 +47,4 @@ const UsersProfileCard = (props) => {
     )
 }
 
-export default UsersProfileCard;
+export default UserProfileCard;

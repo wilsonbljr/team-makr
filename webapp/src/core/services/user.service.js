@@ -8,7 +8,7 @@ export const searchUsers = async (firstName, lastName, skillId, token) => {
         ...(lastName && { lastName }),
         ...(skillId && { skillId })
     };
-    const res = await api.get('/person', { headers: { Authorization: 'Bearer ' + token }, params})
+    const res = await api.get('/person', { headers: { Authorization: 'Bearer ' + token }, params })
         .then(res => res)
         .catch(err => err.message);
     return res.data;
@@ -26,7 +26,7 @@ export const getUser = async (id, token) => {
 
 // Get user info for profile page
 export const getUserProfile = async (id, setData, token) => {
-    const data = await api.get('/person/' + id, { headers: { Authorization: 'Bearer ' + token } })
+    await api.get('/person/' + id, { headers: { Authorization: 'Bearer ' + token } })
         .then(res => {
             setData(res.data[0]);
         })

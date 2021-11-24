@@ -1,15 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useAuth } from '../../auth/AuthContext';
 import { useSkills } from '../../core/hooks/useSkills';
 import { addUserToSkill } from '../../core/services/skill.service';
+
 import { Alert, Button, Grid, Rating, Snackbar, Tooltip, Typography } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
-import { skillLabel, skillTooltip } from '../../core/utils/Lists';
-import AutoCompleteSkill from './AutoCompleteSkill';
 import { Add } from '@mui/icons-material';
-import { StyledForm } from './StyledForm';
 
-const AddSkillForm = () => {
+import SkillsAutoComplete from './SkillsAutoComplete';
+import StyledForm from './StyledForm';
+
+import { skillLabel, skillTooltip } from '../../core/utils/Lists';
+import { iconColor } from '../../core/utils/Variables';
+
+const SkillsAddForm = () => {
     const { user, token } = useAuth();
     const { setCurrentUserSkills } = useSkills();
 
@@ -41,7 +45,7 @@ const AddSkillForm = () => {
 
     return (
         <StyledForm onSubmit={event => { addSkillToPerson(event) }}>
-            <AutoCompleteSkill setSkillAdd={setSkillAdd} />
+            <SkillsAutoComplete setSkillAdd={setSkillAdd} />
             <Tooltip
                 disableFocusListener
                 placement='top'
@@ -63,7 +67,7 @@ const AddSkillForm = () => {
                         onChangeActive={(event, hover) => {
                             setHoverLevel(hover);
                         }}
-                        emptyIcon={<StarIcon style={{ opacity: 0.25, color: 'white' }} fontSize="inherit" />}
+                        emptyIcon={<StarIcon style={{ opacity: 0.25, color: iconColor }} fontSize="inherit" />}
                     />
                     <Typography sx={{ fontWeight: 500, width: '150px', ml: 2, textAlign: 'center' }} variant='body1'>{skillLabel[hoverLevel !== -1 ? hoverLevel : level]}</Typography>
                 </Grid>
@@ -79,4 +83,4 @@ const AddSkillForm = () => {
     )
 }
 
-export default AddSkillForm;
+export default SkillsAddForm;

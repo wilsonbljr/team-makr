@@ -1,16 +1,17 @@
 import React from 'react';
 import { Grid } from '@mui/material';
-import Container from '../../components/Container'
-import SkillsProfileCard from '../../components/SkillsProfileCard';
+
+import StyledContainer from '../../components/StyledContainer'
+import SkillsInfoCard from '../../features/SkillsInfoCard';
 import HomeSkillsCard from '../../features/HomeSkillsCard';
 
 const Skills = () => {
     return (
         <>
-            <Container>
+            <StyledContainer>
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={4} lg={3}>
-                        <SkillsProfileCard />
+                        <SkillsInfoCard />
                     </Grid>
                     <Grid item xs={12} md={8} lg={9}>
                         <Grid container spacing={2}>
@@ -23,7 +24,7 @@ const Skills = () => {
                         </Grid>
                     </Grid>
                 </Grid>
-            </Container>
+            </StyledContainer>
         </>
     )
 }

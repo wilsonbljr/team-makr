@@ -2,14 +2,16 @@ import React from 'react'
 import { useSkills } from '../../core/hooks/useSkills';
 import { Alert, Button, MenuItem } from '@mui/material';
 import { Search } from '@mui/icons-material';
-import { StyledForm } from './StyledForm';
 import { makeStyles } from '@mui/styles';
-import { darkerPrimaryColour } from '../../core/utils/Variables';
-import GeneralInput from './GeneralInput';
+
+import StyledForm from './StyledForm';
+import StyledInput from './StyledInput';
+
+import { darkerPrimaryColour, iconColor } from '../../core/utils/Variables';
 
 const useStyles = makeStyles(theme => ({
     icon: {
-        fill: 'white',
+        fill: iconColor,
     },
     dropdownStyle: {
         backgroundColor: darkerPrimaryColour,
@@ -23,7 +25,7 @@ const SearchForm = (props) => {
 
     return (
         <StyledForm onSubmit={event => { props.search(event) }}>
-            <GeneralInput onChange={event => {
+            <StyledInput onChange={event => {
                 props.setNameFilter(event.target.value);
             }}
                 id='name'
@@ -32,7 +34,7 @@ const SearchForm = (props) => {
                 value={props.nameFilter}
                 type="text"
             />
-            <GeneralInput
+            <StyledInput
                 labelid='skillSelectLabel'
                 id='skillSelect'
                 value={props.skillFilter}
@@ -58,7 +60,7 @@ const SearchForm = (props) => {
                 {allSkills.map(skill => (
                     <MenuItem key={skill.id} value={skill.id}>{skill.name}</MenuItem>
                 ))}
-            </GeneralInput>
+            </StyledInput>
             {props.alert ? <Alert severity="error">Server error, try again</Alert> : <> </>}
             <Button type='submit' variant='contained' color='primary' startIcon={<Search />}>Search</Button>
         </StyledForm>

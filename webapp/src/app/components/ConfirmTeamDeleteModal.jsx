@@ -20,7 +20,7 @@ const ModalContent = styled(Box)`
     border: 2px solid ${primaryColour};
 `
 
-const ConfirmDeleteModal = (props) => {
+const ConfirmTeamDeleteModal = (props) => {
     const [snack, setSnack] = useState(false);
     const closeModal = () => props.setModal(false);
     const closeSnack = () => setSnack(false);
@@ -72,4 +72,4 @@ const ConfirmDeleteModal = (props) => {
     )
 }
 
-export default ConfirmDeleteModal;
+export default ConfirmTeamDeleteModal;

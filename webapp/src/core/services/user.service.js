@@ -14,14 +14,23 @@ export const searchUsers = async (firstName, lastName, skillId, token) => {
     return res.data;
 }
 
-// Get user info
+// Get user info for authentication
 export const getUser = async (id, token) => {
-    const status = await api.get('/person/' + id, { headers: { Authorization: 'Bearer ' + token } })
+    const data = await api.get('/person/' + id, { headers: { Authorization: 'Bearer ' + token } })
         .then(res => {
             return res.data[0];
         })
         .catch(err => err.message);
-    return status;
+    return data;
+}
+
+// Get user info for profile page
+export const getUserProfile = async (id, setData, token) => {
+    const data = await api.get('/person/' + id, { headers: { Authorization: 'Bearer ' + token } })
+        .then(res => {
+            setData(res.data[0]);
+        })
+        .catch(err => err.message);
 }
 
 // Register a new user

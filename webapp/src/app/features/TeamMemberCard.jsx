@@ -14,7 +14,7 @@ const TeamMemberCard = (props) => {
                     Members
                 </Typography>}
             />
-            <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
+            <CardContent>
                 <Grid container spacing={1} justifyContent='center' alignItems='center' flexWrap='wrap'>
                     {props.team.users.map(user => (
                         <Grid item xs={12} lg={6} key={user.id}>

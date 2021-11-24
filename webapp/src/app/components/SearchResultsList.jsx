@@ -13,8 +13,9 @@ const SearchResultsList = (props) => {
         <>
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <ListItem
+                    onClick={() => navigate('/u/' + props.person.id)}
                     secondaryAction={
-                        <IconButton onClick={() => navigate('/u/' + props.person.id)}>
+                        <IconButton onClick={() => navigate('/u/' + props.person.id)} sx={{ display: { xs: 'none', md: 'inline' } }}>
                             <OpenInNew sx={{ color: 'white' }} />
                         </IconButton>}>
                     <ListItemText
@@ -25,11 +26,10 @@ const SearchResultsList = (props) => {
                                     label={
                                         <>
                                             <Typography component='span' sx={{ fontWeight: 500, display: 'inline' }}>
-                                                {allSkills.find(s => s.id === props.skillFilter).name} |
+                                                {allSkills.find(s => s.id === props.skillFilter).name}
                                             </Typography>
-                                            <Typography component='span' sx={{ fontWeight: 300, display: 'inline', ml: 0.7 }}>
-                                                {props.person.skills.find(s => s.skillId === props.skillFilter) ? skillLabel[props.person.skills.find(s => s.skillId === props.skillFilter).level] : 'error'}
-                                                
+                                            <Typography component='span' sx={{ fontWeight: 300, display: { xs: 'none', sm: 'inline' }, ml: 0.7 }}>
+                                                | {props.person.skills.find(s => s.skillId === props.skillFilter) ? skillLabel[props.person.skills.find(s => s.skillId === props.skillFilter).level] : 'error'}
                                             </Typography>
                                         </>
                                     }
@@ -43,10 +43,10 @@ const SearchResultsList = (props) => {
                                         label={
                                             <>
                                                 <Typography component='span' sx={{ fontWeight: 500, display: 'inline' }}>
-                                                    {allSkills.find(s => s.id === skill.skillId).name} |
+                                                    {allSkills.find(s => s.id === skill.skillId).name}
                                                 </Typography>
-                                                <Typography component='span' sx={{ fontWeight: 300, display: 'inline', ml: 0.7 }}>
-                                                    {skillLabel[skill.level]}
+                                                <Typography component='span' sx={{ fontWeight: 300, display: { xs: 'none', sm: 'inline' }, ml: 0.7 }}>
+                                                    | {skillLabel[skill.level]}
                                                 </Typography>
                                             </>
                                         }

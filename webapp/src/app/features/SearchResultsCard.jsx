@@ -1,7 +1,6 @@
 import React from 'react'
-import { Button, Card, CardContent, CardHeader, Divider, Grid, List, Typography } from '@mui/material';
+import { Card, CardContent, CardHeader, Divider, List, Typography } from '@mui/material';
 import { primaryColour } from '../../core/utils/Variables';
-import AddBoxIcon from '@mui/icons-material/AddBox';
 import SearchResultsList from '../components/SearchResultsList';
 
 const SearchResultsCard = (props) => {
@@ -12,18 +11,16 @@ const SearchResultsCard = (props) => {
                 sx={{ pt: 1.5, pb: 1.5, pr: 3 }}
                 title={<Typography
                     variant='h5'
-                    sx={{ textTransform: 'uppercase', fontWeight: '500' }}>
+                    sx={{ textTransform: 'uppercase', fontWeight: '500'}}>
                     Results
                 </Typography>}
-                action={<Button endIcon={<AddBoxIcon />} variant='contained' onClick={() => console.log('oi')}>SORT BY</Button>}
             />
-            <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
+            <CardContent>
                 <List sx={{ alignItems: 'center' }}>
-                    <Divider />
+                    <Divider key = {2054} />
                     {props.searchResult ? props.searchResult.map((person) => (
-                        <SearchResultsList person={person} skillFilter={props.skillFilter} />
-                    ))
-                        : <Typography variant='body1' sx={{ mt: 2 }}>The results of your search will appear here!</Typography>}
+                        <SearchResultsList key={person.id} person={person} skillFilter={props.skillFilter} />))
+                        : <Typography key={2053} variant='body1' sx={{ mt: 2 }}>If you're seeing this here, either you haven't searched yet or we couldn't find anyone.</Typography>}
                 </List>
             </CardContent>
         </Card >

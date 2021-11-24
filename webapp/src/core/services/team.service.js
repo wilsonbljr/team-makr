@@ -35,6 +35,16 @@ export const createTeam = async (name, description, userId, token) => {
     return status;
 }
 
+// Put method to add a user to team
+// Add relationship between user and skill
+export const addUserToTeam = async (userId, teamId, token) => {
+    const status = await api.put('/person/' + userId + '/team/' + teamId, { user_active: true, leader: false }, { headers: { Authorization: 'Bearer ' + token } })
+        .then(res => res.status)
+        .catch(err => err.message);
+    return status;
+}
+
+
 // Delete method that removes the person from team and then deletes it
 export const leaveTeam = async (teamId, userId, users, token) => {
     const requestUser = users.find(user => {

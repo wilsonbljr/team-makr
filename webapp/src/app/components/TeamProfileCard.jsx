@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar, Button, Card, CardContent, CardHeader, Grid, Typography } from '@mui/material'
+import { Avatar, Button, Card, CardContent, CardHeader, Divider, Grid, Typography } from '@mui/material'
 import { primaryColour, secondaryColour } from '../../core/utils/Variables'
 import { styled } from '@mui/styles';
 
@@ -43,6 +43,7 @@ const TeamProfileCard = (props) => {
                     height: '75px'
                 }}>{props.name.charAt(0)}</Avatar>}
             />
+            <Divider />
             <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
                 <Grid container flexDirection='column'>
                     <CategoryText>Team Description: </CategoryText>

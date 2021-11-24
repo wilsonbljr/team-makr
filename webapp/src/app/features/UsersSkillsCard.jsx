@@ -1,15 +1,13 @@
 import React from 'react'
 import { Card, CardContent, CardHeader, Divider, List, Typography } from '@mui/material';
 import { primaryColour } from '../../core/utils/Variables';
-import { useSkills } from '../../core/hooks/useSkills';
 import SkillList from '../components/SkillList';
 
-const HomeSkillsCard = (props) => {
-    const { skills } = useSkills();
+const UserSkillsCard = (props) => {
 
     function skillsMap() {
         // Checks if there is a skill
-        const array = skills.find(skill => skill.softSkill !== props.softSkill);
+        const array = props.skills.find(skill => skill.softSkill !== props.softSkill);
         if (array === 0 || array === undefined) {
             // If there isn't returns a message instead of the card
             return (
@@ -19,7 +17,7 @@ const HomeSkillsCard = (props) => {
                 </>
             )
         } else {
-            return skills.map((skill) => {
+            return props.skills.map((skill) => {
                 if (skill.softSkill !== props.softSkill && skill.id !== null) {
                     return (
                         <React.Fragment key={skill.id + 3000}>
@@ -54,4 +52,4 @@ const HomeSkillsCard = (props) => {
     )
 };
 
-export default HomeSkillsCard;
+export default UserSkillsCard;

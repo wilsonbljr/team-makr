@@ -4,7 +4,7 @@ import { getTeam } from '../../../core/services/team.service';
 import { useParams } from 'react-router';
 import { useAuth } from '../../../auth/AuthContext';
 import TeamMemberCard from '../../features/TeamMemberCard';
-import ConfirmDeleteModal from '../../components/ConfirmTeamDeleteModal';
+import ConfirmTeamDeleteModal from '../../components/ConfirmTeamDeleteModal';
 import Container from '../../components/Container'
 import TeamProfileCard from '../../components/TeamProfileCard';
 
@@ -28,7 +28,7 @@ const Teams = () => {
                     <TeamMemberCard team={team} />
                 </Grid>
             </Grid>
-            <ConfirmDeleteModal modal={modal} setModal={setModal} team={team} />
+            <ConfirmTeamDeleteModal modal={modal} setModal={setModal} team={team} />
         </Container>
     )
 }

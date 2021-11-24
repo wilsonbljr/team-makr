@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, CardContent, CardHeader, Grid, Typography } from '@mui/material'
+import { Avatar, Button, Card, CardContent, CardHeader, Divider, Grid, Typography } from '@mui/material'
 import { Link } from 'react-router-dom';
 import React from 'react'
 import { primaryColour, secondaryColour } from '../../core/utils/Variables'
@@ -52,6 +52,7 @@ const HomeProfileCard = (props) => {
                     height: '75px'
                 }}>{firstName.charAt(0)}</Avatar>}
             />
+            <Divider />
             <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
                 <Grid container flexDirection='column'>
                     <CategoryText>Pronouns: </CategoryText>

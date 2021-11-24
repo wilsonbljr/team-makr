@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { SwipeableDrawer, Divider, List, ListItemText, Typography } from '@mui/material'
+import { SwipeableDrawer, Divider, List, ListItemText, Typography, Button } from '@mui/material'
 import { AppBar, Box, Toolbar, IconButton, ListItemButton, ListItemIcon } from '@mui/material'
 import { AppRegistration, Code, Home, Login, People, Menu, Logout, Search } from '@mui/icons-material'
 
@@ -48,7 +48,7 @@ const checkLoggedIn = (user, navigate, setOpen, logout) => {
                     <ListItemIcon><People sx={{ color: 'white' }} /></ListItemIcon>
                     <ListItemText primary={<ListText variant="p">Teams</ListText>} />
                 </ListItemButton>
-                
+
                 <ListItemButton divider sx={{ height: '60px', color: 'white' }} onClick={() => {
                     navigate('/skill')
                     setOpen(false)
@@ -132,7 +132,16 @@ const Header = () => {
                     >
                         <Menu sx={{ color: 'white' }} />
                     </IconButton>
-                    <Logo src={logo} alt="Team Makr" />
+                    <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                        <Button
+                            startIcon={<Search />}
+                            variant='outlined'
+                            sx={{ width: { xs: '126px', sm: '200px', lg: '300px' }, mr: 2, p: {xs: 0, sm: 1, lg: 2} }}
+                            component={Link}
+                            to='/search'
+                            >Search</Button>
+                        <Logo src={logo} alt="Team Makr" />
+                    </Box>
                     <SwipeableDrawer
                         anchor="left"
                         open={open}

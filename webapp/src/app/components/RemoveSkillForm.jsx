@@ -50,7 +50,7 @@ const RemoveSkillForm = () => {
     return (
         <StyledForm onSubmit={event => { removeSkillFromPerson(event) }}>
             <GeneralInput
-                labelId='skillSelectLabel'
+                labelid='skillSelectLabel'
                 id='skillSelect'
                 value={skillRemove}
                 label='Select Skill'

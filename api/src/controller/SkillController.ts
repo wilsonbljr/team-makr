@@ -61,7 +61,7 @@ export class SkillController {
         const { id } = req.params;
         try {
             const repository = getRepository(Skill);
-            await repository.softDelete(id);
+            await repository.delete(id);
             logger.log('info', 'User: ' + req.user.id + ', Method: deleteSkill');
             return res.status(200).json({ message: `id ${id} deleted`});
         } catch (error) {

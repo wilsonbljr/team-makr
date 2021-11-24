@@ -1,5 +1,4 @@
 import React from 'react';
-import { styled } from '@mui/styles';
 import { Avatar, Button, Card, CardContent, CardHeader, Divider, Grid, Typography } from '@mui/material';
 
 import { primaryColour, secondaryColour } from '../../core/utils/Variables';

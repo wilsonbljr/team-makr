@@ -6,7 +6,7 @@ import { useAuth } from './AuthContext'
 const RequireAuthAdmin = ({ children }) => {
     const { user } = useAuth();
     const { admin } = useUserInfo();
-    return user && admin === true ? <Outlet /> : <Navigate to='/unauthorized' />
+    return user && admin === true ? <Outlet /> : <Navigate to='/home' />
 }
 
 export default RequireAuthAdmin;

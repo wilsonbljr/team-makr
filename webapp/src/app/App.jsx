@@ -14,7 +14,9 @@ import SuccessfulRegisterCard from './components/SuccessfulRegisterCard'
 
 import SuccessfulLogout from './pages/Success/SuccessfulLogout'
 import RequireAuth from '../auth/RequireAuth'
+import RequireAuthAdmin from '../auth/RequireAuthAdmin'
 
+import Admin from './pages/Admin/Admin'
 import Home from './pages/Home/Home'
 import TeamProfile from './pages/Team/TeamProfile'
 import Teams from './pages/Team/Teams'
@@ -26,7 +28,7 @@ import ErrorLayout from './pages/Error/ErrorLayout'
 import ErrorNotFoundCard from './components/ErrorNotFoundCard'
 import ErrorInternalServerCard from './components/ErrorInternalServerCard'
 import ErrorUnauthorizedCard from './components/ErrorUnauthorizedCard'
-import ErrorBoundary from './features/ErrorBoundary'
+import ErrorBoundary from './components/ErrorBoundary'
 
 function App() {
   return (
@@ -65,6 +67,12 @@ function App() {
             <Route path='/unauthorized' element={<ErrorUnauthorizedCard />} />
             <Route path='/internal' element={<ErrorInternalServerCard />} />
             <Route path='/*' element={<ErrorNotFoundCard />} />
+
+          </Route>
+
+          <Route element={<RequireAuthAdmin />}>
+
+            <Route path='/admin' element={<Admin />} />
 
           </Route>
         </Routes>

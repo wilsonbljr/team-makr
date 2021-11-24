@@ -12,8 +12,7 @@ export class LoginController {
     static async login(req, res) {
         try {
             const token = await LoginController.createToken(req.user)
-            res.set('Authorization', token)
-            logger.log('info', 'User: ' + req.user.id + ' created a JWT token');
+            res.set('Authorization', token);
             res.status(204).json({ message: "Login succeded" });
         } catch (error) {
             logger.log('error', 'User: ' + req.user.id + ' failed to login, error: ' + error);

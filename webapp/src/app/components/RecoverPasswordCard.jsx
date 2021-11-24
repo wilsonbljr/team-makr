@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { forgotPasswordEmail, resetPassword } from '../../core/services/password.service';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { Alert, Button, CardContent, Grid, Snackbar, Typography } from '@mui/material';
 
 import StyledForm from './StyledForm';

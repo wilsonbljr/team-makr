@@ -1,11 +1,14 @@
-import { Card, CardContent, CardHeader, Grid, Typography } from '@mui/material'
-import React from 'react'
-import { primaryColour, secondaryColour } from '../../core/utils/Variables'
-import { Code } from '@mui/icons-material';
+import React from 'react';
 import { useSkills } from '../../core/hooks/useSkills';
+
+import { Card, CardContent, CardHeader, Grid, Typography } from '@mui/material'
+import { Code } from '@mui/icons-material';
+
 import { CardCategoryText, CardText } from '../components/StyledCardText';
 import SkillsAddForm from '../components/SkillsAddForm';
 import SkillsRemoveForm from '../components/SkillsRemoveForm';
+
+import { primaryColour, secondaryColour } from '../../core/utils/Variables';
 
 const SkillsInfoCard = () => {
     const { skills } = useSkills();

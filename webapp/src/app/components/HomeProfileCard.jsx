@@ -5,7 +5,7 @@ import { useSkills } from '../../core/hooks/useSkills';
 import { useUserInfo } from '../../core/hooks/useUserInfo';
 
 import { Avatar, Button, Card, CardContent, CardHeader, Divider, Grid, Typography } from '@mui/material';
-import { Code, Edit, People } from '@mui/icons-material';
+import { AdminPanelSettings, Code, Edit, People } from '@mui/icons-material';
 import { styled } from '@mui/styles';
 
 import transformNumber from '../../core/utils/TransformNumber';
@@ -29,7 +29,7 @@ const CategoryText = styled(Typography)({
 });
 
 const HomeProfileCard = (props) => {
-    const { firstName, pronoun, email, phone_number } = useUserInfo();
+    const { firstName, pronoun, email, phone_number, admin } = useUserInfo();
     const { skills } = useSkills();
     const { teams } = useTeams();
 
@@ -82,9 +82,18 @@ const HomeProfileCard = (props) => {
                 <Button
                     endIcon={<Code />}
                     variant='contained'
-                    sx={{ width: '100%' }}
+                    sx={{ width: '100%', mb: 3 }}
                     component={Link}
                     to='/skill'>Manage Skills</Button>
+                {admin ? <>
+
+                    <CategoryText>Admin: </CategoryText>
+                    <Button
+                        endIcon={<AdminPanelSettings />}
+                        variant='contained'
+                        sx={{ width: '100%', mt: 2 }}
+                        component={Link}
+                        to='/admin'>Admin Panel</Button> </> : <> </>}
             </CardContent>
         </Card>
     )

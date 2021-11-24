@@ -33,3 +33,28 @@ export const removeUserToSkill = async (user, skillId, token) => {
         .catch(err => err.message);
     return status;
 }
+
+// Admin methods
+// Add new skill
+export const addSkill = async (skill, token) => {
+    const status = await api.post('/skill', skill, { headers: { Authorization: 'Bearer ' + token } })
+        .then(res => res.status)
+        .catch(err => err.message);
+    return status;
+}
+
+// Edit skill
+export const editSkill = async (skillId, skill, token) => {
+    const status = await api.put('/skill/' + skillId, skill, { headers: { Authorization: 'Bearer ' + token } })
+        .then(res => res.status)
+        .catch(err => err.message);
+    return status;
+}
+
+// Remove skill
+export const deleteSkill = async (skillId, token) => {
+    const status = await api.delete('/skill/' + skillId, { headers: { Authorization: 'Bearer ' + token } })
+        .then(res => res.status)
+        .catch(err => err.message);
+    return status;
+}

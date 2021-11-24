@@ -7,7 +7,7 @@ import { primaryColour } from '../../core/utils/Variables'
 
 const TeamProfileMemberCard = (props) => {
     return (
-        <Card sx={{ width: '100%', background: primaryColour, p: 1, minWidth: '320px', maxWidth: '1540px', borderRadius: 4 }}>
+        <Card sx={{ width: '100%', background: primaryColour, p: 1, minWidth: '320px', borderRadius: 4 }}>
             <CardHeader
                 sx={{ pt: 1.5, pb: 1.5, pr: 3 }}
                 title={<Typography

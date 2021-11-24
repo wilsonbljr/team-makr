@@ -26,46 +26,49 @@ import ErrorLayout from './pages/Error/ErrorLayout'
 import ErrorNotFoundCard from './components/ErrorNotFoundCard'
 import ErrorInternalServerCard from './components/ErrorInternalServerCard'
 import ErrorUnauthorizedCard from './components/ErrorUnauthorizedCard'
+import ErrorBoundary from './features/ErrorBoundary'
 
 function App() {
   return (
     <Router>
       <CssBaseline />
       <Header />
-      <Routes>
-        <Route element={<LandingLayout />}>
+      <ErrorBoundary>
+        <Routes>
+          <Route element={<LandingLayout />}>
 
-          <Route path='/' element={<LandingCard />} />
-          <Route path='/login' element={<LoginCard />} />
-          <Route path='/login/success' element={<SuccessfulLoginCard />} />
-          <Route path='/forgot-password' element={<RecoverPasswordCard />} />
-          <Route path='/forgot-password/success' element={<SuccessfulPasswordResetCard />} />
-          <Route path='/register' element={<RegisterCard />} />
-          <Route path='/register/success' element={<SuccessfulRegisterCard />} />
+            <Route path='/' element={<LandingCard />} />
+            <Route path='/login' element={<LoginCard />} />
+            <Route path='/login/success' element={<SuccessfulLoginCard />} />
+            <Route path='/forgot-password' element={<RecoverPasswordCard />} />
+            <Route path='/forgot-password/success' element={<SuccessfulPasswordResetCard />} />
+            <Route path='/register' element={<RegisterCard />} />
+            <Route path='/register/success' element={<SuccessfulRegisterCard />} />
 
-        </Route>
+          </Route>
 
-        <Route element={<RequireAuth />}>
+          <Route element={<RequireAuth />}>
 
-          <Route path='/home' element={<Home />} />
-          <Route path='/team' element={<Teams />} />
-          <Route path='/skill' element={<Skills />} />
-          <Route path='/search' element={<Search />} />
-          <Route path='/u/:id' element={<User />} />
-          <Route path='/team/:id' element={<TeamProfile />} />
+            <Route path='/home' element={<Home />} />
+            <Route path='/team' element={<Teams />} />
+            <Route path='/skill' element={<Skills />} />
+            <Route path='/search' element={<Search />} />
+            <Route path='/u/:id' element={<User />} />
+            <Route path='/team/:id' element={<TeamProfile />} />
 
-        </Route>
+          </Route>
 
-        <Route path='/logout-success' element={<SuccessfulLogout />} />
+          <Route path='/logout-success' element={<SuccessfulLogout />} />
 
-        <Route element={<ErrorLayout />}>
+          <Route element={<ErrorLayout />}>
 
-          <Route path='/unauthorized' element={<ErrorUnauthorizedCard />} />
-          <Route path='/internal' element={<ErrorInternalServerCard />} />
-          <Route path='/*' element={<ErrorNotFoundCard />} />
+            <Route path='/unauthorized' element={<ErrorUnauthorizedCard />} />
+            <Route path='/internal' element={<ErrorInternalServerCard />} />
+            <Route path='/*' element={<ErrorNotFoundCard />} />
 
-        </Route>
-      </Routes>
+          </Route>
+        </Routes>
+      </ErrorBoundary>
     </Router>
   );
 }

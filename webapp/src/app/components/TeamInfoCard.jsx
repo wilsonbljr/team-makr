@@ -1,25 +1,9 @@
-import React from 'react'
+import React from 'react';
 import { styled } from '@mui/styles';
-import { Avatar, Button, Card, CardContent, CardHeader, Divider, Grid, Typography } from '@mui/material'
+import { Avatar, Button, Card, CardContent, CardHeader, Divider, Grid, Typography } from '@mui/material';
 
-import { primaryColour, secondaryColour } from '../../core/utils/Variables'
-
-const Text = styled(Typography)({
-    fontWeight: '300',
-    textAlign: 'left',
-    letterSpacing: '0.3px',
-    wordWrap: 'break-word',
-    marginTop: 5,
-    marginBottom: 10
-});
-
-const CategoryText = styled(Typography)({
-    fontWeight: '500',
-    fontSize: '1.5em',
-    textAlign: 'left',
-    marginTop: 10,
-    marginBottom: 5
-});
+import { primaryColour, secondaryColour } from '../../core/utils/Variables';
+import { CardText, CardCategoryText } from './StyledCardText';
 
 const TeamInfoCard = (props) => {
     const openModal = () => props.setModal(true);
@@ -43,13 +27,13 @@ const TeamInfoCard = (props) => {
                 }}>{props.name.charAt(0)}</Avatar>}
             />
             <Divider />
-            <CardContent sx={{ paddingBottom: '0px', paddingTop: '0px' }}>
+            <CardContent>
                 <Grid container flexDirection='column'>
-                    <CategoryText>Team Description: </CategoryText>
-                    <Text>{props.description}</Text>
-                    <CategoryText>Members: </CategoryText>
-                    <Text>There are currently {props.users.length} member(s) in this team.</Text>
-                    <CategoryText sx={{ pt: 3 }}>Leave team</CategoryText>
+                    <CardCategoryText>Team Description: </CardCategoryText>
+                    <CardText sx={{maxWidth: '100%'}}>{props.description}</CardText>
+                    <CardCategoryText>Members: </CardCategoryText>
+                    <CardText>There are currently {props.users.length} member(s) in this team.</CardText>
+                    <CardCategoryText sx={{ pt: 3 }}>Leave team</CardCategoryText>
                     <Button
                         color='error'
                         variant='contained'

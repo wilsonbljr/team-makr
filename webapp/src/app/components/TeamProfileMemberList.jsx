@@ -18,7 +18,7 @@ const TeamProfileMemberList = (props) => {
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: 1, borderColor: 'primary.main', borderRadius: 2 }}>
             <ListItem secondaryAction={
-                <IconButton onClick={() => navigate('/user/' + props.user.id)}>
+                <IconButton onClick={() => navigate('/u/' + props.user.id)}>
                     <OpenInNew sx={{ color: iconColor }} />
                 </IconButton>}>
                 <Grid container justifyContent='center'>

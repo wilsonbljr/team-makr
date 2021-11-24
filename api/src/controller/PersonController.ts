@@ -117,7 +117,7 @@ export class PersonController {
                 await repository.update(id, updateFields);
                 const personUpdated = await repository.findByIds(id);
                 logger.log('info', 'User: ' + req.user.id + ', Method: updatePerson');
-                return res.status(201).json(personUpdated);
+                return res.status(200).json(personUpdated);
             } catch (error) {
                 logger.log('error', 'Method: updatePerson, error: ' + error);
                 return res.status(500).json(error.message);

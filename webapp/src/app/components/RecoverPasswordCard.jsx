@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import useValidate from '../../core/hooks/useValidate';
 import { forgotPasswordEmail, resetPassword } from '../../core/services/password.service';
 import styled from 'styled-components';
 import { Alert, Button, CardContent, Grid, Snackbar, Typography } from '@mui/material';
@@ -20,11 +21,13 @@ const ButtonContainer = styled.div`
 `
 
 const RecoverPasswordCard = () => {
+    const { errors, handleValidation } = useValidate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordToken, setPasswordToken] = useState('');
     const [snackSent, setSnackSent] = useState(false);
     const [snackError, setSnackError] = useState(false);
+    const [snackMessage, setSnackMessage] = useState('');
     const navigate = useNavigate();
 
     const closeSnack = (event, reason) => {
@@ -37,20 +40,29 @@ const RecoverPasswordCard = () => {
 
     function sendRecoveryEmail(event) {
         event.preventDefault();
-        forgotPasswordEmail(email).then(() => {
-            setSnackSent(true)
+        forgotPasswordEmail(email).then((res) => {
+            if (res.status === 200) {
+                setSnackSent(true)
+            } else {
+                setSnackMessage('E-mail not found')
+                setSnackError(true)
+            }
         }).catch((error) => {
+            setSnackMessage('Internal server error')
             setSnackError(true)
         });
     }
 
     function resetPasswordForm(event) {
         event.preventDefault();
-        resetPassword(email, password, passwordToken).then(() => {
-            navigate('/forgot-password/success')
-        }).catch((error) => {
-            setSnackError(true)
-        });
+        if (!errors.password.error) {
+            resetPassword(email, password, passwordToken).then(() => {
+                navigate('/forgot-password/success')
+            }).catch((error) => {
+                setSnackMessage('Internal server error')
+                setSnackError(true)
+            });
+        }
     }
 
     return (
@@ -68,9 +80,19 @@ const RecoverPasswordCard = () => {
                     <StyledInput onChange={(event) => {
                         setPasswordToken(event.target.value);
                     }} id='token' label='Token' variant='outlined' type="text" required />
-                    <StyledInput onChange={(event) => {
-                        setPassword(event.target.value);
-                    }} id='password' label='New Password' variant='outlined' type="password" required />
+                    <StyledInput
+                        onChange={(event) => {
+                            setPassword(event.target.value);
+                        }}
+                        error={errors.password.error}
+                        helperText={errors.password.errorText}
+                        id='password'
+                        label='New Password'
+                        variant='outlined'
+                        type="password"
+                        required
+                        onBlur={() => { handleValidation({ password }) }}
+                    />
                     <ButtonContainer>
                         <Button type="submit" variant="contained" >Change password</Button>
                         <Button component={Link} to="/login" variant="outlined" >Back to login</Button>
@@ -83,7 +105,7 @@ const RecoverPasswordCard = () => {
                 </Snackbar>
                 <Snackbar open={snackError} autoHideDuration={5000} onClose={closeSnack} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
                     <Alert severity="error">
-                        Internal server error
+                        {snackMessage}
                     </Alert>
                 </Snackbar>
             </Grid>

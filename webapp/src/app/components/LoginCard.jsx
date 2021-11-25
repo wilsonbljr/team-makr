@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../auth/AuthContext';
+import useValidate from '../../core/hooks/useValidate';
 import { Link, useNavigate } from 'react-router-dom';
 import { Alert, Button, CardContent, Grid, Snackbar, Typography } from '@mui/material';
 
@@ -7,21 +8,24 @@ import { ButtonContainer, CustomStyledForm, ForgotPassword, PasswordContainer } 
 import StyledInput from './StyledInput'
 
 const LoginCard = () => {
+    const { setCurrentUser } = useAuth();
+    const navigate = useNavigate();
+    const { errors, handleValidation } = useValidate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [openSnack, setOpenSnack] = useState(false);
-    const { setCurrentUser } = useAuth();
-    const navigate = useNavigate();
 
     function handleSubmit(event) {
         event.preventDefault();
-        setCurrentUser(email, password)
-            .then((status) => {
-                if (status !== undefined) {
-                    throw Error('Invalid email or password')
-                }
-                navigate('/login/success');
-            }).catch(err => setOpenSnack(true))
+        if (!errors.password.error) {
+            setCurrentUser(email, password)
+                .then((status) => {
+                    if (status !== undefined) {
+                        throw Error('Invalid email or password')
+                    }
+                    navigate('/login/success');
+                }).catch(err => setOpenSnack(true))
+        }
     };
 
     const handleClose = (event, reason) => {
@@ -37,17 +41,33 @@ const LoginCard = () => {
             <Grid container flexDirection='column' alignItems='center' sx={{ height: '100%' }} justifyContent='center'>
                 <Typography variant='h4' component='h1' sx={{ mb: 4, fontWeight: 500 }}>Welcome Back!</Typography>
                 <CustomStyledForm onSubmit={event => { handleSubmit(event) }} >
-                    <StyledInput onChange={(event) => {
-                        setEmail(event.target.value);
-                    }} id='email' label='E-mail' variant='outlined' type="email" required />
+                    <StyledInput
+                        onChange={(event) => {
+                            setEmail(event.target.value);
+                        }}
+                        id='email'
+                        label='E-mail'
+                        variant='outlined'
+                        type="email"
+                        required
+                    />
                     <PasswordContainer>
                         <StyledInput onChange={(event) => {
                             setPassword(event.target.value);
-                        }} id='password' label='Password' variant='outlined' type="password" required />
+                        }}
+                            error={errors.password.error}
+                            helperText={errors.password.errorText}
+                            id='password'
+                            label='Password'
+                            variant='outlined'
+                            type="password"
+                            required
+                            onBlur={() => { handleValidation({ password }) }}
+                        />
                         <ForgotPassword to='/forgot-password'>Recover password</ForgotPassword>
                     </PasswordContainer>
                     <ButtonContainer>
-                        <Button type="submit" variant="contained" >Login</Button>
+                        <Button type="submit" variant="contained">Login</Button>
                         <Button component={Link} to="/register" variant="outlined" >Register</Button>
                     </ButtonContainer>
                 </CustomStyledForm>

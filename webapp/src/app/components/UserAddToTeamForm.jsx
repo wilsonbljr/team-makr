@@ -57,6 +57,7 @@ const UserAddToTeamForm = (props) => {
                         }
                     }
                 }}
+                required
                 select
             >
                 <MenuItem value={''}>None</MenuItem>

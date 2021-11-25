@@ -35,6 +35,14 @@ export const createTeam = async (name, description, userId, token) => {
     return status;
 }
 
+// Put method to update team
+export const editTeam = async (teamId, team, token) => {
+    const status = await api.put('/team/' + teamId, team, { headers: { Authorization: 'Bearer ' + token } })
+        .then(res => res.status)
+        .catch(err => err.message);
+    return status;
+}
+
 // Put method to add a user to team
 // Add relationship between user and skill
 export const addUserToTeam = async (userId, teamId, token) => {

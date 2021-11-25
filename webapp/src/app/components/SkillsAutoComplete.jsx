@@ -77,6 +77,7 @@ const SkillsAutoComplete = (props) => {
             <StyledInput
                 {...params}
                 label='Search Skills'
+                required
                 InputProps={{
                     ...params.InputProps,
                     endAdornment: (

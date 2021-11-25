@@ -67,6 +67,7 @@ const SkillsRemoveForm = () => {
                         }
                     }
                 }}
+                required
                 select
             >
                 {skills.map(skill => (

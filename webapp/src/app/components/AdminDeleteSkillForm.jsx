@@ -50,6 +50,7 @@ const AdminDeleteSkillForm = (props) => {
                 variant='outlined'
                 type="number"
                 required
+                onKeyPress={e => { if (e.key === 'Enter') { handleValidation({ skillId }) } }}
                 onBlur={() => { handleValidation({ skillId }) }}
             />
             {alert ? <Alert severity="error">Server error, try again</Alert> : <> </>}

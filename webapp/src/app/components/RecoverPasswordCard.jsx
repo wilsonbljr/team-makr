@@ -91,6 +91,7 @@ const RecoverPasswordCard = () => {
                         variant='outlined'
                         type="password"
                         required
+                        onKeyPress={e => { if (e.key === 'Enter') { handleValidation({ password }) } }}
                         onBlur={() => { handleValidation({ password }) }}
                     />
                     <ButtonContainer>

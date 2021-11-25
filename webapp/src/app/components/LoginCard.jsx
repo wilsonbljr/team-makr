@@ -62,6 +62,7 @@ const LoginCard = () => {
                             variant='outlined'
                             type="password"
                             required
+                            onKeyPress={e => { if (e.key === 'Enter') { handleValidation({ password }) } }}
                             onBlur={() => { handleValidation({ password }) }}
                         />
                         <ForgotPassword to='/forgot-password'>Recover password</ForgotPassword>

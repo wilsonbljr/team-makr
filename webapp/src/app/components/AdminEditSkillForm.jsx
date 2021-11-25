@@ -53,6 +53,7 @@ const AdminEditSkillForm = (props) => {
                 variant='outlined'
                 type="number"
                 required
+                onKeyPress={e => { if (e.key === 'Enter') { handleValidation({ skillId }) } }}
                 onBlur={() => { handleValidation({ skillId }) }}
             />
             <StyledInput

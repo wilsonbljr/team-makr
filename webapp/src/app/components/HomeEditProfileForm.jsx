@@ -21,7 +21,7 @@ const HomeEditProfileForm = (props) => {
 
     const editForm = event => {
         event.preventDefault();
-        if (!errors.password.error || !errors.pronouns.error || !errors.phone_number.error) {
+        if (!errors.password.error && !errors.pronouns.error && !errors.phone_number.error) {
             updateUser(user, pronouns, phone, password, token).then(async res => {
                 if (res.status === 200) {
                     await setCurrentUserInfo(user, token);
@@ -58,6 +58,7 @@ const HomeEditProfileForm = (props) => {
                 label='Pronouns'
                 variant='outlined'
                 type="text"
+                onKeyPress={e => { if (e.key === 'Enter') { handleValidation({ pronouns }) } }}
                 onBlur={() => { handleValidation({ pronouns }) }}
             />
             <StyledInput
@@ -70,6 +71,7 @@ const HomeEditProfileForm = (props) => {
                 label='Phone Number'
                 variant='outlined'
                 type="tel"
+                onKeyPress={e => { if (e.key === 'Enter') { handleValidation({ phone_number: phone }) } }}
                 onBlur={() => { handleValidation({ phone_number: phone }) }}
             />
             <StyledInput
@@ -90,6 +92,7 @@ const HomeEditProfileForm = (props) => {
                 label='Password'
                 variant='outlined'
                 type="password"
+                onKeyPress={e => { if (e.key === 'Enter') { handleValidation({ password }) } }}
                 onBlur={() => { handleValidation({ password }) }}
             />
             {alert ? <Alert severity="error">Server error, try again</Alert> : <> </>}

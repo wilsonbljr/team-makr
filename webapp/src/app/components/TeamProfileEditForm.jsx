@@ -44,7 +44,7 @@ const TeamProfileEditForm = (props) => {
             }} id='name' label='Name' value={name} variant='outlined' type="text" required />
             <StyledInput onChange={(event) => {
                 setDescription(event.target.value);
-            }} id='pronoun' label='Pronouns' variant='outlined' value={description} type="text" required />
+            }} id='description' label='Description' variant='outlined' value={description} type="text" required />
             {alert ? <Alert severity="error">Server error, try again</Alert> : <> </>}
             <Button type="submit" variant="outlined" endIcon={<Edit />}>Edit Team</Button>
         </StyledForm>

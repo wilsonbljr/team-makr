@@ -20,7 +20,7 @@ const RegisterCard = () => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        if (!errors.password.error || !errors.pronouns.error || !errors.phone_number.error || !errors.name.error) {
+        if (!errors.password.error && !errors.pronouns.error && !errors.phone_number.error && !errors.name.error) {
             registerUser(name, pronouns, phone, email, password).then((res) => {
                 if (res.status === 201) {
                     navigate('/register/success');
@@ -54,6 +54,7 @@ const RegisterCard = () => {
                         variant='outlined'
                         type="text"
                         required
+                        onKeyPress={e => { if (e.key === 'Enter') { handleValidation({ name }) } }}
                         onBlur={() => { handleValidation({ name }) }}
                     />
                     <StyledInput
@@ -66,6 +67,7 @@ const RegisterCard = () => {
                         label='Pronouns'
                         variant='outlined'
                         type="text"
+                        onKeyPress={e => { if (e.key === 'Enter') { handleValidation({ pronouns }) } }}
                         onBlur={() => { handleValidation({ pronouns }) }}
                     />
                     <StyledInput
@@ -78,6 +80,7 @@ const RegisterCard = () => {
                         label='Phone Number'
                         variant='outlined'
                         type="tel"
+                        onKeyPress={e => { if (e.key === 'Enter') { handleValidation({ phone_number: phone }) } }}
                         onBlur={() => { handleValidation({ phone_number: phone }) }}
                     />
                     <StyledInput
@@ -101,6 +104,7 @@ const RegisterCard = () => {
                         variant='outlined'
                         type="password"
                         required
+                        onKeyPress={e => { if (e.key === 'Enter') { handleValidation({ password }) } }}
                         onBlur={() => { handleValidation({ password }) }}
                     />
 

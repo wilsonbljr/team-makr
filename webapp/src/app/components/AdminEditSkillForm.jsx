@@ -11,8 +11,8 @@ import { editSkill } from '../../core/services/skill.service';
 import { iconColor } from '../../core/utils/Variables';
 
 const AdminEditSkillForm = (props) => {
-    const { token } = useAuth();
-    const { setCurrentAllSkills } = useSkills();
+    const { user, token } = useAuth();
+    const { setCurrentAllSkills, setCurrentUserSkills } = useSkills();
     const { errors, handleValidation } = useValidate();
     const [skillId, setSkillId] = useState('');
     const [skillName, setSkillName] = useState('');
@@ -28,6 +28,7 @@ const AdminEditSkillForm = (props) => {
                     props.closeModal();
                     props.openSnack();
                     setCurrentAllSkills(token);
+                    setCurrentUserSkills(user, token);
                 } else {
                     setAlert(true);
                 }

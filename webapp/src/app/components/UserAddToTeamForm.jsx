@@ -3,7 +3,7 @@ import { addUserToTeam } from '../../core/services/team.service';
 import { useAuth } from '../../auth/AuthContext';
 import { useTeams } from '../../core/hooks/useTeams';
 import { makeStyles } from '@mui/styles';
-import { Button, MenuItem } from '@mui/material';
+import { Alert, Button, MenuItem } from '@mui/material';
 
 import StyledForm from './StyledForm';
 import StyledInput from './StyledInput';
@@ -22,16 +22,25 @@ const useStyles = makeStyles(theme => ({
 const UserAddToTeamForm = (props) => {
     const classes = useStyles();
     const [teamId, setTeamId] = useState('');
+    const [alert, setAlert] = useState(false);
     const { token } = useAuth();
     const { teams } = useTeams();
 
     const addUserToTeamForm = event => {
         event.preventDefault();
         addUserToTeam(props.userId, teamId, token).then((status) => {
-            if (status === 200) {
+            console.log(status)
+            if (status === 201 ) {
                 props.closeModal();
                 props.openSnack();
-            }
+            };
+
+            if (status === 'Request failed with status code 400') {
+                setAlert(true);
+                setTimeout(() => {
+                    setAlert(false);
+                }, 3000)
+            };
         })
     }
 
@@ -65,6 +74,7 @@ const UserAddToTeamForm = (props) => {
                     <MenuItem key={team.id} value={team.id}>{team.name}</MenuItem>
                 ))}
             </StyledInput>
+            {alert ? <Alert severity='error'>User already in team</Alert> : <> </>}
             <Button type="submit" variant='outlined'>ADD</Button>
         </StyledForm>
     )

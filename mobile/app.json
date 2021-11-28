@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "TeamMakrApp",
-    "slug": "TeamMakrApp",
+    "name": "Team Makr",
+    "slug": "teammakr",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#031424"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -18,15 +18,6 @@
     ],
     "ios": {
       "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     }
   }
 }

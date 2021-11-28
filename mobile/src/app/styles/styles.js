@@ -2,7 +2,8 @@ export const primaryColour = '#30415d';
 export const lightPrimaryColour = '#8eaebd';
 export const secondaryColour = '#cf6766';
 export const backgroundColour = '#031424';
-export const iconColor = '#FFF';
+export const iconColour = '#FFF';
+export const textColour = '#FFF'
 
 export const fontFamilyLight = 'Montserrat-Light';
 export const fontFamilyRegular = 'Montserrat-Regular';

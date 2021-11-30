@@ -135,7 +135,21 @@ export const personTeam = [{
     id: 2,
     name: "Abstract Connoisseurs",
     description: "OOP rules",
-    user_active: 0,
+    user_active: 1,
+    leader: 1
+},
+{
+    id: 3,
+    name: "Novo time",
+    description: "Descricao gigante pra testar o wrap de texto aaa aaa aaaaaa aaaaaaa",
+    user_active: 1,
+    leader: 0
+},
+{
+    id: 4,
+    name: "Nosso time",
+    description: "Descricao do nosso time",
+    user_active: 1,
     leader: 0
 }]
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { KeyboardAvoidingView, Platform, View, StatusBar, StyleSheet } from 'react-native';
+import { KeyboardAvoidingView, Platform, View, StatusBar, StyleSheet, ScrollView } from 'react-native';
 import { backgroundColour } from '../styles/styles';
 
 const DefaultView = ({ children }) => {
@@ -10,7 +10,9 @@ const DefaultView = ({ children }) => {
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 style={styles.keyboardAvoidContainer}
             >
-                {children}
+                <ScrollView>
+                    {children}
+                </ScrollView>
             </KeyboardAvoidingView>
         </View>
     )
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         justifyContent: 'center',
-        paddingHorizontal: 20,
+        paddingHorizontal: 10,
     }
 });
 

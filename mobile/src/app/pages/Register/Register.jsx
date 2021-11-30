@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Title } from 'react-native-paper';
 import DefaultView from '../../components/DefaultView';
 import RegisterForm from '../../components/RegisterForm';
@@ -7,10 +7,8 @@ import RegisterForm from '../../components/RegisterForm';
 const Register = () => {
     return (
         <DefaultView>
-            <ScrollView>
-                <Title style={styles.title}>Register Account</Title>
-                <RegisterForm />
-            </ScrollView>
+            <Title style={styles.title}>Register Account</Title>
+            <RegisterForm />
         </DefaultView>
     );
 }

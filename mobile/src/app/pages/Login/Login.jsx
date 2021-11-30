@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, ScrollView } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 import { Subheading } from 'react-native-paper';
 import DefaultButton from '../../components/DefaultButton';
 import DefaultView from '../../components/DefaultView';
@@ -9,12 +9,10 @@ const Login = ({ navigation }) => {
 
     return (
         <DefaultView>
-            <ScrollView>
-                <Image source={require('../../../assets/getStarted.png')} style={styles.image} />
-                <Subheading style={styles.text}>Building your project is way easier with the right people</Subheading>
-                <LoginForm navigation={navigation} />
-                <DefaultButton buttonLabel='Register' onPress={() => navigation.navigate('Register')} />
-            </ScrollView>
+            <Image source={require('../../../assets/getStarted.png')} style={styles.image} />
+            <Subheading style={styles.text}>Building your project is way easier with the right people</Subheading>
+            <LoginForm navigation={navigation} />
+            <DefaultButton buttonLabel='Register' onPress={() => navigation.navigate('Register')} />
         </DefaultView>
     );
 }

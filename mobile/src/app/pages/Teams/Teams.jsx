@@ -1,13 +1,13 @@
 import React from 'react';
 import DefaultView from '../../components/DefaultView';
-import HomeProfileCard from '../../components/HomeProfileCard';
+import TeamsCard from '../../components/TeamsCard';
 
-const Home = () => {
+const Teams = () => {
     return (
         <DefaultView>
-            <HomeProfileCard />
+            <TeamsCard />
         </DefaultView>
     )
 }
 
-export default Home;
+export default Teams;

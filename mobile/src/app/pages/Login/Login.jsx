@@ -1,45 +1,25 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, Image, ScrollView } from 'react-native';
-import { Subheading, TextInput } from 'react-native-paper';
+import React from 'react';
+import { StyleSheet, Image, ScrollView } from 'react-native';
+import { Subheading } from 'react-native-paper';
 import DefaultButton from '../../components/DefaultButton';
 import DefaultView from '../../components/DefaultView';
-import { secondaryColour } from '../../styles/styles';
+import LoginForm from '../../components/LoginForm';
 
-const Login = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+const Login = ({ navigation }) => {
 
     return (
         <DefaultView>
-            <ScrollView contentContainerStyle={styles.container} centerContent={true}>
+            <ScrollView>
                 <Image source={require('../../../assets/getStarted.png')} style={styles.image} />
                 <Subheading style={styles.text}>Building your project is way easier with the right people</Subheading>
-                <TextInput
-                    style={styles.input}
-                    label='E-mail'
-                    type='outlined'
-                    value={email}
-                    onChangeText={email => setEmail(email)}
-                />
-                <TextInput
-                    style={styles.input}
-                    label='Password'
-                    type='outlined'
-                    value={password}
-                    onChangeText={password => setPassword(password)}
-                />
-                <Text style={styles.recoverText}>Recover Password</Text>
-                <DefaultButton buttonLabel='Login' />
-                <DefaultButton buttonLabel='Register' />
+                <LoginForm navigation={navigation} />
+                <DefaultButton buttonLabel='Register' onPress={() => navigation.navigate('Register')} />
             </ScrollView>
         </DefaultView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        
-    },
     image: {
         width: 300,
         height: 300,
@@ -49,15 +29,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 18,
         marginVertical: 15,
-    },
-    input: {
-        marginTop: 15
-    },
-    recoverText: {
-        textAlign: 'right',
-        fontSize: 18,
-        marginVertical: 18,
-        color: secondaryColour
     }
 });
 

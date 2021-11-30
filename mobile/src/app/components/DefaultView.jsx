@@ -1,10 +1,10 @@
 import React from 'react';
-import { KeyboardAvoidingView, Platform, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
+import { KeyboardAvoidingView, Platform, View, StatusBar, StyleSheet } from 'react-native';
 import { backgroundColour } from '../styles/styles';
 
 const DefaultView = ({ children }) => {
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <StatusBar backgroundColor={backgroundColour} />
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -12,7 +12,7 @@ const DefaultView = ({ children }) => {
             >
                 {children}
             </KeyboardAvoidingView>
-        </SafeAreaView>
+        </View>
     )
 }
 

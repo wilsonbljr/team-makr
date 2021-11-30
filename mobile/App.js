@@ -6,6 +6,9 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import Login from './src/app/pages/Login/Login';
 import theme from './src/app/styles/theme';
 import { useFonts } from 'expo-font';
+import Register from './src/app/pages/Register/Register';
+import RecoverPassword from './src/app/pages/RecoverPassword/RecoverPassword';
+import Home from './src/app/pages/Home/Home';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,7 +30,17 @@ const App = () => {
         <Stack.Navigator initialRouteName='Login'>
           <Stack.Screen
             name='Login'
-            component={Login}
+            component={Home}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name='Register'
+            component={Register}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name='RecoverPassword'
+            component={RecoverPassword}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

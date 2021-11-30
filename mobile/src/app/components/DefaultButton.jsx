@@ -7,10 +7,10 @@ import { textColour } from '../styles/styles';
 const DefaultButton = (props) => {
     return (
         <Button
-            {...props}
             mode='contained'
             style={styles.button}
             labelStyle={styles.buttonText}
+            {...props}
         >{props.buttonLabel}</Button>
 
     )
@@ -18,12 +18,12 @@ const DefaultButton = (props) => {
 
 const styles = StyleSheet.create({
     button: {
-        height: 45,
+        height: 40,
         marginVertical: 10,
         justifyContent: 'center'
     },
     buttonText: {
-        color: textColour, 
+        color: textColour,
         fontSize: 16
     }
 });

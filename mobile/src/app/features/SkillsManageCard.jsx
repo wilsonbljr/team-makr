@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Avatar, Card, IconButton, Text, Title } from 'react-native-paper';
 import { personSkills } from '../../../mock';
 import SkillsAddForm from '../components/SkillsAddForm';
+import SkillsDeleteForm from '../components/SkillsDeleteForm';
 import { primaryColour, secondaryColour } from '../styles/styles';
 
 
@@ -22,7 +23,7 @@ const SkillsManageCard = () => {
                 <Text style={styles.text}>To edit your skills just add it again with the new level.</Text>
                 <SkillsAddForm />
                 <Title style={styles.title}>Remove skill:</Title>
-                
+                <SkillsDeleteForm />
             </Card.Content>
         </Card>
     )

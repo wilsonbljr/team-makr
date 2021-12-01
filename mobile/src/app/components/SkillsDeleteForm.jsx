@@ -1,29 +1,28 @@
 import React, { useState } from 'react';
 import { textColour } from '../styles/styles';
 import DefaultButton from './DefaultButton';
+import { personSkills } from '../../../mock';
 import RNPickerSelect from 'react-native-picker-select';
-import { skills } from '../../../mock';
 import { StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
 
-
-const SkillsAddForm = () => {
-    const [addSkill, setAddSkill] = useState(null);
+const SkillsDeleteForm = () => {
+    const [deleteSkill, setDeleteSkill] = useState('');
 
     return (
         <>
             <RNPickerSelect
-                onValueChange={value => setAddSkill(value)}
-                items={skills.map(skill => { return { label: skill.name, value: skill.id } })}
+                onValueChange={value => setDeleteSkill(value)}
+                items={personSkills.map(skill => { return { label: skill.name, value: skill.id } })}
                 placeholder={{ label: 'Select a skill', value: null }}
-                value={addSkill}
-                style={{...styles}}
+                value={deleteSkill}
+                style={{ ...styles }}
                 useNativeAndroidPickerStyle={false}
                 Icon={() => {
-                    return <IconButton icon='menu-down' color={textColour}/>
+                    return <IconButton icon='menu-down' color={textColour} />
                 }}
             />
-            <DefaultButton buttonLabel='Add Skill' icon='plus' />
+            <DefaultButton buttonLabel='Remove Skill' icon='delete' color={'#bf1206dd'} />
         </>
     )
 };
@@ -47,9 +46,8 @@ const styles = StyleSheet.create({
         borderColor: textColour,
         borderRadius: 5,
         color: textColour,
-        paddingRight: 30, 
+        paddingRight: 30,
     },
 })
 
-export default SkillsAddForm;
-
+export default SkillsDeleteForm;

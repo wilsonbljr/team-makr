@@ -14,9 +14,10 @@ function skillsMap(personSkills, softSkill) {
         // If there is returns the card
         return personSkills.map((skill) => {
             if (skill.softSkill !== softSkill && skill.id !== null) {
+                // Random keys for react fragment and divider so it doesn't trigger unique key error
                 return (
-                    <>
-                        <Divider style={styles.divider} />
+                    <React.Fragment key={skill.id + 3659}> 
+                        <Divider style={styles.divider} key={skill.id + 4659} />
                         <List.Item
                             key={skill.id}
                             title={<Subheading>{skill.name}</Subheading>}
@@ -32,10 +33,10 @@ function skillsMap(personSkills, softSkill) {
                                 starContainerStyle={styles.stars}
                                 reviews={ratingReviews} />}
                         />
-                    </>
+                    </React.Fragment>
                 )
             }
-            return (<></>);
+            return
         })
     }
     // Otherwise, returns a message

@@ -1,10 +1,10 @@
 import { configureFonts, DefaultTheme } from 'react-native-paper';
-import { backgroundColour, primaryColour, secondaryColour, textColour } from './styles';
+import { primaryColour, secondaryColour, textColour } from './styles';
 import { fontConfig } from './fonts';
 
 const theme = {
     ...DefaultTheme,
-    roudness: 2,
+    roundness: 6,
     colors: {
         ...DefaultTheme.colors,
         background: primaryColour,

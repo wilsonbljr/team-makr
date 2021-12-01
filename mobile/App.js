@@ -11,6 +11,8 @@ import RecoverPassword from './src/app/pages/RecoverPassword/RecoverPassword';
 import Home from './src/app/pages/Home/Home';
 import Teams from './src/app/pages/Teams/Teams';
 import Skills from './src/app/pages/Skills/Skills';
+import TeamProfile from './src/app/pages/Teams/TeamProfile';
+import UserProfile from './src/app/pages/User/UserProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,7 +34,7 @@ const App = () => {
         <Stack.Navigator initialRouteName='Login'>
           <Stack.Screen
             name='Login'
-            component={Skills}
+            component={UserProfile}
             options={{ headerShown: false }}
           />
           <Stack.Screen

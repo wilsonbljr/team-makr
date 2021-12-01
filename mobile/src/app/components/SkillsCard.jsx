@@ -24,7 +24,7 @@ function skillsMap(personSkills, softSkill) {
                             titleStyle={styles.listTitle}
                             style={styles.listItem}
                             right={() => <AirbnbRating
-                                size={13}
+                                size={16}
                                 isDisabled
                                 reviewColor={textColour}
                                 reviewSize={14}

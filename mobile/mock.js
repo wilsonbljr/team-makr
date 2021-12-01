@@ -104,7 +104,14 @@ export const team = {
             id: 1,
             firstName: "Sana",
             lastName: "Minatozaki"
-        }
+        },
+        {
+            user_active: 1,
+            leader: 0,
+            id: 2,
+            firstName: "Wilson",
+            lastName: "Bley"
+        },
     ]
 }
 

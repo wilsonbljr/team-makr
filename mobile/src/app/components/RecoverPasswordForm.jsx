@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-paper';
-import { secondaryColour } from '../styles/styles';
 import DefaultButton from './DefaultButton';
+import { secondaryColour } from '../styles/styles';
+
 
 const RecoverPasswordForm = () => {
     const [email, setEmail] = useState('');

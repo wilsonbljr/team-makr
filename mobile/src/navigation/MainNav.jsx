@@ -1,15 +1,18 @@
 import React from 'react';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
-import BottomNav from './BottomNav';
+
+import Login from '../app/pages/Login/Login';
 import Register from '../app/pages/Register/Register';
 import RecoverPassword from '../app/pages/RecoverPassword/RecoverPassword';
-import Login from '../app/pages/Login/Login';
-import TeamProfile from '../app/pages/Teams/TeamProfile';
+
+import BottomNav from './BottomNav';
 import UserProfile from '../app/pages/User/UserProfile';
+import TeamProfile from '../app/pages/Teams/TeamProfile';
+import Search from '../app/pages/Search/Search';
+
 import { primaryColour, secondaryColour } from '../app/styles/styles';
 import HeaderLogo from '../app/components/HeaderLogo';
 import HeaderSearchButton from '../app/components/HeaderSearchButton';
-import Search from '../app/pages/Search/Search';
 
 const Stack = createStackNavigator();
 

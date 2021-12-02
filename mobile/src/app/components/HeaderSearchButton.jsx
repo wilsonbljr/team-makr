@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { secondaryColour } from '../styles/styles';
 import DefaultButtonOutlined from './DefaultButtonOutlined';
+import { secondaryColour } from '../styles/styles';
+
 
 const HeaderSearchButton = ({ navigation }) => {
     return (

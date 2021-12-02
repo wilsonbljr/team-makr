@@ -2,6 +2,7 @@ import React from 'react';
 import { KeyboardAvoidingView, Platform, View, StatusBar, StyleSheet, ScrollView } from 'react-native';
 import { backgroundColour } from '../styles/styles';
 
+
 const DefaultView = ({ children }) => {
     return (
         <View style={styles.container}>

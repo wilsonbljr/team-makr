@@ -18,3 +18,5 @@ export const teamRoles = {
     1: 'Leader',
     0: 'Member'
 }
+
+export const ratingReviews = ['Being Developed', 'Basic', 'Intermediate', 'Advanced', 'Expert'];

@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-paper';
-import { user } from '../../../mock';
 import DefaultButtonOutlined from './DefaultButtonOutlined';
 import DefaultModal from './DefaultModal';
 import { backgroundColour, primaryColour } from '../styles/styles';
+import { user } from '../../../mock';
+
 
 const HomeEditProfileModal = ({ modal, setModal }) => {
     const [name, setName] = useState(user.firstName + ' ' + user.lastName);

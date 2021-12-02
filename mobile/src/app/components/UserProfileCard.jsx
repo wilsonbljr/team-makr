@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Avatar, Card, Divider, Text, Title } from 'react-native-paper';
-import { user } from '../../../mock';
-import { addButtonColour, primaryColour, secondaryColour } from '../styles/styles';
-import transformNumber from '../../core/utils/TransformNumber'
 import DefaultButton from './DefaultButton';
+import transformNumber from '../../core/utils/TransformNumber';
+import { addButtonColour, primaryColour, secondaryColour } from '../styles/styles';
+import { user } from '../../../mock';
 
 const UserProfileCard = ({ setModal }) => {
     return (

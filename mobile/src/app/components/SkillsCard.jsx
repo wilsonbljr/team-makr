@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Card, Divider, List, Subheading, Text } from 'react-native-paper';
-import { personSkills } from '../../../mock';
-import { primaryColour, secondaryColour, textColour } from '../styles/styles';
 import { AirbnbRating } from 'react-native-ratings';
+import { primaryColour, secondaryColour, textColour } from '../styles/styles';
+import { ratingReviews } from '../../core/utils/Lists';
+import { personSkills } from '../../../mock';
 
-const ratingReviews = ['Being Developed', 'Basic', 'Intermediate', 'Advanced', 'Expert'];
 
 function skillsMap(personSkills, softSkill) {
     // Checks if there is a skill

@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
-import DefaultButtonOutlined from './DefaultButtonOutlined';
-import RNPickerSelect from 'react-native-picker-select';
-import DefaultModal from './DefaultModal';
-import { teams } from '../../../mock';
-import { textColour } from '../styles/styles';
 import { IconButton } from 'react-native-paper';
+import RNPickerSelect from 'react-native-picker-select';
+import DefaultButtonOutlined from './DefaultButtonOutlined';
+import DefaultModal from './DefaultModal';
+import { textColour } from '../styles/styles';
+import { teams } from '../../../mock';
 
 const UserProfileAddToTeamModal = ({ modal, setModal }) => {
     const [addTeam, setAddTeam] = useState(null);

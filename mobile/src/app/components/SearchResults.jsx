@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Card, Chip, Divider, IconButton, List, Subheading, Text } from 'react-native-paper';
-import { skills, users } from '../../../mock';
+import { Card, Chip, Divider, List, Subheading, Text } from 'react-native-paper';
 import { primaryColour, secondaryColour } from '../styles/styles';
+import { skills, users } from '../../../mock';
+
 
 const SearchResults = () => {
     return (

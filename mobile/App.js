@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider as PaperProvider } from 'react-native-paper';
+import MainNav from './src/navigation/MainNav';
 import { useFonts } from 'expo-font';
 import theme from './src/app/styles/theme';
-import MainNav from './src/navigation/MainNav';
 
 const App = () => {
   const [loaded] = useFonts({

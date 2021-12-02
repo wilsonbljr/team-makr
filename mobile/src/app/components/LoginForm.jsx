@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
-import { TextInput, TouchableRipple } from 'react-native-paper';
-import { secondaryColour } from '../styles/styles';
+import { TextInput } from 'react-native-paper';
 import DefaultButton from './DefaultButton';
+import { secondaryColour } from '../styles/styles';
+
 
 const LoginForm = ({ navigation }) => {
     const [email, setEmail] = useState('')

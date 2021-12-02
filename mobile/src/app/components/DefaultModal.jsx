@@ -1,7 +1,8 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { Modal, Portal, Text, Button, Provider, Title, IconButton } from 'react-native-paper';
+import { Modal, Portal, Title, IconButton } from 'react-native-paper';
 import { backgroundColour, primaryColour } from '../styles/styles';
+
 
 const DefaultModal = ({ setModal, modal, children, title }) => {
     const hideModal = () => setModal(false);

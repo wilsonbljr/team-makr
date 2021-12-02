@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Card, List, Text } from 'react-native-paper';
-import { personTeam } from '../../../mock';
-import { primaryColour, secondaryColour } from '../styles/styles';
 import DefaultButton from './DefaultButton';
+import { primaryColour, secondaryColour } from '../styles/styles';
+import { personTeam } from '../../../mock';
 
 const TeamsCard = ({ setModal }) => {
     return (

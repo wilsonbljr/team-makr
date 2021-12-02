@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Card, IconButton, Text, Title } from 'react-native-paper';
-import { personSkills } from '../../../mock';
 import SkillsAddForm from '../components/SkillsAddForm';
 import SkillsDeleteForm from '../components/SkillsDeleteForm';
 import { primaryColour, secondaryColour } from '../styles/styles';
+import { personSkills } from '../../../mock';
 
 
 const SkillsManageCard = () => {

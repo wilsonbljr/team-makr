@@ -1,7 +1,7 @@
 import React from 'react';
+import SkillsManageCard from '../../features/SkillsManageCard';
 import DefaultView from '../../components/DefaultView';
 import SkillsCard from '../../components/SkillsCard';
-import SkillsManageCard from '../../features/SkillsManageCard';
 
 const Skills = () => {
 

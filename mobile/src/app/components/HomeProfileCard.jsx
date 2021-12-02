@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Avatar, Card, Divider, Text, Title } from 'react-native-paper';
-import { user, personTeam, personSkills } from '../../../mock';
-import { primaryColour, secondaryColour } from '../styles/styles';
-import transformNumber from '../../core/utils/TransformNumber'
 import DefaultButton from './DefaultButton';
+import transformNumber from '../../core/utils/TransformNumber';
+import { primaryColour, secondaryColour } from '../styles/styles';
+import { user, personTeam, personSkills } from '../../../mock';
+
 
 const HomeProfileCard = ({ setModal, navigation }) => {
     return (

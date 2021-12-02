@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { textColour } from '../styles/styles';
-import DefaultButton from './DefaultButton';
-import RNPickerSelect from 'react-native-picker-select';
-import { skills } from '../../../mock';
 import { StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
+import RNPickerSelect from 'react-native-picker-select';
+import DefaultButton from './DefaultButton';
+import { textColour } from '../styles/styles';
+import { skills } from '../../../mock';
 
 
 const SkillsAddForm = () => {

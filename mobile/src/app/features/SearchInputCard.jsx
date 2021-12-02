@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Card, IconButton, Text, Title } from 'react-native-paper';
+import { Card, IconButton, Text } from 'react-native-paper';
 import SearchForm from '../components/SearchForm';
 import { primaryColour, secondaryColour } from '../styles/styles';
 

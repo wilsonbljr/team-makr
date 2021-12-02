@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Avatar, Card, Divider, Text, Title } from 'react-native-paper';
+import DefaultButton from './DefaultButton';
+import { backgroundColour, deleteButtonColour, primaryColour, secondaryColour } from '../styles/styles';
 import { team } from '../../../mock';
-import { backgroundColour, deleteButtonColour, editButtonColour, primaryColour, secondaryColour } from '../styles/styles';
-import DefaultButton from './DefaultButton'
 
 
 const TeamProfileInfoCard = ({ setLeaveModal, setEditModal }) => {

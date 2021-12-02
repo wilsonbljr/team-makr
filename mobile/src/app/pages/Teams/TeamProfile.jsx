@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
+import TeamProfileEditModal from '../../features/TeamProfileEditModal';
+import TeamProfileLeaveModal from '../../features/TeamProfileLeaveModal';
 import DefaultView from '../../components/DefaultView';
 import TeamProfileMemberList from '../../components/TeamProfileMemberList';
-import TeamProfileInfoCard from '../../features/TeamProfileInfoCard';
-import TeamProfileLeaveModal from '../../features/TeamProfileLeaveModal';
+import TeamProfileInfoCard from '../../components/TeamProfileInfoCard';
 
 const TeamProfile = () => {
-    const [modal, setModal] = useState(false);
+    const [editModal, setEditModal] = useState(false);
+    const [leaveModal, setLeaveModal] = useState(false);
 
     return (
         <DefaultView>
-            <TeamProfileInfoCard setModal={setModal} />
+            <TeamProfileInfoCard setLeaveModal={setLeaveModal} setEditModal={setEditModal} />
             <TeamProfileMemberList />
-            <TeamProfileLeaveModal modal={modal} setModal={setModal} />
+            <TeamProfileEditModal modal={editModal} setModal={setEditModal} />
+            <TeamProfileLeaveModal modal={leaveModal} setModal={setLeaveModal} />
         </DefaultView>
     )
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Modal, Portal, Text, Button, Provider, Title, IconButton } from 'react-native-paper';
-import { primaryColour } from '../styles/styles';
+import { backgroundColour, primaryColour } from '../styles/styles';
 
 const DefaultModal = ({ setModal, modal, children, title }) => {
     const hideModal = () => setModal(false);
@@ -23,11 +23,13 @@ const DefaultModal = ({ setModal, modal, children, title }) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: primaryColour,
+        backgroundColor: backgroundColour,
         paddingTop: 10,
         paddingHorizontal: 25,
         paddingBottom: 25,
-        margin: 20
+        margin: 20,
+        borderWidth: 1.5,
+        borderColor: primaryColour
     },
     title: {
         marginBottom: 16,

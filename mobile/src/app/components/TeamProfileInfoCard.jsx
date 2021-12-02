@@ -3,10 +3,10 @@ import { StyleSheet } from 'react-native';
 import { Avatar, Card, Divider, Text, Title } from 'react-native-paper';
 import { team } from '../../../mock';
 import { backgroundColour, deleteButtonColour, editButtonColour, primaryColour, secondaryColour } from '../styles/styles';
-import DefaultButton from '../components/DefaultButton'
+import DefaultButton from './DefaultButton'
 
 
-const TeamProfileInfoCard = ({ setModal }) => {
+const TeamProfileInfoCard = ({ setLeaveModal, setEditModal }) => {
     return (
         <Card style={styles.card}>
             <Card.Title
@@ -24,10 +24,10 @@ const TeamProfileInfoCard = ({ setModal }) => {
                 <Text style={styles.text}>There are currently {team.users.length} member(s) in this team.</Text>
 
                 <Title style={styles.title}>Edit team:</Title>
-                <DefaultButton buttonLabel='EDIT TEAM' icon='pencil' color={editButtonColour} />
+                <DefaultButton buttonLabel='EDIT TEAM' icon='pencil' color={editButtonColour} onPress={() => setEditModal(true)} />
 
                 <Title style={styles.title}>Leave team:</Title>
-                <DefaultButton buttonLabel='LEAVE TEAM' icon='logout' onPress={() => setModal(true)} color={deleteButtonColour} />
+                <DefaultButton buttonLabel='LEAVE TEAM' icon='logout' onPress={() => setLeaveModal(true)} color={deleteButtonColour} />
             </Card.Content>
         </Card>
     )

@@ -11,7 +11,9 @@ const DefaultView = ({ children }) => {
                 style={styles.keyboardAvoidContainer}
             >
                 <ScrollView>
-                    {children}
+                    <View style={styles.scrollContainer}>
+                        {children}
+                    </View>
                 </ScrollView>
             </KeyboardAvoidingView>
         </View>
@@ -30,6 +32,9 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         paddingHorizontal: 10,
+    },
+    scrollContainer: {
+        paddingVertical: 10
     }
 });
 

@@ -6,7 +6,7 @@ import { primaryColour, secondaryColour } from '../styles/styles';
 import transformNumber from '../../core/utils/TransformNumber'
 import DefaultButton from './DefaultButton';
 
-const HomeProfileCard = ({ setModal }) => {
+const HomeProfileCard = ({ setModal, navigation }) => {
     return (
         <Card style={styles.card}>
             <Card.Title title={user.firstName} leftStyle={styles.avatar} left={() => <Avatar.Text size={60} label={user.firstName.charAt(0)} />} />
@@ -31,11 +31,11 @@ const HomeProfileCard = ({ setModal }) => {
 
                 <Title style={styles.title}>Teams:</Title>
                 <Text style={styles.text}>You currently are in {personTeam.length} team(s)!</Text>
-                <DefaultButton style={styles.button} icon='account-multiple' buttonLabel='Manage Teams' />
+                <DefaultButton style={styles.button} icon='account-multiple' buttonLabel='Manage Teams' onPress={() => navigation.navigate('Teams')} />
 
                 <Title style={styles.title}>Skills:</Title>
                 <Text style={styles.text}>You currently have {personSkills.length} skill(s)!</Text>
-                <DefaultButton style={styles.lastButton} icon='code-tags' buttonLabel='Manage Skills' />
+                <DefaultButton style={styles.lastButton} icon='code-tags' buttonLabel='Manage Skills' onPress={() => navigation.navigate('Skills')}  />
 
             </Card.Content>
         </Card>

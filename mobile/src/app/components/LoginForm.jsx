@@ -27,8 +27,8 @@ const LoginForm = ({ navigation }) => {
                 secureTextEntry={true}
                 onChangeText={password => setPassword(password)}
             />
-                <Text style={styles.recoverText} onPress={() => navigation.navigate('RecoverPassword')}>Recover Password</Text>
-            <DefaultButton buttonLabel='Login' />
+            <Text style={styles.recoverText} onPress={() => navigation.navigate('RecoverPassword')}>Recover Password</Text>
+            <DefaultButton buttonLabel='Login' onPress={() => navigation.reset({ routes: [{ name: 'HomeNav' }] })} />
         </>
     )
 };

@@ -1,21 +1,9 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import { Provider as PaperProvider } from 'react-native-paper';
-import Login from './src/app/pages/Login/Login';
-import theme from './src/app/styles/theme';
 import { useFonts } from 'expo-font';
-import Register from './src/app/pages/Register/Register';
-import RecoverPassword from './src/app/pages/RecoverPassword/RecoverPassword';
-import Home from './src/app/pages/Home/Home';
-import Teams from './src/app/pages/Teams/Teams';
-import Skills from './src/app/pages/Skills/Skills';
-import TeamProfile from './src/app/pages/Teams/TeamProfile';
-import UserProfile from './src/app/pages/User/UserProfile';
-import Search from './src/app/pages/Search/Search';
-
-const Stack = createNativeStackNavigator();
+import theme from './src/app/styles/theme';
+import MainNav from './src/navigation/MainNav';
 
 const App = () => {
   const [loaded] = useFonts({
@@ -32,23 +20,7 @@ const App = () => {
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='Login'>
-          <Stack.Screen
-            name='Login'
-            component={UserProfile}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name='Register'
-            component={Register}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name='RecoverPassword'
-            component={RecoverPassword}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
+        <MainNav />
       </NavigationContainer>
     </PaperProvider>
   );

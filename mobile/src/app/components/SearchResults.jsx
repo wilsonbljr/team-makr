@@ -14,15 +14,15 @@ const SearchResults = () => {
             <Card.Content>
                 <Divider style={styles.divider} />
                 {users ? users.map(user => {
-                    return (<>
+                    return (<React.Fragment key={user.id + 4090}>
                         <List.Item
                             key={user.id}
                             title={<Subheading style={styles.name}>{user.firstName + ' ' + user.lastName}</Subheading>}
                             titleStyle={styles.listTitle}
                             description={user.skills.slice(0, 5).map(skill => {
                                 return (
-                                    <View style={{ padding: 1 }}>
-                                        <Chip mode='outlined' disabled style={styles.chip} textStyle={{ color: secondaryColour }}>
+                                    <View key={skill.skillId + 300} style={{ padding: 1 }}>
+                                        <Chip key={skill.skillId} mode='outlined' disabled style={styles.chip} textStyle={{ color: secondaryColour }}>
                                             {skills.find(s => s.id === skill.skillId).name}
                                         </Chip>
                                     </View>
@@ -32,8 +32,8 @@ const SearchResults = () => {
                             descriptionStyle={styles.chipContainer}
                             descriptionNumberOfLines={5}
                         />
-                        <Divider style={styles.divider} />
-                    </>)
+                        <Divider key={user.id + 3090} style={styles.divider} />
+                    </React.Fragment>)
                 }) : <Text>If you're seeing this here, either you haven't searched yet or we couldn't find anyone</Text>}
             </Card.Content>
         </Card>

@@ -13,6 +13,7 @@ import Teams from './src/app/pages/Teams/Teams';
 import Skills from './src/app/pages/Skills/Skills';
 import TeamProfile from './src/app/pages/Teams/TeamProfile';
 import UserProfile from './src/app/pages/User/UserProfile';
+import Search from './src/app/pages/Search/Search';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,7 +35,7 @@ const App = () => {
         <Stack.Navigator initialRouteName='Login'>
           <Stack.Screen
             name='Login'
-            component={UserProfile}
+            component={Search}
             options={{ headerShown: false }}
           />
           <Stack.Screen

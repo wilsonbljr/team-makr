@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Card, Divider, IconButton, List, Subheading, Text } from 'react-native-paper';
+import { Card, IconButton, List, Subheading, Text } from 'react-native-paper';
 import { team } from '../../../mock';
 import { primaryColour, secondaryColour } from '../styles/styles';
 

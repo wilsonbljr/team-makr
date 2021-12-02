@@ -10,6 +10,7 @@ const DefaultButton = (props) => {
             mode='contained'
             style={styles.button}
             labelStyle={styles.buttonText}
+            contentStyle={styles.content}
             {...props}
         >{props.buttonLabel}</Button>
 
@@ -25,6 +26,9 @@ const styles = StyleSheet.create({
     buttonText: {
         color: textColour,
         fontSize: 16
+    },
+    content: {
+        flexDirection: 'row-reverse',
     }
 });
 

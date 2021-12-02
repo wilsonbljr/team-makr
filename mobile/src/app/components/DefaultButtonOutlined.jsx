@@ -10,6 +10,7 @@ const DefaultButtonOutlined = (props) => {
             mode='outlined'
             style={styles.button}
             labelStyle={styles.buttonText}
+            contentStyle={styles.content}
             {...props}
         >{props.buttonLabel}</Button>
 
@@ -25,6 +26,9 @@ const styles = StyleSheet.create({
     buttonText: {
         color: secondaryColour,
         fontSize: 16
+    },
+    content: {
+        flexDirection: 'row-reverse',
     }
 });
 

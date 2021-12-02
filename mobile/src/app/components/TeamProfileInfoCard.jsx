@@ -24,7 +24,7 @@ const TeamProfileInfoCard = ({ setLeaveModal, setEditModal }) => {
                 <Text style={styles.text}>There are currently {team.users.length} member(s) in this team.</Text>
 
                 <Title style={styles.title}>Edit team:</Title>
-                <DefaultButton buttonLabel='EDIT TEAM' icon='pencil' color={editButtonColour} onPress={() => setEditModal(true)} />
+                <DefaultButton buttonLabel='EDIT TEAM' icon='pencil' onPress={() => setEditModal(true)} />
 
                 <Title style={styles.title}>Leave team:</Title>
                 <DefaultButton buttonLabel='LEAVE TEAM' icon='logout' onPress={() => setLeaveModal(true)} color={deleteButtonColour} />

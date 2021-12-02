@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { Modal, Portal, Text, Button, Provider, Title, IconButton } from 'react-native-paper';
 import { backgroundColour, primaryColour } from '../styles/styles';
 
@@ -13,10 +13,13 @@ const DefaultModal = ({ setModal, modal, children, title }) => {
                 onDismiss={hideModal}
                 contentContainerStyle={styles.container}
             >
-                <Title style={styles.title}>{title}</Title>
-                <IconButton icon='close' style={styles.icon} onPress={() => setModal(false)} />
-                {children}
+                <ScrollView style={styles.scrollContainer}>
+                    <Title style={styles.title}>{title}</Title>
+                    <IconButton icon='close' style={styles.icon} onPress={() => setModal(false)} />
+                    {children}
+                </ScrollView>
             </Modal>
+
         </Portal>
     );
 };
@@ -24,12 +27,15 @@ const DefaultModal = ({ setModal, modal, children, title }) => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: backgroundColour,
-        paddingTop: 10,
-        paddingHorizontal: 25,
-        paddingBottom: 25,
         margin: 20,
         borderWidth: 1.5,
         borderColor: primaryColour
+    },
+    scrollContainer: {
+        width: '100%',
+        paddingTop: 10,
+        paddingHorizontal: 20,
+        paddingBottom: 25,
     },
     title: {
         marginBottom: 16,
@@ -38,8 +44,8 @@ const styles = StyleSheet.create({
     },
     icon: {
         position: 'absolute',
-        top: 2,
-        right: 2
+        top: -5,
+        right: -10
     }
 })
 

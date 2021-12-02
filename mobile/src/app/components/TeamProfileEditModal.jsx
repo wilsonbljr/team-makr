@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import { StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { team } from '../../../mock';
-import DefaultButton from '../components/DefaultButton';
-import DefaultButtonOutlined from '../components/DefaultButtonOutlined';
-import DefaultModal from '../components/DefaultModal';
-import { backgroundColour, secondaryColour } from '../styles/styles';
+import DefaultButtonOutlined from './DefaultButtonOutlined';
+import DefaultModal from './DefaultModal';
+import { backgroundColour } from '../styles/styles';
 
 const TeamProfileEditModal = ({ modal, setModal }) => {
     const [name, setName] = useState(team.name);

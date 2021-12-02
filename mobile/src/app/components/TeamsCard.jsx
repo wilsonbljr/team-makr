@@ -5,13 +5,13 @@ import { personTeam } from '../../../mock';
 import { primaryColour, secondaryColour } from '../styles/styles';
 import DefaultButton from './DefaultButton';
 
-const TeamsCard = () => {
+const TeamsCard = ({ setModal }) => {
     return (
         <Card style={styles.card}>
             <Card.Title
                 title='TEAMS'
                 style={styles.cardTitle}
-                right={() => <DefaultButton mode='contained' icon='plus-box' buttonLabel='Create Team' style={styles.button} />}
+                right={() => <DefaultButton mode='contained' icon='plus-box' buttonLabel='Create Team' style={styles.button} onPress={() => setModal(true)}/>}
             />
             <Card.Content>
                 {personTeam.length !== 0

@@ -35,7 +35,7 @@ const App = () => {
         <Stack.Navigator initialRouteName='Login'>
           <Stack.Screen
             name='Login'
-            component={TeamProfile}
+            component={UserProfile}
             options={{ headerShown: false }}
           />
           <Stack.Screen

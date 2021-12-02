@@ -6,7 +6,7 @@ import { addButtonColour, primaryColour, secondaryColour } from '../styles/style
 import transformNumber from '../../core/utils/TransformNumber'
 import DefaultButton from './DefaultButton';
 
-const UserProfileCard = () => {
+const UserProfileCard = ({ setModal }) => {
     return (
         <Card style={styles.card}>
             <Card.Title title={user.firstName} leftStyle={styles.avatar} left={() => <Avatar.Text size={60} label={user.firstName.charAt(0)} />} />
@@ -22,7 +22,7 @@ const UserProfileCard = () => {
                 <Title style={styles.title}>Phone:</Title>
                 <Text style={styles.text}>{transformNumber(user.phone_number)}</Text>
 
-                <DefaultButton style={styles.button} icon='plus' buttonLabel='Add To Team' color={addButtonColour} />
+                <DefaultButton style={styles.button} icon='plus' buttonLabel='Add To Team' color={addButtonColour} onPress={() => setModal(true)} />
 
             </Card.Content>
         </Card>

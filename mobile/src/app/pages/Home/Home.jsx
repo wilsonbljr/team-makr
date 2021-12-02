@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DefaultView from '../../components/DefaultView';
 import HomeProfileCard from '../../components/HomeProfileCard';
+import HomeEditProfileModal from '../../components/HomeEditProfileModal';
 
 const Home = () => {
+    const [modal, setModal] = useState(false);
+
     return (
         <DefaultView>
-            <HomeProfileCard />
+            <HomeProfileCard setModal={setModal} />
+            <HomeEditProfileModal modal={modal} setModal={setModal} />
         </DefaultView>
     )
 }

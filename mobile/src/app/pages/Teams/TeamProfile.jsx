@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import TeamProfileEditModal from '../../features/TeamProfileEditModal';
-import TeamProfileLeaveModal from '../../features/TeamProfileLeaveModal';
+import TeamProfileEditModal from '../../components/TeamProfileEditModal';
+import TeamProfileLeaveModal from '../../components/TeamProfileLeaveModal';
 import DefaultView from '../../components/DefaultView';
 import TeamProfileMemberList from '../../components/TeamProfileMemberList';
 import TeamProfileInfoCard from '../../components/TeamProfileInfoCard';

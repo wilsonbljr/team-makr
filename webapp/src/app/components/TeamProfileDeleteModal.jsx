@@ -56,11 +56,11 @@ const TeamProfileDeleteModal = (props) => {
             <Modal open={props.modal} onClose={closeModal}>
                 <ModalContent sx={{ boxShadow: 24, padding: 3 }}>
                     <Grid container justifyContent='center' alignItems='center'>
-                        <Typography variant='h6' sx={{ mb: 2, textAlign: 'center' }}>LEAVE TEAM</Typography>
+                        <Typography variant='h6' sx={{ mb: 2, textAlign: 'center', color: 'white' }}>LEAVE TEAM</Typography>
                         <IconButton aria-label="Close Modal" sx={{ position: 'absolute', top: '6px', right: '6px' }} onClick={() => closeModal()}>
                             <Close sx={{ color: iconColor }} />
                         </IconButton>
-                        <Typography variant='body1' sx={{ textAlign: 'center' }}>If you are the leader of this team, the team will be DELETED</Typography>
+                        <Typography variant='body1' sx={{ textAlign: 'center', color: 'white' }}>If you are the leader of this team, the team will be DELETED</Typography>
                         <Button onClick={event => handleDelete(event)} variant='contained' color='error' sx={{ mt: 2, minWidth: '190px' }}>CONFIRM</Button>
                     </Grid>
                 </ModalContent>

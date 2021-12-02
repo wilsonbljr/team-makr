@@ -29,7 +29,7 @@ const TeamsModal = (props) => {
         <>
             <Modal open={props.modal} onClose={closeModal}>
                 <ModalContent sx={{ boxShadow: 24, p: 3, pt: 2 }}>
-                    <Typography variant='h5' sx={{ mb: 4, textAlign: 'center', fontWeight: 500 }}>Create new Team</Typography>
+                    <Typography variant='h5' sx={{ mb: 4, textAlign: 'center', fontWeight: 500, color: 'white' }}>Create new Team</Typography>
                     <IconButton aria-label="Close Modal" sx={{ position: 'absolute', top: '6px', right: '6px' }} onClick={() => closeModal()}>
                         <Close sx={{ color: iconColor }} />
                     </IconButton>

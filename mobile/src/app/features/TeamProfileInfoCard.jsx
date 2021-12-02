@@ -6,7 +6,7 @@ import { backgroundColour, deleteButtonColour, editButtonColour, primaryColour, 
 import DefaultButton from '../components/DefaultButton'
 
 
-const TeamProfileInfoCard = () => {
+const TeamProfileInfoCard = ({ setModal }) => {
     return (
         <Card style={styles.card}>
             <Card.Title
@@ -27,7 +27,7 @@ const TeamProfileInfoCard = () => {
                 <DefaultButton buttonLabel='EDIT TEAM' icon='pencil' color={editButtonColour} />
 
                 <Title style={styles.title}>Leave team:</Title>
-                <DefaultButton buttonLabel='LEAVE TEAM' icon='logout' color={deleteButtonColour} />
+                <DefaultButton buttonLabel='LEAVE TEAM' icon='logout' onPress={() => setModal(true)} color={deleteButtonColour} />
             </Card.Content>
         </Card>
     )

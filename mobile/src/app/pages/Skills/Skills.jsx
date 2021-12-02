@@ -4,6 +4,7 @@ import SkillsCard from '../../components/SkillsCard';
 import SkillsManageCard from '../../features/SkillsManageCard';
 
 const Skills = () => {
+
     return (
         <DefaultView>
             <SkillsManageCard />

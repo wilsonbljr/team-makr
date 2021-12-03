@@ -5,6 +5,8 @@ import MainNav from './src/navigation/MainNav';
 import { useFonts } from 'expo-font';
 import theme from './src/app/styles/theme';
 
+import { AuthContextProvider } from './src/auth/AuthContext';
+
 const App = () => {
   const [loaded] = useFonts({
     MontserratBold: require('./src/assets/fonts/Montserrat-Bold.ttf'),
@@ -18,11 +20,13 @@ const App = () => {
   }
 
   return (
-    <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <MainNav />
-      </NavigationContainer>
-    </PaperProvider>
+    <AuthContextProvider>
+      <PaperProvider theme={theme}>
+        <NavigationContainer>
+          <MainNav />
+        </NavigationContainer>
+      </PaperProvider>
+    </AuthContextProvider>
   );
 }
 

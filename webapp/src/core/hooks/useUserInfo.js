@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { getUser } from '../services/user.service';
 
 const UserInfoContext = createContext({
@@ -10,7 +10,7 @@ const UserInfoContext = createContext({
     admin: null,
     setCurrentUserInfo: () => { },
     unsetCurrentUserInfo: () => { }
-})
+});
 
 export const UserInfoContextProvider = ({ children }) => {
     const [firstName, setFirstName] = useState();

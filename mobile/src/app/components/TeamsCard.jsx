@@ -5,7 +5,7 @@ import DefaultButton from './DefaultButton';
 import { primaryColour, secondaryColour } from '../styles/styles';
 import { personTeam } from '../../../mock';
 
-const TeamsCard = ({ setModal }) => {
+const TeamsCard = ({ setModal, navigation }) => {
     return (
         <Card style={styles.card}>
             <Card.Title
@@ -21,6 +21,7 @@ const TeamsCard = ({ setModal }) => {
                         style={styles.listItem}
                         description={team.description.length > 30 ? team.description.substring(0, 30) + '...' : team.description}
                         right={props => <List.Icon {...props} icon='open-in-new' />}
+                        onPress={() => navigation.navigate('TeamProfile')}
                     />)
                     : <Text style={styles.text}>You haven't joined any teams yet.</Text>
                 }

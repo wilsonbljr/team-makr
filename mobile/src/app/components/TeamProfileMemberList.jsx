@@ -4,7 +4,7 @@ import { Card, IconButton, List, Subheading, Text } from 'react-native-paper';
 import { primaryColour, secondaryColour } from '../styles/styles';
 import { team } from '../../../mock';
 
-const TeamProfileMemberList = () => {
+const TeamProfileMemberList = ({ navigation }) => {
     return (
         <Card style={styles.card}>
             <Card.Title
@@ -20,6 +20,7 @@ const TeamProfileMemberList = () => {
                         description={<Text style={styles.lastName}>{user.lastName}</Text>}
                         style={styles.listItem}
                         right={() => <IconButton icon='open-in-new' style={styles.icon} />}
+                        onPress={() => navigation.navigate('UserProfile')}
                     />)
                 })}
             </Card.Content>

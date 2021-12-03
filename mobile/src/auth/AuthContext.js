@@ -1,7 +1,7 @@
-import { createContext, useContext, useState } from 'react'
-import { useSkills } from '../core/hooks/useSkills';
-import { useTeams } from '../core/hooks/useTeams';
-import { useUserInfo } from '../core/hooks/useUserInfo';
+import React, { createContext, useContext, useState } from 'react'
+// import { useSkills } from '../core/hooks/useSkills';
+// import { useTeams } from '../core/hooks/useTeams';
+// import { useUserInfo } from '../core/hooks/useUserInfo';
 import { login, logout } from './auth';
 
 const AuthContext = createContext({
@@ -14,22 +14,22 @@ const AuthContext = createContext({
 export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState();
     const [token, setToken] = useState();
-    const { setCurrentUserInfo, unsetCurrentUserInfo } = useUserInfo();
-    const { setCurrentUserTeams } = useTeams();
-    const { setCurrentUserSkills, setCurrentAllSkills } = useSkills();
+    // const { setCurrentUserInfo, unsetCurrentUserInfo } = useUserInfo();
+    // const { setCurrentUserTeams } = useTeams();
+    // const { setCurrentUserSkills, setCurrentAllSkills } = useSkills();
 
     const setCurrentUser = async (email, password) => {
         const status = await login(email, password)
-            .then(async ({ token, userId, status}) => {
+            .then(async ({ token, userId, status }) => {
                 if (token === undefined) {
                     return status;
                 }
                 setToken(token);
                 setUser(userId);
-                await setCurrentUserInfo(userId, token);
-                await setCurrentUserTeams(userId, token);
-                await setCurrentUserSkills(userId, token);
-                await setCurrentAllSkills(token);
+                // setCurrentUserInfo(userId, token);
+                // setCurrentUserTeams(userId, token);
+                // setCurrentUserSkills(userId, token);
+                // setCurrentAllSkills(token);
             }).catch(err => err.message);
         return status;
     }
@@ -39,7 +39,7 @@ export const AuthContextProvider = ({ children }) => {
             .then((res) => {
                 setUser(null);
                 setToken(null);
-                unsetCurrentUserInfo();
+                // unsetCurrentUserInfo();
                 return res
             });
         return res;

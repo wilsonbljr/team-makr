@@ -2,14 +2,24 @@ import { useState } from 'react';
 
 const useValidate = () => {
     const [errors, setErrors] = useState({
+        email: { error: false, errorText: '' },
         password: { error: false, errorText: '' },
         name: { error: false, errorText: '' },
         pronouns: { error: false, errorText: '' },
         phone_number: { error: false, errorText: '' },
-        skillId: {error: false, errorText: ''}
+        skillId: { error: false, errorText: '' }
     });
 
     const handleValidation = (values) => {
+        if (values.email) {
+            //eslint-disable-next-line
+            const re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+            const validate = re.test(values.email);
+            validate ?
+                setErrors({ ...errors, email: { error: false, errorText: '' } })
+                : setErrors({ ...errors, email: { error: true, errorText: 'Please enter a valid email' } })
+
+        }
         if (values.password) {
             //eslint-disable-next-line
             const re = /^(?=[^\d_].*?\d)\w(\w|[!@#$%]){7,20}/;

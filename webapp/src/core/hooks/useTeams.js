@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { getUserTeams } from '../services/team.service';
 
 const TeamsContext = createContext({

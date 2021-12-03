@@ -5,14 +5,14 @@ import DefaultView from '../../components/DefaultView';
 import TeamProfileMemberList from '../../components/TeamProfileMemberList';
 import TeamProfileInfoCard from '../../components/TeamProfileInfoCard';
 
-const TeamProfile = () => {
+const TeamProfile = ({ navigation }) => {
     const [editModal, setEditModal] = useState(false);
     const [leaveModal, setLeaveModal] = useState(false);
 
     return (
         <DefaultView>
             <TeamProfileInfoCard setLeaveModal={setLeaveModal} setEditModal={setEditModal} />
-            <TeamProfileMemberList />
+            <TeamProfileMemberList navigation={navigation} />
             <TeamProfileEditModal modal={editModal} setModal={setEditModal} />
             <TeamProfileLeaveModal modal={leaveModal} setModal={setLeaveModal} />
         </DefaultView>

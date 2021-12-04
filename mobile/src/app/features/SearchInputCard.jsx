@@ -5,7 +5,7 @@ import SearchForm from '../components/SearchForm';
 import { primaryColour, secondaryColour } from '../styles/styles';
 
 
-const SearchInputCard = () => {
+const SearchInputCard = ({ setResults }) => {
     return (
         <Card style={styles.card}>
             <Card.Title
@@ -16,7 +16,7 @@ const SearchInputCard = () => {
             />
             <Card.Content>
                 <Text style={styles.text}>You can search people by name, skill or both!</Text>
-                <SearchForm />
+                <SearchForm setResults={setResults} />
             </Card.Content>
         </Card>
     )

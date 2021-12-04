@@ -1,15 +1,31 @@
 import React, { useState } from 'react';
+import { useAuth } from '../../auth/AuthContext';
+import { useSkills } from '../../core/hooks/useSkills';
+import { searchUsers } from '../../core/services/user.service';
 import { StyleSheet } from 'react-native';
 import { IconButton, TextInput } from 'react-native-paper';
 import RNPickerSelect from 'react-native-picker-select';
 import DefaultButton from './DefaultButton';
 import { textColour } from '../styles/styles';
-import { skills } from '../../../mock';
 
 
-const SearchForm = () => {
-    const [addSkill, setAddSkill] = useState(null);
+const SearchForm = ({ setResults }) => {
+    const { token } = useAuth();
+    const { allSkills } = useSkills();
+    const [skillFilter, setSkillFilter] = useState(null);
     const [name, setName] = useState('');
+
+    
+    async function search() {
+        const splitName = name.split(' ', 2);
+        let firstName = splitName[0];
+        let lastName = splitName[1];
+        await searchUsers(firstName, lastName, skillFilter, token)
+            .then(res => {
+                setResults(res);
+            })
+            .catch(err => setAlert(true));
+    }
 
     return (
         <>
@@ -22,17 +38,17 @@ const SearchForm = () => {
                 onChangeText={name => setName(name)}
             />
             <RNPickerSelect
-                onValueChange={value => setAddSkill(value)}
-                items={skills.map(skill => { return { label: skill.name, value: skill.id } })}
+                onValueChange={value => setSkillFilter(value)}
+                items={allSkills.map(skill => { return { label: skill.name, value: skill.id } })}
                 placeholder={{ label: 'Select Skill', value: null }}
-                value={addSkill}
+                value={skillFilter}
                 style={{ ...pickerStyles }}
                 useNativeAndroidPickerStyle={false}
                 Icon={() => {
                     return <IconButton icon='menu-down' color={textColour} />
                 }}
             />
-            <DefaultButton buttonLabel='Search' icon='magnify' />
+            <DefaultButton buttonLabel='Search' icon='magnify' onPress={() => search()}/>
         </>
     )
 };

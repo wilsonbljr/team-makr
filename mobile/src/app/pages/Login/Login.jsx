@@ -1,17 +1,18 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/core';
 import { StyleSheet, Image } from 'react-native';
 import { Subheading } from 'react-native-paper';
 import DefaultButton from '../../components/DefaultButton';
 import DefaultView from '../../components/DefaultView';
 import LoginForm from '../../components/LoginForm';
 
-const Login = ({ navigation }) => {
-
+const Login = () => {
+    const navigation = useNavigation();
     return (
         <DefaultView>
             <Image source={require('../../../assets/getStarted.png')} style={styles.image} />
             <Subheading style={styles.text}>Building your project is way easier with the right people</Subheading>
-            <LoginForm navigation={navigation} />
+            <LoginForm />
             <DefaultButton buttonLabel='Register' onPress={() => navigation.navigate('Register')} />
         </DefaultView>
     );

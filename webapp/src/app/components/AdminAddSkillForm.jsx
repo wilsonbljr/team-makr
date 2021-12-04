@@ -26,7 +26,6 @@ const AdminAddSkillForm = (props) => {
                 setCurrentAllSkills(token);
             }
         }).catch(err => {
-            console.log(err)
             setAlert(true);
             setTimeout(() => {
                 setAlert(false);

@@ -29,7 +29,6 @@ const UserAddToTeamForm = (props) => {
     const addUserToTeamForm = event => {
         event.preventDefault();
         addUserToTeam(props.userId, teamId, token).then((status) => {
-            console.log(status)
             if (status === 201 ) {
                 props.closeModal();
                 props.openSnack();

@@ -29,7 +29,6 @@ const HomeEditProfileForm = (props) => {
                     props.openSnack();
                 }
             }).catch(err => {
-                console.log(err)
                 setAlert(true);
                 setTimeout(() => {
                     setAlert(false);

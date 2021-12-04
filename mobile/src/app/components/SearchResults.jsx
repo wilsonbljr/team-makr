@@ -3,9 +3,11 @@ import { StyleSheet, View } from 'react-native';
 import { Card, Chip, Divider, List, Subheading, Text } from 'react-native-paper';
 import { primaryColour, secondaryColour } from '../styles/styles';
 import { useSkills } from '../../core/hooks/useSkills';
+import { useNavigation } from '@react-navigation/core';
 
 
 const SearchResults = ({ results }) => {
+    const navigation = useNavigation();
     const { allSkills } = useSkills();
 
     return (
@@ -34,6 +36,7 @@ const SearchResults = ({ results }) => {
                             }
                             descriptionStyle={styles.chipContainer}
                             descriptionNumberOfLines={5}
+                            onPress={() => navigation.navigate('UserProfile', { id: user.id })}
                         />
                         <Divider key={user.id + 3090} style={styles.divider} />
                     </React.Fragment>)

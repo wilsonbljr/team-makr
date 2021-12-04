@@ -19,14 +19,12 @@ const AdminLogsCard = (props) => {
         event.preventDefault();
         await getLogs(initialDate, finalDate, setLogs, token).then(async res => {
             if (res !== 200) {
-                console.log(res)
                 setAlert(true);
                 setTimeout(() => {
                     setAlert(false);
                 }, 3000);
             }
         }).catch(err => {
-            console.log(err)
             setAlert(true);
             setTimeout(() => {
                 setAlert(false);

@@ -3,12 +3,12 @@ import DefaultView from '../../components/DefaultView';
 import TeamsCard from '../../components/TeamsCard';
 import TeamsCreateModal from '../../components/TeamsCreateModal';
 
-const Teams = ({ navigation }) => {
+const Teams = () => {
     const [modal, setModal] = useState(false);
 
     return (
         <DefaultView>
-            <TeamsCard setModal={setModal} navigation={navigation} />
+            <TeamsCard setModal={setModal} />
             <TeamsCreateModal setModal={setModal} modal={modal} />
         </DefaultView>
     )

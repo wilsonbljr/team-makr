@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/core';
 import { useAuth } from '../../auth/AuthContext';
 import useValidate from '../../core/hooks/useValidate';
 import { useSnackbar } from '../../core/hooks/useSnackbar';
 import { StyleSheet, Text } from 'react-native';
 import { HelperText, TextInput } from 'react-native-paper';
 import DefaultButton from './DefaultButton';
-import { secondaryColour, deleteButtonColour } from '../styles/styles';
+import { secondaryColour } from '../styles/styles';
 
 
-const LoginForm = ({ navigation }) => {
+const LoginForm = () => {
     const { setCurrentUser } = useAuth();
     const { errors, handleValidation } = useValidate();
     const { showSnack } = useSnackbar();
+    const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 

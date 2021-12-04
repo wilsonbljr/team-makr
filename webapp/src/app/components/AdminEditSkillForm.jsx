@@ -33,7 +33,6 @@ const AdminEditSkillForm = (props) => {
                     setAlert(true);
                 }
             }).catch(err => {
-                console.log(err)
                 setAlert(true);
                 setTimeout(() => {
                     setAlert(false);

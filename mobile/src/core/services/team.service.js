@@ -2,7 +2,7 @@ import api from './api.service';
 
 // Get teams from a certain user
 export const getUserTeams = async (id, setData, token) => {
-    const status = await api.get('/person/' + id + '/team?user_active=true', { headers: { Authorization: 'Bearer ' + token } })
+    const status = await api.get('/person/' + id + '/team', { headers: { Authorization: 'Bearer ' + token }, params: { active: true } })
         .then(res => {
             setData(res.data);
             return res.status;
@@ -58,7 +58,7 @@ export const leaveTeam = async (teamId, userId, users, token) => {
     const requestUser = users.find(user => {
         return user.id === userId
     });
-    if (requestUser.leader === 1) {
+    if (requestUser.leader === 1 || users.length === 1) {
         const res = await api.delete('/person/' + userId + '/team/' + teamId, { headers: { Authorization: 'Bearer ' + token } })
             .then(async res => {
                 const response = await api.delete('/team/' + teamId, { headers: { Authorization: 'Bearer ' + token } });

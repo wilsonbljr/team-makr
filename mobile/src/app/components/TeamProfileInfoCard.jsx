@@ -1,12 +1,13 @@
 import React from 'react';
+import { useAuth } from '../../auth/AuthContext';
 import { StyleSheet } from 'react-native';
 import { Avatar, Card, Divider, Text, Title } from 'react-native-paper';
 import DefaultButton from './DefaultButton';
 import { backgroundColour, deleteButtonColour, primaryColour, secondaryColour } from '../styles/styles';
-import { team } from '../../../mock';
 
 
-const TeamProfileInfoCard = ({ setLeaveModal, setEditModal }) => {
+const TeamProfileInfoCard = ({ setLeaveModal, setEditModal, team }) => {
+    const { user } = useAuth();
     return (
         <Card style={styles.card}>
             <Card.Title
@@ -23,8 +24,8 @@ const TeamProfileInfoCard = ({ setLeaveModal, setEditModal }) => {
                 <Title style={styles.title}>Members:</Title>
                 <Text style={styles.text}>There are currently {team.users.length} member(s) in this team.</Text>
 
-                <Title style={styles.title}>Edit team:</Title>
-                <DefaultButton buttonLabel='EDIT TEAM' icon='pencil' onPress={() => setEditModal(true)} />
+                {team.users && team.users.find(u => u.id === user)?.leader === 1 ? <><Title style={styles.title}>Edit team:</Title>
+                    <DefaultButton buttonLabel='EDIT TEAM' icon='pencil' onPress={() => setEditModal(true)} /></> : <></>}
 
                 <Title style={styles.title}>Leave team:</Title>
                 <DefaultButton buttonLabel='LEAVE TEAM' icon='logout' onPress={() => setLeaveModal(true)} color={deleteButtonColour} />

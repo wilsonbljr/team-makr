@@ -1,18 +1,21 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/core';
 import { StyleSheet } from 'react-native';
 import DefaultButtonOutlined from './DefaultButtonOutlined';
 import { secondaryColour } from '../styles/styles';
 
 
-const HeaderSearchButton = ({ navigation }) => {
+const HeaderSearchButton = () => {
+    const navigation = useNavigation();
+
     return (
-        <DefaultButtonOutlined 
-        buttonLabel='Search' 
-        icon='magnify' 
-        contentStyle={styles.content}
-        style={styles.button}
-        labelStyle={styles.buttonText}
-        onPress={() => {navigation.navigate('Search')}}
+        <DefaultButtonOutlined
+            buttonLabel='Search'
+            icon='magnify'
+            contentStyle={styles.content}
+            style={styles.button}
+            labelStyle={styles.buttonText}
+            onPress={() => { navigation.navigate('Search') }}
         />
     )
 };

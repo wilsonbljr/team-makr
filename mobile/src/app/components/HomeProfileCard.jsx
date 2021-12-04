@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../auth/AuthContext';
 import { useUserInfo } from '../../core/hooks/useUserInfo';
+import { useTeams } from '../../core/hooks/useTeams';
+import { useSkills } from '../../core/hooks/useSkills';
+import { useNavigation } from '@react-navigation/core';
 import { StyleSheet } from 'react-native';
 import { Avatar, Card, Divider, Text, Title } from 'react-native-paper';
 import DefaultButtonOutlined from './DefaultButtonOutlined';
 import DefaultButton from './DefaultButton';
 import transformNumber from '../../core/utils/TransformNumber';
 import { primaryColour, secondaryColour } from '../styles/styles';
-import { useTeams } from '../../core/hooks/useTeams';
-import { useSkills } from '../../core/hooks/useSkills';
 import Loading from './Loading';
 
 
-const HomeProfileCard = ({ setModal, navigation }) => {
+const HomeProfileCard = ({ setModal }) => {
     const { unsetCurrentUser } = useAuth();
     const { firstName, pronoun, email, phone_number } = useUserInfo();
     const { teams } = useTeams();
     const { skills } = useSkills();
+    const navigation = useNavigation();
     const [loading, setLoading] = useState(true);
 
     const logout = async () => {

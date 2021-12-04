@@ -4,9 +4,8 @@ import { Avatar, Card, Divider, Text, Title } from 'react-native-paper';
 import DefaultButton from './DefaultButton';
 import transformNumber from '../../core/utils/TransformNumber';
 import { addButtonColour, primaryColour, secondaryColour } from '../styles/styles';
-import { user } from '../../../mock';
 
-const UserProfileCard = ({ setModal }) => {
+const UserProfileCard = ({ setModal, user }) => {
     return (
         <Card style={styles.card}>
             <Card.Title title={user.firstName} leftStyle={styles.avatar} left={() => <Avatar.Text size={60} label={user.firstName.charAt(0)} />} />

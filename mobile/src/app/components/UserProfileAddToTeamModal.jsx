@@ -1,14 +1,34 @@
 import React, { useState } from 'react';
+import { useAuth } from '../../auth/AuthContext';
+import { useSnackbar } from '../../core/hooks/useSnackbar';
+import { useTeams } from '../../core/hooks/useTeams';
+import { addUserToTeam } from '../../core/services/team.service';
 import { StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import RNPickerSelect from 'react-native-picker-select';
 import DefaultButtonOutlined from './DefaultButtonOutlined';
 import DefaultModal from './DefaultModal';
 import { textColour } from '../styles/styles';
-import { teams } from '../../../mock';
 
-const UserProfileAddToTeamModal = ({ modal, setModal }) => {
+const UserProfileAddToTeamModal = ({ modal, setModal, user }) => {
+    const { token } = useAuth();
+    const { showSnack } = useSnackbar();
+    const { teams } = useTeams();
     const [addTeam, setAddTeam] = useState(null);
+
+    const submitAddToTeam = async () => {
+        await addUserToTeam(user.id, addTeam, token).then((status) => {
+            if (status === 201) {
+                setModal(false);
+                showSnack(false, 'User added to team!')
+            };
+
+            if (status === 'Request failed with status code 400') {
+                setModal(false);
+                showSnack(true, 'User already in team!');
+            };
+        }).catch(err => showSnack(true, 'Internal Server error.'))
+    };
 
     return (
         <DefaultModal setModal={setModal} modal={modal} title='Add user to team'>
@@ -23,7 +43,7 @@ const UserProfileAddToTeamModal = ({ modal, setModal }) => {
                     return <IconButton icon='menu-down' color={textColour} />
                 }}
             />
-            <DefaultButtonOutlined buttonLabel='ADD' />
+            <DefaultButtonOutlined buttonLabel='ADD' onPress={() => submitAddToTeam()} />
         </DefaultModal>
     )
 };

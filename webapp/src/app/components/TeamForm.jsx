@@ -16,7 +16,6 @@ const TeamForm = (props) => {
     const teamForm = event => {
         event.preventDefault();
         createTeam(teamName, teamDesc, user, token).then((status) => {
-            console.log(status)
             if (status === 201) {
                 props.closeModal();
                 props.openSnack();

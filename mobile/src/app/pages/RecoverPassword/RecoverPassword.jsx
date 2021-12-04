@@ -4,7 +4,7 @@ import { Title } from 'react-native-paper';
 import DefaultView from '../../components/DefaultView';
 import RecoverPasswordForm from '../../components/RecoverPasswordForm';
 
-const RecoverPassword = ({ navigation }) => {
+const RecoverPassword = () => {
     return (
         <DefaultView>
             <Title style={styles.title}>Recover your password</Title>

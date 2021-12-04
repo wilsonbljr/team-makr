@@ -1,11 +1,13 @@
 import React from 'react';
+import { useTeams } from '../../core/hooks/useTeams';
 import { StyleSheet } from 'react-native';
 import { Card, List, Text } from 'react-native-paper';
 import DefaultButton from './DefaultButton';
 import { primaryColour, secondaryColour } from '../styles/styles';
-import { personTeam } from '../../../mock';
 
 const TeamsCard = ({ setModal, navigation }) => {
+    const { teams } = useTeams();
+
     return (
         <Card style={styles.card}>
             <Card.Title
@@ -14,8 +16,8 @@ const TeamsCard = ({ setModal, navigation }) => {
                 right={() => <DefaultButton mode='contained' icon='plus-box' buttonLabel='Create Team' style={styles.button} onPress={() => setModal(true)}/>}
             />
             <Card.Content>
-                {personTeam.length !== 0
-                    ? personTeam.map(team => <List.Item
+                {teams.length !== 0
+                    ? teams.map(team => <List.Item
                         key={team.id}
                         title={team.name}
                         style={styles.listItem}

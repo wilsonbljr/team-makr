@@ -1,6 +1,7 @@
 import React from 'react';
 import { KeyboardAvoidingView, Platform, View, StatusBar, StyleSheet, ScrollView } from 'react-native';
 import { backgroundColour } from '../styles/styles';
+import DefaultSnackbar from './DefaultSnackbar';
 
 
 const DefaultView = ({ children }) => {
@@ -17,6 +18,7 @@ const DefaultView = ({ children }) => {
                     </View>
                 </ScrollView>
             </KeyboardAvoidingView>
+            <DefaultSnackbar />
         </View>
     )
 }

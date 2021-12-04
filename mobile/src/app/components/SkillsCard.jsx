@@ -4,15 +4,14 @@ import { Card, Divider, List, Subheading, Text } from 'react-native-paper';
 import { AirbnbRating } from 'react-native-ratings';
 import { primaryColour, secondaryColour, textColour } from '../styles/styles';
 import { ratingReviews } from '../../core/utils/Lists';
-import { personSkills } from '../../../mock';
 
 
-function skillsMap(personSkills, softSkill) {
+function skillsMap(skills, softSkill) {
     // Checks if there is a skill
-    const array = personSkills.find(skill => skill.softSkill !== softSkill);
+    const array = skills.find(skill => skill.softSkill !== softSkill);
     if (array !== 0 && array !== undefined) {
         // If there is returns the card
-        return personSkills.map((skill) => {
+        return skills.map((skill) => {
             if (skill.softSkill !== softSkill && skill.id !== null) {
                 // Random keys for react fragment and divider so it doesn't trigger unique key error
                 return (
@@ -48,15 +47,15 @@ function skillsMap(personSkills, softSkill) {
     )
 }
 
-const SkillsCard = (props) => {
+const SkillsCard = ({ skills, softSkill }) => {
     return (
         <Card style={styles.card}>
             <Card.Title
-                title={props.softSkill === 1 ? 'HARD SKILLS' : 'SOFT SKILLS'}
+                title={softSkill === 1 ? 'HARD SKILLS' : 'SOFT SKILLS'}
                 style={styles.cardTitle}
             />
             <Card.Content>
-                {skillsMap(personSkills, props.softSkill)}
+                {skillsMap(skills, softSkill)}
                 <Divider style={styles.divider} />
             </Card.Content>
         </Card>

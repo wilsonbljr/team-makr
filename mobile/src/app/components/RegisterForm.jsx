@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/core';
 import useValidate from '../../core/hooks/useValidate';
+import { useSnackbar } from '../../core/hooks/useSnackbar';
 import { registerUser } from '../../core/services/user.service';
-import { StyleSheet } from 'react-native';
-import { HelperText, Snackbar, TextInput } from 'react-native-paper';
+import { HelperText, TextInput } from 'react-native-paper';
 import DefaultButton from './DefaultButton';
-import { deleteButtonColour, secondaryColour, successColour } from '../styles/styles';
 
 
 const RegisterForm = () => {
     const { errors, handleValidation } = useValidate();
     const navigation = useNavigation();
+    const { showSnack } = useSnackbar();
     const [name, setName] = useState('');
     const [pronouns, setPronouns] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [successSnack, setSuccessSnack] = useState(false);
-    const [errorSnack, setErrorSnack] = useState(false);
 
 
     function submitRegister() {
@@ -31,10 +29,10 @@ const RegisterForm = () => {
             password !== '') {
             registerUser(name, pronouns, phone, email, password).then((res) => {
                 if (res.status === 201) {
-                    setSuccessSnack(true);
+                    showSnack(false, 'Register successful!');
                     setTimeout(() => { navigation.navigate('Login') }, 3000);
                 } else {
-                    setErrorSnack(true);
+                    showSnack(true, 'Internal Server Error.');
                 }
             });
         }
@@ -94,39 +92,8 @@ const RegisterForm = () => {
             />
             <HelperText type='error' padding='none' visible={errors.password.error}>{errors.password.errorText}</HelperText>
             <DefaultButton buttonLabel='Register' onPress={() => submitRegister()} />
-            <Snackbar
-                visible={errorSnack}
-                onDismiss={() => setErrorSnack(false)}
-                duration={3000}
-                style={styles.snackError}
-            >
-                Internal Server Error
-            </Snackbar>
-            <Snackbar
-                visible={successSnack}
-                onDismiss={() => setSuccessSnack(false)}
-                duration={3000}
-                style={styles.snackSuccess}
-            >
-                Register successful!
-            </Snackbar>
         </>
     )
 };
-
-const styles = StyleSheet.create({
-    recoverText: {
-        textAlign: 'right',
-        fontSize: 18,
-        marginVertical: 18,
-        color: secondaryColour
-    },
-    snackError: {
-        backgroundColor: deleteButtonColour,
-    },
-    snackSuccess: {
-        backgroundColor: successColour,
-    }
-});
 
 export default RegisterForm;

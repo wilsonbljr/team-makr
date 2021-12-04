@@ -1,13 +1,15 @@
 import React from 'react';
+import { useSkills } from '../../core/hooks/useSkills';
 import { StyleSheet } from 'react-native';
 import { Card, IconButton, Text, Title } from 'react-native-paper';
 import SkillsAddForm from '../components/SkillsAddForm';
 import SkillsDeleteForm from '../components/SkillsDeleteForm';
 import { primaryColour, secondaryColour } from '../styles/styles';
-import { personSkills } from '../../../mock';
 
 
 const SkillsManageCard = () => {
+    const { skills } = useSkills();
+
     return (
         <Card style={styles.card}>
             <Card.Title
@@ -17,7 +19,7 @@ const SkillsManageCard = () => {
                 style={styles.cardTitle}
             />
             <Card.Content>
-                <Text style={styles.text}>You currently have {personSkills.length} skill(s) registered in your profile.</Text>
+                <Text style={styles.text}>You currently have {skills.length} skill(s) registered in your profile.</Text>
                 
                 <Title style={styles.title}>Add new skill:</Title>
                 <Text style={styles.text}>To edit your skills just add it again with the new level.</Text>

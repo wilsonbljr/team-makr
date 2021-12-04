@@ -1,39 +1,33 @@
 import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/core';
 import { forgotPasswordEmail, resetPassword } from '../../core/services/password.service';
 import useValidate from '../../core/hooks/useValidate';
+import { useSnackbar } from '../../core/hooks/useSnackbar';
+import { useNavigation } from '@react-navigation/core';
 import { StyleSheet } from 'react-native';
-import { HelperText, Snackbar, TextInput } from 'react-native-paper';
+import { HelperText, TextInput } from 'react-native-paper';
 import DefaultButton from './DefaultButton';
-import { deleteButtonColour, secondaryColour, successColour } from '../styles/styles';
+import { secondaryColour } from '../styles/styles';
 
 
 const RecoverPasswordForm = () => {
     const { errors, handleValidation } = useValidate();
     const navigation = useNavigation();
+    const { showSnack } = useSnackbar();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordToken, setPasswordToken] = useState('');
-    const [successSnack, setSuccessSnack] = useState(false);
-    const [errorSnack, setErrorSnack] = useState(false);
-    const [errorSnackMessage, setErrorSnackMessage] = useState('');
-    const [successSnackMessage, setSuccessSnackMessage] = useState('');
-
 
     function submitRecoveryEmail() {
         handleValidation(email);
         if (!errors.email.error) {
             forgotPasswordEmail(email).then(res => {
                 if (res.status === 200) {
-                    setSuccessSnackMessage('E-mail sent');
-                    setSuccessSnack(true);
+                    showSnack(false, 'E-mail sent');
                 } else {
-                    setErrorSnackMessage('E-mail not found')
-                    setErrorSnack(true)
+                    showSnack(true, 'E-mail not found');
                 }
             }).catch(error => {
-                setErrorSnackMessage('Internal server error')
-                setErrorSnack(true)
+                showSnack(true, 'Internal server error');
             });
         }
     };
@@ -43,16 +37,13 @@ const RecoverPasswordForm = () => {
         if (!errors.password.error) {
             resetPassword(email, password, passwordToken).then(res => {
                 if (res === 200) {
-                    setSuccessSnackMessage('Password changed!');
-                    setSuccessSnack(true);
+                    showSnack(false, 'Password changed!');
                     setTimeout(() => navigation.navigate('Login'), 3000)
                 } else {
-                    setErrorSnackMessage('Invalid token');
-                    setErrorSnack(true);
+                    showSnack(true, 'Invalid token');
                 }
             }).catch(error => {
-                setErrorSnackMessage('Internal server error')
-                setErrorSnack(true)
+                showSnack(true, 'Internal server error')
             });
         }
     };
@@ -91,22 +82,6 @@ const RecoverPasswordForm = () => {
             />
             <HelperText type='error' padding='none' visible={errors.password.error}>{errors.password.errorText}</HelperText>
             <DefaultButton buttonLabel='Change Password' onPress={() => submitResetPassword()} />
-            <Snackbar
-                visible={errorSnack}
-                onDismiss={() => setErrorSnack(false)}
-                duration={3000}
-                style={styles.snackError}
-            >
-                {errorSnackMessage}
-            </Snackbar>
-            <Snackbar
-                visible={successSnack}
-                onDismiss={() => setSuccessSnack(false)}
-                duration={3000}
-                style={styles.snackSuccess}
-            >
-                {successSnackMessage}
-            </Snackbar>
         </>
     )
 };
@@ -123,12 +98,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginVertical: 18,
         color: secondaryColour
-    },
-    snackError: {
-        backgroundColor: deleteButtonColour,
-    },
-    snackSuccess: {
-        backgroundColor: successColour,
     }
 });
 

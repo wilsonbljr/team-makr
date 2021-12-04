@@ -9,6 +9,7 @@ import { UserInfoContextProvider } from './src/core/hooks/useUserInfo';
 import { TeamsContextProvider } from './src/core/hooks/useTeams';
 import { SkillsContextProvider } from './src/core/hooks/useSkills';
 import { AuthContextProvider } from './src/auth/AuthContext';
+import { SnackbarContextProvider } from './src/core/hooks/useSnackbar';
 
 
 const App = () => {
@@ -28,11 +29,13 @@ const App = () => {
       <TeamsContextProvider>
         <SkillsContextProvider>
           <AuthContextProvider>
-            <PaperProvider theme={theme}>
-              <NavigationContainer>
-                <MainNav />
-              </NavigationContainer>
-            </PaperProvider>
+            <SnackbarContextProvider>
+              <PaperProvider theme={theme}>
+                <NavigationContainer>
+                  <MainNav />
+                </NavigationContainer>
+              </PaperProvider>
+            </SnackbarContextProvider>
           </AuthContextProvider>
         </SkillsContextProvider>
       </TeamsContextProvider>

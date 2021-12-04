@@ -1,29 +1,49 @@
 import React, { useState } from 'react';
+import { useAuth } from '../../auth/AuthContext';
+import { useSkills } from '../../core/hooks/useSkills';
+import { useSnackbar } from '../../core/hooks/useSnackbar';
+import { addUserToSkill } from '../../core/services/skill.service';
 import { StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import RNPickerSelect from 'react-native-picker-select';
 import DefaultButton from './DefaultButton';
 import { textColour } from '../styles/styles';
-import { skills } from '../../../mock';
 
 
 const SkillsAddForm = () => {
+    const { user, token } = useAuth();
+    const { showSnack } = useSnackbar();
+    const { allSkills } = useSkills();
     const [addSkill, setAddSkill] = useState(null);
+    const [level, setLevel] = useState(2);
+
+    const submitAddSkill = async () => {
+        await addUserToSkill(user, addSkill, level, token)
+            .then(res => {
+                if (res < 202) {
+                    showSnack(false, 'Skill added!');
+                    setCurrentUserSkills(user, token);
+                } else {
+                    showSnack(true, 'Internal server error.');
+                }
+            })
+            .catch(err => showSnack(true, 'Internal server error.'));
+    };
 
     return (
         <>
             <RNPickerSelect
                 onValueChange={value => setAddSkill(value)}
-                items={skills.map(skill => { return { label: skill.name, value: skill.id } })}
+                items={allSkills.map(skill => { return { label: skill.name, value: skill.id } })}
                 placeholder={{ label: 'Select a skill', value: null }}
                 value={addSkill}
-                style={{...styles}}
+                style={{ ...styles }}
                 useNativeAndroidPickerStyle={false}
                 Icon={() => {
-                    return <IconButton icon='menu-down' color={textColour}/>
+                    return <IconButton icon='menu-down' color={textColour} />
                 }}
             />
-            <DefaultButton buttonLabel='Add Skill' icon='plus' />
+            <DefaultButton buttonLabel='Add Skill' icon='plus' onPress={() => submitAddSkill()} />
         </>
     )
 };
@@ -47,9 +67,9 @@ const styles = StyleSheet.create({
         borderColor: textColour,
         borderRadius: 5,
         color: textColour,
-        paddingRight: 30, 
+        paddingRight: 30,
     },
-})
+});
 
 export default SkillsAddForm;
 

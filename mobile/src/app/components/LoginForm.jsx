@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../auth/AuthContext';
 import useValidate from '../../core/hooks/useValidate';
+import { useSnackbar } from '../../core/hooks/useSnackbar';
 import { StyleSheet, Text } from 'react-native';
-import { HelperText, TextInput, Snackbar } from 'react-native-paper';
+import { HelperText, TextInput } from 'react-native-paper';
 import DefaultButton from './DefaultButton';
 import { secondaryColour, deleteButtonColour } from '../styles/styles';
 
@@ -10,9 +11,9 @@ import { secondaryColour, deleteButtonColour } from '../styles/styles';
 const LoginForm = ({ navigation }) => {
     const { setCurrentUser } = useAuth();
     const { errors, handleValidation } = useValidate();
+    const { showSnack } = useSnackbar();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [snack, setSnack] = useState(false);
 
     function submitLogin() {
         handleValidation(email, password);
@@ -22,7 +23,7 @@ const LoginForm = ({ navigation }) => {
                     if (status !== undefined) {
                         throw Error('Invalid email or password')
                     }
-                }).catch(() => setSnack(true))
+                }).catch((err) => showSnack(true, err.message))
         }
     };
 
@@ -54,14 +55,6 @@ const LoginForm = ({ navigation }) => {
             <HelperText type='error' padding='none' visible={errors.password.error}>{errors.password.errorText}</HelperText>
             <Text style={styles.recoverText} onPress={() => navigation.navigate('RecoverPassword')}>Recover Password</Text>
             <DefaultButton buttonLabel='Login' onPress={() => submitLogin()} />
-            <Snackbar
-                visible={snack}
-                onDismiss={() => setSnack(false)}
-                duration={3000}
-                style={styles.snackError}
-            >
-                Invalid email or password
-            </Snackbar>
         </>
     )
 };
@@ -76,9 +69,6 @@ const styles = StyleSheet.create({
         marginTop: 3,
         marginBottom: 18,
         color: secondaryColour
-    },
-    snackError: {
-        backgroundColor: deleteButtonColour,
     }
 });
 

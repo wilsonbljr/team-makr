@@ -19,7 +19,6 @@ const HeaderSearchButton = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     button: {
-        marginLeft: 10,
         borderColor: secondaryColour,
         borderWidth: 1,
         height: 36,

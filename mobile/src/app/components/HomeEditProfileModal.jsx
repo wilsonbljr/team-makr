@@ -2,24 +2,24 @@ import React, { useState } from 'react';
 import { useAuth } from '../../auth/AuthContext';
 import { useUserInfo } from '../../core/hooks/useUserInfo';
 import useValidate from '../../core/hooks/useValidate';
+import { useSnackbar } from '../../core/hooks/useSnackbar';
 import { updateUser } from '../../core/services/user.service';
 
 import { StyleSheet } from 'react-native';
-import { HelperText, Snackbar, TextInput } from 'react-native-paper';
+import { HelperText, TextInput } from 'react-native-paper';
 import DefaultButtonOutlined from './DefaultButtonOutlined';
 import DefaultModal from './DefaultModal';
-import { backgroundColour, deleteButtonColour, primaryColour, successColour } from '../styles/styles';
+import { backgroundColour, primaryColour } from '../styles/styles';
 
 
 const HomeEditProfileModal = ({ modal, setModal }) => {
     const { user, token } = useAuth();
     const { errors, handleValidation } = useValidate();
+    const { showSnack } = useSnackbar();
     const { firstName, lastName, email, setCurrentUserInfo } = useUserInfo();
     const [pronouns, setPronouns] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
-    const [successSnack, setSuccessSnack] = useState(false);
-    const [errorSnack, setErrorSnack] = useState(false);
 
     const submitEditProfile = () => {
         handleValidation({ password, pronouns, phone_number: phone });
@@ -30,11 +30,11 @@ const HomeEditProfileModal = ({ modal, setModal }) => {
             updateUser(user, pronouns, phone, password, token).then(async res => {
                 if (res.status === 200) {
                     await setCurrentUserInfo(user, token);
-                    setSuccessSnack(true);
-                    setTimeout(() => setModal(false), 3000)
+                    showSnack(false, 'Profile updated!');
+                    setModal(false);
                 }
             }).catch(err => {
-                setErrorSnack(true);
+                showSnack(true, 'Internal server Error');
             });
         }
     };
@@ -94,22 +94,6 @@ const HomeEditProfileModal = ({ modal, setModal }) => {
             />
             <HelperText type='error' padding='none' visible={errors.password.error}>{errors.password.errorText}</HelperText>
             <DefaultButtonOutlined buttonLabel='EDIT PROFILE' icon='pencil' onPress={() => submitEditProfile()} />
-            <Snackbar
-                visible={errorSnack}
-                onDismiss={() => setErrorSnack(false)}
-                duration={3000}
-                style={styles.snackError}
-            >
-                Internal Server Error.
-            </Snackbar>
-            <Snackbar
-                visible={successSnack}
-                onDismiss={() => setSuccessSnack(false)}
-                duration={2500}
-                style={styles.snackSuccess}
-            >
-                Profile updated!
-            </Snackbar>
         </DefaultModal>
     )
 }
@@ -120,12 +104,6 @@ const styles = StyleSheet.create({
     },
     inputMargin: {
         marginBottom: 20
-    },
-    snackError: {
-        backgroundColor: deleteButtonColour,
-    },
-    snackSuccess: {
-        backgroundColor: successColour,
     }
 })
 

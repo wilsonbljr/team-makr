@@ -8,12 +8,14 @@ import { IconButton } from 'react-native-paper';
 import RNPickerSelect from 'react-native-picker-select';
 import DefaultButton from './DefaultButton';
 import { textColour } from '../styles/styles';
+import { ratingReviews } from '../../core/utils/Lists';
+import { AirbnbRating } from 'react-native-ratings';
 
 
 const SkillsAddForm = () => {
     const { user, token } = useAuth();
+    const { allSkills, setCurrentUserSkills } = useSkills();
     const { showSnack } = useSnackbar();
-    const { allSkills } = useSkills();
     const [addSkill, setAddSkill] = useState(null);
     const [level, setLevel] = useState(2);
 
@@ -23,11 +25,12 @@ const SkillsAddForm = () => {
                 if (res < 202) {
                     showSnack(false, 'Skill added!');
                     setCurrentUserSkills(user, token);
-                } else {
-                    showSnack(true, 'Internal server error.');
+                } 
+                if (res === 'Request failed with status code 400') {
+                    showSnack(true, 'Skill already in your profile')
                 }
             })
-            .catch(err => showSnack(true, 'Internal server error.'));
+            .catch(err => showSnack(true, 'Internal Server Error'));
     };
 
     return (
@@ -43,6 +46,14 @@ const SkillsAddForm = () => {
                     return <IconButton icon='menu-down' color={textColour} />
                 }}
             />
+            <AirbnbRating
+                size={20}
+                reviewColor={textColour}
+                reviewSize={16}
+                onFinishRating={value => setLevel(value)}
+                ratingContainerStyle={ratingStyles.rating}
+                starContainerStyle={ratingStyles.stars}
+                reviews={ratingReviews} />
             <DefaultButton buttonLabel='Add Skill' icon='plus' onPress={() => submitAddSkill()} />
         </>
     )
@@ -69,6 +80,17 @@ const styles = StyleSheet.create({
         color: textColour,
         paddingRight: 30,
     },
+});
+
+const ratingStyles = StyleSheet.create({
+    rating: {
+        flexDirection: 'column-reverse',
+        textAlign: 'center',
+        marginTop: 15
+    },
+    stars: {
+        margin: 0
+    }
 });
 
 export default SkillsAddForm;

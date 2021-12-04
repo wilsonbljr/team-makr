@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../auth/AuthContext';
 import { useSkills } from '../../core/hooks/useSkills';
+import { useSnackbar } from '../../core/hooks/useSnackbar';
 import { searchUsers } from '../../core/services/user.service';
 import { StyleSheet } from 'react-native';
 import { IconButton, TextInput } from 'react-native-paper';
@@ -12,6 +13,7 @@ import { textColour } from '../styles/styles';
 const SearchForm = ({ setResults }) => {
     const { token } = useAuth();
     const { allSkills } = useSkills();
+    const { showSnack } = useSnackbar();
     const [skillFilter, setSkillFilter] = useState(null);
     const [name, setName] = useState('');
 
@@ -24,7 +26,7 @@ const SearchForm = ({ setResults }) => {
             .then(res => {
                 setResults(res);
             })
-            .catch(err => setAlert(true));
+            .catch(err => showSnack(true, 'Internal server error'));
     }
 
     return (

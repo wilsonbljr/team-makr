@@ -1,16 +1,44 @@
 import React from 'react';
+import { useAuth } from '../../auth/AuthContext';
 import { StyleSheet } from 'react-native';
 import { Avatar, Card, Divider, Text, Title } from 'react-native-paper';
 import DefaultButton from './DefaultButton';
 import transformNumber from '../../core/utils/TransformNumber';
 import { primaryColour, secondaryColour } from '../styles/styles';
 import { user, personTeam, personSkills } from '../../../mock';
+import DefaultButtonOutlined from './DefaultButtonOutlined';
 
 
 const HomeProfileCard = ({ setModal, navigation }) => {
+    const { unsetCurrentUser } = useAuth();
+
+    const logout = async () => {
+        await unsetCurrentUser()
+            .then((res) => {
+                if (res.status !== 204) {
+                    throw Error('Internal server error')
+                }
+            })
+            .catch(err => err);
+    }
+
     return (
         <Card style={styles.card}>
-            <Card.Title title={user.firstName} leftStyle={styles.avatar} left={() => <Avatar.Text size={60} label={user.firstName.charAt(0)} />} />
+            <Card.Title
+                title={user.firstName}
+                leftStyle={styles.avatar}
+                left={() => <Avatar.Text
+                    size={60}
+                    label={user.firstName.charAt(0)}
+                />}
+                right={() => <DefaultButtonOutlined 
+                    buttonLabel='Logout'
+                    style={styles.logout}
+                    labelStyle={styles.logoutText}
+                    icon='exit-to-app'
+                    onPress={() => logout()}
+                    />}
+            />
             <Divider style={styles.divider} />
             <Card.Content>
 
@@ -36,7 +64,7 @@ const HomeProfileCard = ({ setModal, navigation }) => {
 
                 <Title style={styles.title}>Skills:</Title>
                 <Text style={styles.text}>You currently have {personSkills.length} skill(s)!</Text>
-                <DefaultButton style={styles.lastButton} icon='code-tags' buttonLabel='Manage Skills' onPress={() => navigation.navigate('Skills')}  />
+                <DefaultButton style={styles.lastButton} icon='code-tags' buttonLabel='Manage Skills' onPress={() => navigation.navigate('Skills')} />
 
             </Card.Content>
         </Card>
@@ -53,6 +81,16 @@ const styles = StyleSheet.create({
     },
     avatar: {
         marginRight: 30
+    },
+    logout: {
+        marginTop: 2,
+        marginRight: 10,
+        borderColor: secondaryColour,
+        borderWidth: 1,
+    },
+    logoutText: {
+        color: secondaryColour,
+        fontSize: 15
     },
     divider: {
         backgroundColor: secondaryColour,

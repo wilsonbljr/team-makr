@@ -20,8 +20,7 @@ const LoginForm = ({ navigation }) => {
                     if (status !== undefined) {
                         throw Error('Invalid email or password')
                     }
-                    navigation.reset({ routes: [{ name: 'HomeNav' }] })
-                }).catch(err => console.log(err))
+                }).catch(err => err)
         }
     };
 

@@ -1,8 +1,10 @@
-import React, { createContext, useContext, useState } from 'react'
-// import { useSkills } from '../core/hooks/useSkills';
-// import { useTeams } from '../core/hooks/useTeams';
-// import { useUserInfo } from '../core/hooks/useUserInfo';
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import { useSkills } from '../core/hooks/useSkills';
+import { useTeams } from '../core/hooks/useTeams';
+import { useUserInfo } from '../core/hooks/useUserInfo';
 import { login, logout } from './auth';
+import * as SecureStore from 'expo-secure-store';
+import jwtDecode from 'jwt-decode';
 
 const AuthContext = createContext({
     user: null,
@@ -14,9 +16,24 @@ const AuthContext = createContext({
 export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState();
     const [token, setToken] = useState();
-    // const { setCurrentUserInfo, unsetCurrentUserInfo } = useUserInfo();
-    // const { setCurrentUserTeams } = useTeams();
-    // const { setCurrentUserSkills, setCurrentAllSkills } = useSkills();
+    const { setCurrentUserInfo, unsetCurrentUserInfo } = useUserInfo();
+    const { setCurrentUserSkills, setCurrentAllSkills } = useSkills();
+    const { setCurrentUserTeams } = useTeams();
+
+    useEffect(() => {
+        SecureStore.getItemAsync('token').then(res => {
+            if (res) {
+                SecureStore.getItemAsync('token')
+                    .then((token) => {
+                        const decodedToken = jwtDecode(token);
+                        if (decodedToken.exp < new Date()) {
+                            setToken(token);
+                            setUser(decodedToken.id);
+                        }
+                    })
+            }
+        })
+    }, [])
 
     const setCurrentUser = async (email, password) => {
         const status = await login(email, password)
@@ -24,12 +41,15 @@ export const AuthContextProvider = ({ children }) => {
                 if (token === undefined) {
                     return status;
                 }
-                setToken(token);
                 setUser(userId);
-                // setCurrentUserInfo(userId, token);
-                // setCurrentUserTeams(userId, token);
-                // setCurrentUserSkills(userId, token);
-                // setCurrentAllSkills(token);
+                setCurrentUserInfo(userId, token);
+                setCurrentUserTeams(userId, token);
+                setCurrentUserSkills(userId, token);
+                setCurrentAllSkills(token);
+                await SecureStore.setItemAsync('token', token)
+                    .then(() => {
+                        setToken(token);
+                    })
             }).catch(err => err.message);
         return status;
     }
@@ -39,7 +59,8 @@ export const AuthContextProvider = ({ children }) => {
             .then((res) => {
                 setUser(null);
                 setToken(null);
-                // unsetCurrentUserInfo();
+                SecureStore.deleteItemAsync('token');
+                unsetCurrentUserInfo();
                 return res
             });
         return res;

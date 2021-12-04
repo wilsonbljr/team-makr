@@ -5,7 +5,11 @@ import MainNav from './src/navigation/MainNav';
 import { useFonts } from 'expo-font';
 import theme from './src/app/styles/theme';
 
+import { UserInfoContextProvider } from './src/core/hooks/useUserInfo';
+import { TeamsContextProvider } from './src/core/hooks/useTeams';
+import { SkillsContextProvider } from './src/core/hooks/useSkills';
 import { AuthContextProvider } from './src/auth/AuthContext';
+
 
 const App = () => {
   const [loaded] = useFonts({
@@ -20,13 +24,19 @@ const App = () => {
   }
 
   return (
-    <AuthContextProvider>
-      <PaperProvider theme={theme}>
-        <NavigationContainer>
-          <MainNav />
-        </NavigationContainer>
-      </PaperProvider>
-    </AuthContextProvider>
+    <UserInfoContextProvider>
+      <TeamsContextProvider>
+        <SkillsContextProvider>
+          <AuthContextProvider>
+            <PaperProvider theme={theme}>
+              <NavigationContainer>
+                <MainNav />
+              </NavigationContainer>
+            </PaperProvider>
+          </AuthContextProvider>
+        </SkillsContextProvider>
+      </TeamsContextProvider>
+    </UserInfoContextProvider>
   );
 }
 

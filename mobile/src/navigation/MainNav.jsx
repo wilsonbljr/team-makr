@@ -13,13 +13,15 @@ import Search from '../app/pages/Search/Search';
 import { primaryColour, secondaryColour } from '../app/styles/styles';
 import HeaderLogo from '../app/components/HeaderLogo';
 import HeaderSearchButton from '../app/components/HeaderSearchButton';
+import { useAuth } from '../auth/AuthContext';
 
 const Stack = createStackNavigator();
 
 const MainNav = () => {
+    const { token } = useAuth();
+
     return (
         <Stack.Navigator
-            initialRouteName='Authentication'
             screenOptions={{
                 cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                 headerStyle: { backgroundColor: primaryColour },
@@ -27,50 +29,48 @@ const MainNav = () => {
                 headerRight: () => <HeaderLogo />,
                 headerTitle: () => <></>,
             }}
-
         >
-
-            <Stack.Group>
-                <Stack.Screen
-                    name='Login'
-                    component={Login}
-                />
-                <Stack.Screen
-                    name='Register'
-                    component={Register}
-                />
-                <Stack.Screen
-                    name='RecoverPassword'
-                    component={RecoverPassword}
-                />
-            </Stack.Group>
-
-            <Stack.Group>
-                <Stack.Screen
-                    name='HomeNav'
-                    component={BottomNav}
-                    options={({ navigation }) => ({
-                        headerTitle: () => <HeaderSearchButton navigation={navigation} />
-                    })}
-                />
-
-                <Stack.Screen
-                    name='UserProfile'
-                    component={UserProfile}
-                />
-                <Stack.Screen
-                    name='TeamProfile'
-                    component={TeamProfile}
-                />
-                <Stack.Screen
-                    name="Search"
-                    component={Search}
-                    options={({ navigation }) => ({
-                        headerTitle: () => <HeaderSearchButton navigation={navigation} />
-                    })}
-                />
-            </Stack.Group>
-
+            {!token ?
+                <Stack.Group >
+                    <Stack.Screen
+                        name='Login'
+                        component={Login}
+                    />
+                    <Stack.Screen
+                        name='Register'
+                        component={Register}
+                    />
+                    <Stack.Screen
+                        name='RecoverPassword'
+                        component={RecoverPassword}
+                    />
+                </Stack.Group>
+                :
+                <Stack.Group>
+                    <Stack.Screen
+                        name='HomeNav'
+                        component={BottomNav}
+                        options={({ navigation }) => ({
+                            headerTitle: () => <HeaderSearchButton navigation={navigation} />
+                        })}
+                    />
+                    <Stack.Screen
+                        name='UserProfile'
+                        component={UserProfile}
+                    />
+                    <Stack.Screen
+                        name='TeamProfile'
+                        component={TeamProfile}
+                    />
+                    <Stack.Screen
+                        name="Search"
+                        component={Search}
+                        options={({ navigation }) => ({
+                            headerTitle: () => <HeaderSearchButton navigation={navigation} />
+                        })}
+                    />
+                </Stack.Group>
+            }
         </Stack.Navigator>
     )
 }

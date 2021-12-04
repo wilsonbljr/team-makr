@@ -22,7 +22,7 @@ const LoginForm = ({ navigation }) => {
                     if (status !== undefined) {
                         throw Error('Invalid email or password')
                     }
-                }).catch(err => setSnack(true))
+                }).catch(() => setSnack(true))
         }
     };
 
@@ -49,6 +49,7 @@ const LoginForm = ({ navigation }) => {
                 textContentType={'password'}
                 secureTextEntry={true}
                 onChangeText={password => setPassword(password)}
+                autoCapitalize='none'
             />
             <HelperText type='error' padding='none' visible={errors.password.error}>{errors.password.errorText}</HelperText>
             <Text style={styles.recoverText} onPress={() => navigation.navigate('RecoverPassword')}>Recover Password</Text>
@@ -57,7 +58,7 @@ const LoginForm = ({ navigation }) => {
                 visible={snack}
                 onDismiss={() => setSnack(false)}
                 duration={3000}
-                style={styles.snack}
+                style={styles.snackError}
             >
                 Invalid email or password
             </Snackbar>
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
         marginBottom: 18,
         color: secondaryColour
     },
-    snack: {
+    snackError: {
         backgroundColor: deleteButtonColour,
     }
 });

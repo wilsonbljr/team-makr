@@ -9,6 +9,7 @@ import jwtDecode from 'jwt-decode';
 const AuthContext = createContext({
     user: null,
     token: null,
+    loading: true,
     setCurrentUser: () => { },
     unsetCurrentUser: () => { }
 });
@@ -16,6 +17,7 @@ const AuthContext = createContext({
 export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState();
     const [token, setToken] = useState();
+    const [loading, setLoading] = useState(true);
     const { setCurrentUserInfo, unsetCurrentUserInfo } = useUserInfo();
     const { setCurrentUserSkills, setCurrentAllSkills } = useSkills();
     const { setCurrentUserTeams } = useTeams();
@@ -26,11 +28,23 @@ export const AuthContextProvider = ({ children }) => {
                 SecureStore.getItemAsync('token')
                     .then((token) => {
                         const decodedToken = jwtDecode(token);
-                        if (decodedToken.exp < new Date()) {
+                        if (Date.now() < decodedToken.exp * 1000) {
                             setToken(token);
                             setUser(decodedToken.id);
+                        } else {
+                            setToken(null);
+                            setUser(null);
+                            setLoading(false);
                         }
+                        setCurrentUserInfo(decodedToken.id, token)
+                        setCurrentUserTeams(decodedToken.id, token)
+                        setCurrentUserSkills(decodedToken.id, token)
+                        setCurrentAllSkills(token)
                     })
+                    .then(() => setLoading(false))
+                    .catch(err => err);
+            } else {
+                setLoading(false);
             }
         })
     }, [])
@@ -60,7 +74,7 @@ export const AuthContextProvider = ({ children }) => {
                 setUser(null);
                 setToken(null);
                 SecureStore.deleteItemAsync('token');
-                unsetCurrentUserInfo();
+                setTimeout(() => unsetCurrentUserInfo(), 0);
                 return res
             });
         return res;
@@ -69,6 +83,7 @@ export const AuthContextProvider = ({ children }) => {
     const contextValue = {
         user,
         token,
+        loading,
         setCurrentUser,
         unsetCurrentUser
     }

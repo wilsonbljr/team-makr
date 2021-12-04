@@ -14,7 +14,7 @@ const SkillsContext = createContext({
 export const SkillsContextProvider = ({ children }) => {
     const [skills, setSkills] = useState();
     const [allSkills, setAllSkills] = useState();
-
+    
     const setCurrentUserSkills = async (user, token) => {
         await getUserSkills(user, setSkills, token)
             .catch(err => err.message);

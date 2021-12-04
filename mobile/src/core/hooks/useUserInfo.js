@@ -22,7 +22,7 @@ export const UserInfoContextProvider = ({ children }) => {
 
     const setCurrentUserInfo = async (user, token) => {
         await getUser(user, token)
-            .then( (res) => {
+            .then(res => {
                 setFirstName(res.firstName);
                 setLastName(res.lastName);
                 setPronoun(res.pronoun);
@@ -30,7 +30,6 @@ export const UserInfoContextProvider = ({ children }) => {
                 setPhoneNumber(res.phone_number);
                 setAdmin(res.admin);
             })
-            .catch(err => err.message);
     }
 
     const unsetCurrentUserInfo = () => {

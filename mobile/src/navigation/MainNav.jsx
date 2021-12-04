@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAuth } from '../auth/AuthContext';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 
 import Login from '../app/pages/Login/Login';
@@ -10,15 +11,15 @@ import UserProfile from '../app/pages/User/UserProfile';
 import TeamProfile from '../app/pages/Teams/TeamProfile';
 import Search from '../app/pages/Search/Search';
 
-import { primaryColour, secondaryColour } from '../app/styles/styles';
 import HeaderLogo from '../app/components/HeaderLogo';
 import HeaderSearchButton from '../app/components/HeaderSearchButton';
-import { useAuth } from '../auth/AuthContext';
+import Loading from '../app/components/Loading';
+import { primaryColour, secondaryColour } from '../app/styles/styles';
 
 const Stack = createStackNavigator();
 
 const MainNav = () => {
-    const { token } = useAuth();
+    const { token, loading } = useAuth();
 
     return (
         <Stack.Navigator
@@ -30,7 +31,7 @@ const MainNav = () => {
                 headerTitle: () => <></>,
             }}
         >
-            {!token ?
+            {loading ? <Stack.Screen name='Loading' component={Loading} /> : !token ?
                 <Stack.Group >
                     <Stack.Screen
                         name='Login'

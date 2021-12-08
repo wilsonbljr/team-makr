@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const useValidate = () => {
     const [errors, setErrors] = useState({

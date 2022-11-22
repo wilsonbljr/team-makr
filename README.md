@@ -10,6 +10,32 @@ The development of this application uses MySQL, NodeJS with Express and TypeORM,
 
 # How to use
 
-Clone the repository, go into the docker folder readme and follow those steps, then do npm install in the webapp, mobile and api folders.
+After cloning the repository, create the two docker containers:
 
-Start the two containers in docker (Redis and MySQL), npm start in the api folder then in the webapp and mobile.
+### Running the Database on Docker
+
+Open the terminal and navigate to this folder. 
+
+Type in the terminal: 
+```
+docker build -t tmdb . 
+docker run -p 3306:3306 -d tmdb
+```
+
+Where the first 3306 can be changed to the port you want to use to connect and smdb is the image name.
+
+### Running Redis (used for logout blacklist) on Docker
+
+Type in the terminal: 
+```
+docker pull redis
+docker run -p 6379:6379 -d --name redis redis
+```
+
+Now you can install the dependencies, start the containers and start the application:
+```
+npm install
+npm start
+```
+
+The `npm start` should be used inside the API folder, the WebApp folder and the Mobile folder.
